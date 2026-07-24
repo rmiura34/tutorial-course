@@ -15,7 +15,7 @@
     "course:generate": "node --experimental-strip-types scripts/generate-course-tasks.mjs",
     "learner:setup": "node scripts/setup-learning.mjs",
     "learner:start": "node scripts/start-learning.mjs",
-    "lab:test": "php training-lab/artisan test",
+    "lab:test": "composer --working-dir=training-lab test",
     "lab:lint": "composer --working-dir=training-lab lint",
     "scraper:test": "python3 -m unittest discover -s practice/python-scraper/tests -v",
     "db:generate": "drizzle-kit generate"
