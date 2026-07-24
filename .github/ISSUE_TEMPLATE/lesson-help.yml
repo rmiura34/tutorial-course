@@ -1,0 +1,41 @@
+name: レッスンで困った
+description: エラーや分からない点を、再現できる形で共有します
+title: "[Help] Lesson "
+labels: ["question"]
+body:
+  - type: dropdown
+    id: lesson
+    attributes:
+      label: レッスン
+      options:
+        - "01: VS Code / Codespaces"
+        - "02: HTML"
+        - "03: CSS"
+        - "04: JavaScript"
+        - "05: Git Commit"
+        - "06: Git Branch"
+        - "07: Pull Request"
+        - "08: Deploy"
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: やろうとしたこと
+      description: どの手順で、何を期待していましたか？
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: 実際に起きたこと
+      description: エラーメッセージは個人情報や秘密を除いて貼り付けてください。
+    validations:
+      required: true
+  - type: textarea
+    id: tried
+    attributes:
+      label: すでに試したこと
+      description: まだ何も試していない場合は、そのまま書いて大丈夫です。
+    validations:
+      required: true
