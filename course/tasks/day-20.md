@@ -13,6 +13,22 @@ duration_minutes: 180
 
 AIを使いながらも、自分で安全性と正しさを説明できる実務PRを完成する
 
+## Why this matters
+
+最終課題では、Codeを書く速さではなく、未知の問題を安全に調査し、判断と検証を説明できるかを確認します。
+
+## Before you start
+
+- [ ] Day 01–19の提出物が揃う
+- [ ] 試験用Branch以外はClean
+- [ ] 禁止事項と採点表を読む
+
+## Three words for today
+
+- **Root cause:** 症状を生む根本原因
+- **Capstone:** 学んだ内容を統合する最終課題
+- **Audit trail:** 誰が何を判断・実行したかの記録
+
 ## Start command
 
 ```bash
@@ -67,6 +83,31 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-20.md. Use COACH mode. Do no
 - [ ] AI利用記録
 - [ ] RiskとRollback
 - [ ] Review対応
+
+## Success looks like this
+
+- [ ] 再現→原因→計画→実装→Test→PRがつながる
+- [ ] AI利用と人間の判断が区別される
+- [ ] 第三者がRollbackまで再現できる
+
+## If you get stuck
+
+| 見えている症状 | よくある原因 | 安全な戻り方 |
+|---|---|---|
+| 時間が足りず検証前に提出しそう | 実装範囲を広げすぎた | 非Goalを増やし、再現する最小修正とRegression Testへ絞る |
+| 途中で現在地やBranchが分からなくなった | 複数のTerminalやTaskを同時に進めた | 作業を止め、pwdとgit status -sbを実行。対象DayのTaskを読み直してから1手だけ進める |
+
+## How to write the submission
+
+### 事実と根拠
+
+- 含めるもの: 何を確認し、どのファイル・Command・画面を根拠にしたか
+- 記入例: AIは原因候補列挙に使用。採用案は実Fileと失敗Testで確認。残Riskと戻し方も記載。
+
+### 検証と振り返り
+
+- 含めるもの: 実行したTest、結果、AI案の採否、残っている不明点
+- 記入例: 確認: 指定TestはPASS。AI案のうち1件は根拠不足で不採用。未確認事項は次の質問へ残した。
 
 ## Done when
 

@@ -13,6 +13,22 @@ duration_minutes: 180
 
 対象QueryのSQL、Eloquent、Schema、件数、性能リスクを説明できる
 
+## Why this matters
+
+Database変更は画面より戻しにくいため、読む・試す・戻す手順を先に身につけます。MigrationとTestで安全網を作ります。
+
+## Before you start
+
+- [ ] ModelからTable名を確認できる
+- [ ] LabのSQLite fileを確認できる
+- [ ] Test用Databaseと学習用Databaseを区別する
+
+## Three words for today
+
+- **Database:** 構造化したDataを保存する仕組み
+- **Migration:** Table構造の変更をCodeで記録する仕組み
+- **Transaction:** 複数処理を全部成功か全部取消にする単位
+
 ## Start command
 
 ```bash
@@ -60,6 +76,31 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-10.md. Use COACH mode. Do no
 - [ ] SQLとEloquentの対応表
 - [ ] Query回数の変更前後
 - [ ] Migration rollback結果
+
+## Success looks like this
+
+- [ ] Table・Column・制約を説明できる
+- [ ] Migrationのup/downを確認できる
+- [ ] 重複やNullのTest結果を残せる
+
+## If you get stuck
+
+| 見えている症状 | よくある原因 | 安全な戻り方 |
+|---|---|---|
+| Table already existsでMigration失敗 | 同じMigrationを別状態のDBへ実行 | 使用中Environmentを確認し、履歴を見てから講師指定のreset手順を使う |
+| 途中で現在地やBranchが分からなくなった | 複数のTerminalやTaskを同時に進めた | 作業を止め、pwdとgit status -sbを実行。対象DayのTaskを読み直してから1手だけ進める |
+
+## How to write the submission
+
+### 事実と根拠
+
+- 含めるもの: 何を確認し、どのファイル・Command・画面を根拠にしたか
+- 記入例: companies.nameは必須、external_idはunique。重複時にどのErrorになるかTestする。
+
+### 検証と振り返り
+
+- 含めるもの: 実行したTest、結果、AI案の採否、残っている不明点
+- 記入例: 確認: 指定TestはPASS。AI案のうち1件は根拠不足で不採用。未確認事項は次の質問へ残した。
 
 ## Done when
 

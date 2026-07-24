@@ -12,6 +12,7 @@ export default function Home() {
         </Link>
         <nav className="header-nav" aria-label="メインナビゲーション">
           <Link href="/start">START HERE</Link>
+          <Link href="/glossary">用語集</Link>
           <a href="#roadmap">ロードマップ</a>
           <a href="#how-it-works">学び方</a>
           <a

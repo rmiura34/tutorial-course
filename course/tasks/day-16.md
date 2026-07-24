@@ -13,6 +13,22 @@ duration_minutes: 180
 
 別の開発者が変更計画を作れる水準のsystem-investigation.mdを提出できる
 
+## Why this matters
+
+未知のSystemでは、すぐ直すより先に地図を作る方が速く安全です。確認済み事実と仮説を分離して調査します。
+
+## Before you start
+
+- [ ] 変更禁止の調査Branch
+- [ ] 起動・Test Commandを確認
+- [ ] 本番Secretへアクセスしない
+
+## Three words for today
+
+- **System map:** 主要部品とDataの流れを表す地図
+- **依存関係:** ある部品が別の部品を必要とする関係
+- **Risk register:** 危険・影響・確認方法を並べた表
+
 ## Start command
 
 ```bash
@@ -60,6 +76,31 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-16.md. Use COACH mode. Do no
 - [ ] System map
 - [ ] Risk register
 - [ ] 不明点と追加質問
+
+## Success looks like this
+
+- [ ] Request・DB・外部通信の地図がある
+- [ ] 各事実に根拠ファイルがある
+- [ ] 不明点と次の質問が残る
+
+## If you get stuck
+
+| 見えている症状 | よくある原因 | 安全な戻り方 |
+|---|---|---|
+| 調査中にAIがCodeを整形した | 変更禁止を明示していない | git diffを保存し、不要変更を確認してから調査Promptへ禁止条件を追加する |
+| 途中で現在地やBranchが分からなくなった | 複数のTerminalやTaskを同時に進めた | 作業を止め、pwdとgit status -sbを実行。対象DayのTaskを読み直してから1手だけ進める |
+
+## How to write the submission
+
+### 事実と根拠
+
+- 含めるもの: 何を確認し、どのファイル・Command・画面を根拠にしたか
+- 記入例: 事実: Scheduler登録あり（routes/console.php）。仮説: 本番で毎時実行。設定未確認。
+
+### 検証と振り返り
+
+- 含めるもの: 実行したTest、結果、AI案の採否、残っている不明点
+- 記入例: 確認: 指定TestはPASS。AI案のうち1件は根拠不足で不採用。未確認事項は次の質問へ残した。
 
 ## Done when
 

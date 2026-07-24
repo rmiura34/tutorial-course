@@ -48,6 +48,14 @@ test("renders a complete lesson page with resources, practice, and quizzes", asy
   assert.match(html, /理解確認クイズ/);
   assert.match(html, /自分のBranchで提出物を作る/);
   assert.match(html, /完了チェック/);
+  assert.match(html, /始める前に、ここだけ確認/);
+  assert.match(html, /なぜ、今日これを学ぶのか/);
+  assert.match(html, /成功すると、こうなります/);
+  assert.match(html, /よくあるつまずきと戻り方/);
+  assert.match(html, /提出物の書き方/);
+  assert.match(html, /repository-map\.example\.md/);
+  assert.doesNotMatch(html, /git switch -c training\/day-01-environment/);
+  assert.doesNotMatch(html, /Claude Code overview/);
   assert.doesNotMatch(html, /動画をここに埋め込みます/);
 });
 
@@ -57,7 +65,7 @@ test("renders the learner onboarding route with accounts and exact startup comma
 
   const html = await response.text();
   assert.match(html, /入口は、ここ一つ。/);
-  assert.match(html, /ACCOUNTS ARE SEPARATE/);
+  assert.match(html, /BEFORE YOU START/);
   assert.match(html, /GitHub/);
   assert.match(html, /Codex \/ ChatGPT/);
   assert.match(html, /npm run learner:start/);
@@ -65,6 +73,22 @@ test("renders the learner onboarding route with accounts and exact startup comma
   assert.match(html, /PORT 3000/);
   assert.match(html, /PORT 8000/);
   assert.match(html, /Codex用Promptをコピー/);
+  assert.match(html, /You’re almost in/);
+  assert.match(html, /Create codespace on main/);
+  assert.match(html, /command not found: npm/);
+  assert.match(html, /Day 01からCoachとして利用/);
+  assert.doesNotMatch(html, /Day 05以降/);
+});
+
+test("renders a searchable plain-Japanese glossary", async () => {
+  const response = await render("/glossary");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /分からない言葉を/);
+  assert.match(html, /Repository/);
+  assert.match(html, /Pull Request/);
+  assert.match(html, /AGENTS\.md/);
+  assert.match(html, /Secret/);
 });
 
 test("renders all 20 days with the complete learning flow", async () => {
@@ -87,7 +111,12 @@ test("renders all 20 days with the complete learning flow", async () => {
     assert.match(html, /理解確認クイズ/);
     assert.match(html, /必須提出物/);
     assert.match(html, /完了チェック/);
+    assert.match(html, /始める前に、ここだけ確認/);
+    assert.match(html, /成功すると、こうなります/);
+    assert.match(html, /よくあるつまずきと戻り方/);
+    assert.match(html, /提出物の書き方/);
     assert.match(html, new RegExp(`npm run course -- start ${slugs.indexOf(slug) + 1}`));
+    assert.match(html, new RegExp(`npm run course -- check ${slugs.indexOf(slug) + 1}`));
   }
 });
 
@@ -101,6 +130,9 @@ test("keeps course infrastructure and agent starters in the repository", async (
     access(new URL("../course/tasks/day-20.md", import.meta.url)),
     access(new URL("../exercises/01-profile-card/index.html", import.meta.url)),
     access(new URL("../docs/AUTHORING.md", import.meta.url)),
+    access(new URL("../docs/GLOSSARY.md", import.meta.url)),
+    access(new URL("../learning-log/templates/repository-map.md", import.meta.url)),
+    access(new URL("../learning-log/examples/day-01-repository-map.example.md", import.meta.url)),
     access(new URL("../training-lab/artisan", import.meta.url)),
     access(
       new URL(
@@ -145,8 +177,16 @@ test("keeps course infrastructure and agent starters in the repository", async (
   assert.match(lessonData, /training\/day-15-plugin-mcp/);
   assert.equal((lessonData.match(/id: "lesson-\d+"/g) ?? []).length, 20);
   assert.equal((lessonData.match(/quizzes: \[/g) ?? []).length, 20);
+  assert.doesNotMatch(lessonData, /git switch -c training\/day-/);
   const taskData = JSON.parse(taskIndex);
   assert.equal(taskData.tasks.length, 20);
   assert.equal(taskData.tasks[0].taskFile, "course/tasks/day-01.md");
   assert.equal(taskData.tasks[19].branch, "exam/final-capstone");
+  for (const task of taskData.tasks) {
+    assert.ok(task.prerequisites.length >= 3);
+    assert.ok(task.terms.length >= 3);
+    assert.ok(task.expectedResults.length >= 3);
+    assert.ok(task.commonMistakes.length >= 2);
+    assert.ok(task.submissionGuide.length >= 2);
+  }
 });

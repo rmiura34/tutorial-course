@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CopyCommand } from "../../components/CopyCommand";
 import { LessonQuiz } from "../../components/LessonQuiz";
 import { getLesson, lessons } from "../../data/lessons";
 
@@ -41,7 +42,10 @@ export default async function LessonPage({ params }: LessonPageProps) {
         <div className="lesson-header-progress">
           LESSON {lesson.number} / {String(lessons.length).padStart(2, "0")}
         </div>
-        <Link className="back-link" href="/start">受講準備を確認</Link>
+        <nav className="lesson-top-nav">
+          <Link href="/glossary">用語集</Link>
+          <Link className="back-link" href="/start">受講準備を確認</Link>
+        </nav>
       </header>
 
       <div className="lesson-layout">
@@ -79,12 +83,34 @@ export default async function LessonPage({ params }: LessonPageProps) {
               <p>Task fileをCodexと人間が同じ順番で読み、実装前に計画を作ります。</p>
             </div>
             <div className="task-commands">
-              <pre><code>{`npm run course -- show ${lesson.day}`}</code></pre>
-              <pre><code>{`npm run course -- start ${lesson.day}`}</code></pre>
+              <div><pre><code>{`npm run course -- show ${lesson.day}`}</code></pre><CopyCommand command={`npm run course -- show ${lesson.day}`} /></div>
+              <div><pre><code>{`npm run course -- start ${lesson.day}`}</code></pre><CopyCommand command={`npm run course -- start ${lesson.day}`} /></div>
             </div>
             <blockquote>
               {`COACHモードで、AGENTS.md、START-HERE.md、course/tasks/day-${lesson.number}.mdを読んでください。まだ実装せず、Goal・Context・Constraints・Done whenからTask checklistを作ってください。`}
             </blockquote>
+          </section>
+
+          <section className="beginner-context">
+            <div className="beginner-before">
+              <span className="lesson-section-kicker">BEFORE YOU START</span>
+              <h2>始める前に、ここだけ確認</h2>
+              <ul>
+                {lesson.prerequisites.map((item) => <li key={item}><span>□</span>{item}</li>)}
+              </ul>
+            </div>
+            <div className="beginner-why">
+              <span className="lesson-section-kicker">WHY THIS MATTERS</span>
+              <h2>なぜ、今日これを学ぶのか</h2>
+              <p>{lesson.whyItMatters}</p>
+            </div>
+            <div className="lesson-terms">
+              <div><span className="lesson-section-kicker">3 WORDS FOR TODAY</span><h2>今日使う言葉</h2></div>
+              <dl>
+                {lesson.terms.map((item) => <div key={item.term}><dt>{item.term}</dt><dd>{item.meaning}</dd></div>)}
+              </dl>
+              <Link href="/glossary">50語の初心者用語集を見る →</Link>
+            </div>
           </section>
 
           <section className="video-panel">
@@ -198,6 +224,32 @@ export default async function LessonPage({ params }: LessonPageProps) {
             </ol>
           </section>
 
+          <section className="expected-section">
+            <div>
+              <span className="lesson-section-kicker">SUCCESS LOOKS LIKE THIS</span>
+              <h2>成功すると、こうなります</h2>
+              <p>途中で不安になったら、完成形ではなくこの3点だけを照合します。</p>
+            </div>
+            <ol>
+              {lesson.expectedResults.map((item, index) => (
+                <li key={item}><span>{String(index + 1).padStart(2, "0")}</span><p>{item}</p></li>
+              ))}
+            </ol>
+          </section>
+
+          <section className="mistake-section">
+            <div className="resource-heading">
+              <div><span className="lesson-section-kicker">IF YOU GET STUCK</span><h2>よくあるつまずきと戻り方</h2></div>
+              <p>Errorは失敗ではなく、現在地を示す情報です。削除ややり直しの前に症状を照合します。</p>
+            </div>
+            <div className="mistake-table">
+              <div className="mistake-head"><b>見えている症状</b><b>よくある原因</b><b>安全な戻り方</b></div>
+              {lesson.commonMistakes.map((item) => (
+                <div key={item.symptom}><strong>{item.symptom}</strong><p>{item.cause}</p><p>{item.recovery}</p></div>
+              ))}
+            </div>
+          </section>
+
           <section className="prompt-panel">
             <div>
               <span className="lesson-section-kicker">AI PRACTICE</span>
@@ -218,14 +270,25 @@ export default async function LessonPage({ params }: LessonPageProps) {
               <span className="practice-time">Day {lesson.day} · {lesson.duration}</span>
             </div>
             <div className="branch-command">
-              <span>BRANCH</span>
-              <code>git switch -c {lesson.branch}</code>
+              <span>EXPECTED BRANCH</span>
+              <code>{lesson.branch}</code>
+              <small>`course -- start`で作成済みです。もう一度git switch -cは実行しません。</small>
             </div>
             <div className="deliverables">
               <h3>必須提出物</h3>
               <ol>
                 {lesson.deliverables.map((item) => <li key={item}>{item}</li>)}
               </ol>
+            </div>
+            <div className="submission-example">
+              <h3>提出物の書き方</h3>
+              {lesson.submissionGuide.map((item) => (
+                <article key={item.section}>
+                  <span>{item.section}</span>
+                  <p><b>含めるもの:</b> {item.include}</p>
+                  <blockquote>{item.example}</blockquote>
+                </article>
+              ))}
             </div>
             <h3>完了チェック</h3>
             <ul className="check-list">
@@ -245,6 +308,11 @@ export default async function LessonPage({ params }: LessonPageProps) {
               >
                 GitHubを開く ↗
               </a>
+            </div>
+            <div className="final-check-command">
+              <div><strong>提出前に自動チェック</strong><p>Branch、提出File、禁止事項をCourse runnerで確認します。</p></div>
+              <code>{`npm run course -- check ${lesson.day}`}</code>
+              <CopyCommand command={`npm run course -- check ${lesson.day}`} />
             </div>
           </section>
 

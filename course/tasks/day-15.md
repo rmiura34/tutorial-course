@@ -13,6 +13,22 @@ duration_minutes: 180
 
 Codexで読み込めるSkillとPlugin starterを作り、MCPのRead/Write権限を説明できる
 
+## Why this matters
+
+PluginとMCPはAIが触れられる外部機能を増やします。便利さと同時に権限・入力検証・失敗時の境界を設計する必要があります。
+
+## Before you start
+
+- [ ] Day 14のSkillがTest済み
+- [ ] 外部接続なしのMockから始める
+- [ ] 許可する操作と禁止操作を列挙
+
+## Three words for today
+
+- **Plugin:** SkillやToolなどを配布できるPackage
+- **MCP:** AIと外部Tool・Dataを接続する共通方式
+- **権限:** 読み取り・変更など許可された操作範囲
+
 ## Start command
 
 ```bash
@@ -60,6 +76,31 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-15.md. Use COACH mode. Do no
 - [ ] .agents/skills/trace-laravel-flow/SKILL.md
 - [ ] plugins/laravel-maintenance-codex
 - [ ] learning-log/day-15/mcp-permission-audit.md
+
+## Success looks like this
+
+- [ ] Manifestが検証を通る
+- [ ] Tool入力のValidationとErrorがある
+- [ ] 権限とSecurity注意点がREADMEにある
+
+## If you get stuck
+
+| 見えている症状 | よくある原因 | 安全な戻り方 |
+|---|---|---|
+| Pluginを読めるがToolが見つからない | Manifestのpath/name不一致 | validatorを実行し、実ファイル名とmanifestを1項目ずつ照合する |
+| 途中で現在地やBranchが分からなくなった | 複数のTerminalやTaskを同時に進めた | 作業を止め、pwdとgit status -sbを実行。対象DayのTaskを読み直してから1手だけ進める |
+
+## How to write the submission
+
+### 事実と根拠
+
+- 含めるもの: 何を確認し、どのファイル・Command・画面を根拠にしたか
+- 記入例: 入力はcompany_idのみ、読み取り専用。存在しないIDは明示Error。Tokenは受け取らない。
+
+### 検証と振り返り
+
+- 含めるもの: 実行したTest、結果、AI案の採否、残っている不明点
+- 記入例: 確認: 指定TestはPASS。AI案のうち1件は根拠不足で不採用。未確認事項は次の質問へ残した。
 
 ## Done when
 

@@ -13,6 +13,22 @@ duration_minutes: 180
 
 実際に呼び出せるSkill、専門Subagent、4種類の安全Hookを作成できる
 
+## Why this matters
+
+SkillとHookはAIの作業手順を再利用可能にし、危険な操作を機械的に止めます。指示を長くするより、発動条件と検証を明確にします。
+
+## Before you start
+
+- [ ] Day 05でAgentとPromptを区別できる
+- [ ] 安全にTestできる専用Branch
+- [ ] 禁止したいCommandを具体化
+
+## Three words for today
+
+- **Skill:** 特定作業の手順・知識・Tool利用をまとめた再利用部品
+- **Hook:** 決まったEventの前後で自動実行する処理
+- **Trigger:** SkillやHookが動く条件
+
 ## Start command
 
 ```bash
@@ -60,6 +76,31 @@ LaravelのRequest flow調査を毎回同じ品質で行うSkillを設計して�
 - [ ] .claude/skills/safe-refactor/SKILL.md
 - [ ] .claude/agents/laravel-reviewer.md
 - [ ] .claude/settings.jsonまたはHooks設定
+
+## Success looks like this
+
+- [ ] Skillの使用条件と手順が文書化される
+- [ ] Hookが安全なCommandを通し危険例を止める
+- [ ] 発動・非発動のTest記録がある
+
+## If you get stuck
+
+| 見えている症状 | よくある原因 | 安全な戻り方 |
+|---|---|---|
+| Skillが関係ない依頼でも使われる | 説明が広すぎてTriggerが曖昧 | 対象Task・入力・使わない条件をdescriptionへ具体的に書く |
+| 途中で現在地やBranchが分からなくなった | 複数のTerminalやTaskを同時に進めた | 作業を止め、pwdとgit status -sbを実行。対象DayのTaskを読み直してから1手だけ進める |
+
+## How to write the submission
+
+### 事実と根拠
+
+- 含めるもの: 何を確認し、どのファイル・Command・画面を根拠にしたか
+- 記入例: Laravel処理経路調査の時だけ発動。実装依頼や一般質問では使わない。
+
+### 検証と振り返り
+
+- 含めるもの: 実行したTest、結果、AI案の採否、残っている不明点
+- 記入例: 確認: 指定TestはPASS。AI案のうち1件は根拠不足で不採用。未確認事項は次の質問へ残した。
 
 ## Done when
 

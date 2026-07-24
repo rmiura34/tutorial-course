@@ -13,6 +13,22 @@ duration_minutes: 180
 
 講師が用意したBugを再現し、失敗Testから最小修正と回帰確認まで完了できる
 
+## Why this matters
+
+Testは完成後の採点ではなく、変更してよい範囲を示す安全網です。正常系だけでなく失敗条件を先に固定します。
+
+## Before you start
+
+- [ ] 対象処理を手動で一度再現
+- [ ] 期待する入力と出力を文章化
+- [ ] Test Commandを確認
+
+## Three words for today
+
+- **Unit Test:** 小さな関数やClassを単独で確かめるTest
+- **Feature Test:** 複数部品を通した振る舞いを確かめるTest
+- **Regression:** 直した不具合が再発すること
+
 ## Start command
 
 ```bash
@@ -60,6 +76,31 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-13.md. Use COACH mode. Do no
 - [ ] 修正前に失敗するTest
 - [ ] Root cause説明
 - [ ] 修正前後のTest結果
+
+## Success looks like this
+
+- [ ] 変更前に失敗する再現Testがある
+- [ ] 修正後に同じTestが成功する
+- [ ] 正常・境界・失敗の3種類を含む
+
+## If you get stuck
+
+| 見えている症状 | よくある原因 | 安全な戻り方 |
+|---|---|---|
+| Testが実装前から成功する | 不具合を再現できていない | 期待値を見直し、壊れている入力で本当に失敗することを先に確認する |
+| 途中で現在地やBranchが分からなくなった | 複数のTerminalやTaskを同時に進めた | 作業を止め、pwdとgit status -sbを実行。対象DayのTaskを読み直してから1手だけ進める |
+
+## How to write the submission
+
+### 事実と根拠
+
+- 含めるもの: 何を確認し、どのファイル・Command・画面を根拠にしたか
+- 記入例: 2ページ目を取得できない入力でRED、修正後GREEN、1ページだけの既存動作もGREEN。
+
+### 検証と振り返り
+
+- 含めるもの: 実行したTest、結果、AI案の採否、残っている不明点
+- 記入例: 確認: 指定TestはPASS。AI案のうち1件は根拠不足で不採用。未確認事項は次の質問へ残した。
 
 ## Done when
 

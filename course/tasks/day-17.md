@@ -13,6 +13,22 @@ duration_minutes: 180
 
 講師が実装可否を判断できるRefactoring Planを作り、承認後の作業単位へ分割できる
 
+## Why this matters
+
+Refactoringの失敗は、Codeより「変えてはいけない振る舞い」の認識不足から起きます。実装前に範囲とRollbackを合意します。
+
+## Before you start
+
+- [ ] Day 16のSystem mapが承認済み
+- [ ] 症状を再現できる
+- [ ] このDayでは承認前に実装しない
+
+## Three words for today
+
+- **Refactoring:** 外から見える動作を保ち内部構造を改善すること
+- **非Goal:** 今回あえて行わないこと
+- **Rollback:** 問題時に安全な以前の状態へ戻す手順
+
 ## Start command
 
 ```bash
@@ -60,6 +76,31 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-17.md. Use COACH mode. Do no
 - [ ] 変更しない仕様一覧
 - [ ] Test matrix
 - [ ] 講師の承認記録
+
+## Success looks like this
+
+- [ ] 現状・原因仮説・変更しない仕様が分離
+- [ ] 実装StepごとにTestとRollbackがある
+- [ ] 講師の承認記録が残る
+
+## If you get stuck
+
+| 見えている症状 | よくある原因 | 安全な戻り方 |
+|---|---|---|
+| 計画が「きれいにする」だけ | 問題と完了条件が測定不能 | 対象File、守るResponse、Test、変更しない範囲を具体化する |
+| 途中で現在地やBranchが分からなくなった | 複数のTerminalやTaskを同時に進めた | 作業を止め、pwdとgit status -sbを実行。対象DayのTaskを読み直してから1手だけ進める |
+
+## How to write the submission
+
+### 事実と根拠
+
+- 含めるもの: 何を確認し、どのファイル・Command・画面を根拠にしたか
+- 記入例: 維持: APIのJSON keyとStatus。変更: 重複排除Service。非Goal: UI刷新。
+
+### 検証と振り返り
+
+- 含めるもの: 実行したTest、結果、AI案の採否、残っている不明点
+- 記入例: 確認: 指定TestはPASS。AI案のうち1件は根拠不足で不採用。未確認事項は次の質問へ残した。
 
 ## Done when
 

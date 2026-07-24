@@ -13,6 +13,22 @@ duration_minutes: 180
 
 1回の画面操作についてRequestとResponse、DOM、Cookieをbrowser-request-analysis.mdへ記録できる
 
+## Why this matters
+
+HTMLは画面の意味と骨組み、CSSは見た目を担当します。役割を分けると、AIが生成した画面も直す場所を自分で特定できます。
+
+## Before you start
+
+- [ ] exercises/01-profile-cardを開く
+- [ ] Browser PreviewまたはPortを開ける
+- [ ] HTMLファイルとCSSファイルを見分けられる
+
+## Three words for today
+
+- **HTML:** Webページの内容と構造を表す言語
+- **CSS:** 色・余白・配置を指定する言語
+- **要素:** 見出し、段落、リンクなどHTMLの部品
+
 ## Start command
 
 ```bash
@@ -60,6 +76,31 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-06.md. Use COACH mode. Do no
 - [ ] Request/Responseの表
 - [ ] 対象DOM要素とSelector
 - [ ] Secretを除いた観察ログ
+
+## Success looks like this
+
+- [ ] 名前・説明・リンクを持つProfile cardが表示される
+- [ ] 画面幅を変えても文字がはみ出さない
+- [ ] HTMLとCSSの変更理由を説明できる
+
+## If you get stuck
+
+| 見えている症状 | よくある原因 | 安全な戻り方 |
+|---|---|---|
+| 変更したのに画面が変わらない | 別ファイルを開いたかBrowser cache | 開いているURLと保存済みファイルを確認し、再読み込みする |
+| 途中で現在地やBranchが分からなくなった | 複数のTerminalやTaskを同時に進めた | 作業を止め、pwdとgit status -sbを実行。対象DayのTaskを読み直してから1手だけ進める |
+
+## How to write the submission
+
+### 事実と根拠
+
+- 含めるもの: 何を確認し、どのファイル・Command・画面を根拠にしたか
+- 記入例: h1はページの主題、pは説明、aは外部リンク。見た目だけでなく意味を選んだ。
+
+### 検証と振り返り
+
+- 含めるもの: 実行したTest、結果、AI案の採否、残っている不明点
+- 記入例: 確認: 指定TestはPASS。AI案のうち1件は根拠不足で不採用。未確認事項は次の質問へ残した。
 
 ## Done when
 

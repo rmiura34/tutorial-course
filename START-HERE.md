@@ -2,7 +2,17 @@
 
 このファイルは受講者が最初に読む唯一の入口です。上から順番に進めてください。
 
-## 0. 何にログインするのか
+## 0. 教材の前に英語のLogin画面が出た場合
+
+`You’re almost in` と `Continue with ChatGPT` が表示されるのは、教材の招待確認画面です。
+
+1. `Continue with ChatGPT`を押す
+2. 講師へ伝えたメールアドレスのChatGPT AccountでLoginする
+3. 教材が開いたら、次の「GitHub」へ進む
+
+ここで使うChatGPT Accountと、Codeを保存するGitHub Accountは別物です。教材へ入れてもGitHub Repositoryを編集できるようにはなりません。招待されていない場合は、講師へChatGPTで使うメールアドレスだけを伝えます。Password、認証Code、Tokenは伝えません。
+
+## 1. 何にログインするのか
 
 教材サイト、GitHub、Codexは別のサービスです。1つのアカウントですべてへ自動的に入れるわけではありません。
 
@@ -10,7 +20,7 @@
 |---|---|---|
 | 教材サイト | 最初から | 動画、公式資料、クイズ、Taskの確認 |
 | GitHub | Day 1から必須 | 自分のRepository、Codespaces、Branch、Commit、PR |
-| Codex / ChatGPT | Day 5以降 | Repositoryを読み、計画、実装、Reviewを支援 |
+| Codex / ChatGPT | Day 1からCoachとして利用 | Repositoryを読み、計画、実装、Reviewを支援。正式な比較学習はDay 5 |
 | Cursor / Claude Code | 該当Day | Agent比較、Skills、Hooksの演習 |
 
 - 招待制開催では、講師から案内されたメールアドレスで教材サイトとGitHubへアクセスします。
@@ -18,7 +28,9 @@
 - GitHubへログインできても、Codexの利用権限が自動で付与されるわけではありません。
 - アクセスできない場合は、新しいアカウントを作る前に講師へ「どのメールアドレスを登録したか」を確認してください。
 
-## 1. 推奨環境
+知らない言葉は[docs/GLOSSARY.md](./docs/GLOSSARY.md)で確認できます。暗記する必要はありません。
+
+## 2. 推奨環境
 
 初心者はGitHub Codespacesを使います。PHP、Node.js、Composer、SQLite、VS Code設定を自動で揃えられるためです。
 
@@ -31,7 +43,7 @@
 
 ローカルPCで進める場合は、Git、Node.js 22以上、npm、PHP 8.4以上、Composer 2、SQLiteが必要です。
 
-## 2. 自分のRepositoryを作る
+## 3. 自分のRepositoryを作る
 
 開催方法によって、講師からどちらか一方が案内されます。
 
@@ -54,23 +66,38 @@
 
 以降は、必ず自分のRepositoryで作業します。元教材のRepositoryへ直接Pushしません。
 
-## 3. Codespacesを起動する
+## 4. Codespacesを起動する
 
 1. 自分のRepositoryで緑色の`Code`ボタンを押す
 2. `Codespaces`タブを選ぶ
 3. `Create codespace on main`を押す
 4. VS Codeの画面が開くまで待つ
-5. Terminalに`Learner workspace is ready`と表示されることを確認する
+5. 左に`EXPLORER`、中央にEditor、下にTerminalが表示されることを確認する
 
 初回は依存関係のDownloadに数分かかる場合があります。途中でブラウザを閉じないでください。
 
-## 4. 2つのアプリを起動する
+## 5. 初回準備と2つのアプリを起動する
 
 VS Code上部のメニューから`Terminal` → `New Terminal`を選び、次を実行します。
 
 ```bash
+npm run learner:setup
+```
+
+- `npm`: Repositoryに登録された処理を呼び出す道具
+- `run`: `package.json`に定義された名前付き処理を実行
+- `learner:setup`: 受講環境の依存関係とLabを準備する処理名
+- 成功の見た目: 最後に`Learner setup completed`が表示され、赤いErrorが残らない
+
+続けて次を実行します。
+
+```bash
 npm run learner:start
 ```
+
+- このCommandは教材サイトとLaravel Labを同時に起動します。
+- 起動中はこのTerminalを閉じません。
+- 停止するときはTerminalを選び、`Control + C`を1回押します。
 
 起動するもの:
 
@@ -79,33 +106,47 @@ npm run learner:start
 
 Codespaces右下に通知が出たら`Open in Browser`を押します。通知を閉じた場合は、VS Code下部の`PORTS`タブを開き、Port 3000または8000の地球アイコンを押します。
 
-## 5. 正常起動を確認する
+## 6. 正常起動を確認する
 
 次の6項目を確認します。
 
 - [ ] Port 3000でTutorial Courseが表示される
-- [ ] Port 8000でCompany Import Monitorが表示される
+- [ ] Port 8000でCompany Import Labが表示される
 - [ ] Company Import Monitorに3社表示される
 - [ ] `Run demo import`を押すと会社が追加される
 - [ ] `npm run lab:test`が成功する
 - [ ] `git status -sb`で予期しない変更が出ていない
 
-起動できない場合:
+## 7. よくあるErrorと安全な戻り方
+
+| Error・症状 | 主な原因 | 安全な戻り方 |
+|---|---|---|
+| `Repository not found` / 404 | GitHub未Login、招待未承認 | github.com右上のAccountと招待メールを確認 |
+| `command not found: npm` | Codespace準備中、別Terminal | CodespaceのSetup完了を待ち、VS Code内Terminalで`node -v`と`npm -v` |
+| `EADDRINUSE` / Address already in use | 同じPortで前のAppが起動中 | 起動中Terminalで`Control + C`。不明ならCodespaceをStopして再開 |
+| `Branch already exists` | 同じDayを開始済み | `git branch --show-current`を確認し、正しいBranchなら作り直さない |
+| `Working tree is not clean` | 未Commit変更がある | `git status -sb`で対象を確認し、勝手に削除せずCommitまたは講師へ相談 |
+
+講師へ送る前に次を実行します。
 
 ```bash
-npm run learner:setup
-npm run lab:test
+pwd
+node -v
+npm -v
+git status -sb
 ```
 
-それでも失敗する場合は、エラー全文、実行したコマンド、現在のBranchを講師へ送ります。Secretや`.env`の中身は送らないでください。
+`pwd`は現在のFolder、`-v`はVersion、`status -sb`は短い形式でBranchと変更を表示します。Error全文、実行Command、止まったStepと一緒に送ります。Secretや`.env`の中身は送りません。
 
-## 6. Day 01のTaskを開始する
+## 8. Day 01のTaskを開始する
 
 Taskを表示します。
 
 ```bash
 npm run course -- show 1
 ```
+
+`show 1`はDay 01のTaskを読むだけで、Fileを変更しません。
 
 作業Branchと学習Logを作ります。
 
@@ -114,8 +155,9 @@ npm run course -- start 1
 ```
 
 このコマンドは未Commit変更がある場合には停止します。既存の作業を勝手に失わないためです。
+成功するとBranchは`training/day-01-environment`になります。この後で`git switch -c`をもう一度実行しません。
 
-## 7. Codexへ最初に渡す指示
+## 9. Codexへ最初に渡す指示
 
 CodexでこのRepositoryを開き、次を貼り付けます。
 
@@ -129,7 +171,7 @@ COACHモードで進めてください。
 
 Codexは`AGENTS.md`を自動的に読みますが、最初の演習では読み込んだファイルと理解した条件を言葉で確認します。
 
-## 8. 毎日の提出Flow
+## 10. 毎日の提出Flow
 
 ```text
 Taskを読む

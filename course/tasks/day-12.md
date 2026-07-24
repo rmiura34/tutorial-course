@@ -13,6 +13,22 @@ duration_minutes: 180
 
 ログイン状態を安全に保存し、一覧とPaginationを巡回するPlaywright処理を作れる
 
+## Why this matters
+
+Paginationと重複除去は実務Scraperで頻出します。停止条件を誤ると無限Loopや同じDataの大量登録につながります。
+
+## Before you start
+
+- [ ] Day 11の1ページ取得が成功
+- [ ] 一意にできるKey候補を確認
+- [ ] 最大ページ数を安全な小さい値に設定
+
+## Three words for today
+
+- **Pagination:** 結果を複数ページに分ける仕組み
+- **重複排除:** 同じ対象を一度だけ残す処理
+- **停止条件:** Loopを終了する明確な判断
+
 ## Start command
 
 ```bash
@@ -64,6 +80,31 @@ npx playwright codegen https://example.test/login
 - [ ] playwright.config.ts
 - [ ] 認証状態の生成手順
 - [ ] learning-log/day-12/ui-vs-api.md
+
+## Success looks like this
+
+- [ ] 2ページ以上を順番に取得できる
+- [ ] 同一Keyが1件にまとまる
+- [ ] 最大件数・次リンクなし・Errorで安全に停止する
+
+## If you get stuck
+
+| 見えている症状 | よくある原因 | 安全な戻り方 |
+|---|---|---|
+| 同じページを繰り返し取得する | next URLを更新していない | 各Loopでcurrent URLをLogし、同じURL再訪時に停止する |
+| 途中で現在地やBranchが分からなくなった | 複数のTerminalやTaskを同時に進めた | 作業を止め、pwdとgit status -sbを実行。対象DayのTaskを読み直してから1手だけ進める |
+
+## How to write the submission
+
+### 事実と根拠
+
+- 含めるもの: 何を確認し、どのファイル・Command・画面を根拠にしたか
+- 記入例: external_idをKeyにdictへ保存。nextがない、既訪問URL、最大3ページのいずれかで停止。
+
+### 検証と振り返り
+
+- 含めるもの: 実行したTest、結果、AI案の採否、残っている不明点
+- 記入例: 確認: 指定TestはPASS。AI案のうち1件は根拠不足で不採用。未確認事項は次の質問へ残した。
 
 ## Done when
 

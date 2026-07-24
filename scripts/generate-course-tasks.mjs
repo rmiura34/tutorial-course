@@ -2,11 +2,41 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { lessons } from "../app/data/lessons.ts";
+import { glossaryTerms } from "../app/data/glossary.ts";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const taskDirectory = resolve(root, "course", "tasks");
 
 await mkdir(taskDirectory, { recursive: true });
+
+for (const lesson of lessons) {
+  if (lesson.videos.length === 0) {
+    throw new Error(`Day ${lesson.day} has no video resource`);
+  }
+  if (lesson.readings.length === 0) {
+    throw new Error(`Day ${lesson.day} has no reading resource`);
+  }
+  for (const resource of [...lesson.videos, ...lesson.readings]) {
+    if (
+      !resource.title.trim() ||
+      !resource.source.trim() ||
+      !resource.description.trim() ||
+      !resource.time.trim() ||
+      !resource.url.startsWith("https://")
+    ) {
+      throw new Error(`Day ${lesson.day} has an incomplete resource: ${resource.title}`);
+    }
+  }
+  if (
+    lesson.prerequisites.length < 3 ||
+    lesson.terms.length < 3 ||
+    lesson.expectedResults.length < 3 ||
+    lesson.commonMistakes.length < 2 ||
+    lesson.submissionGuide.length < 2
+  ) {
+    throw new Error(`Day ${lesson.day} is missing beginner support`);
+  }
+}
 
 function workspaceFor(day) {
   if (day <= 5) return "repository root";
@@ -39,6 +69,12 @@ const tasks = lessons.map((lesson) => {
     taskFile,
     durationMinutes: 180,
     goal: lesson.outcome,
+    prerequisites: lesson.prerequisites,
+    whyItMatters: lesson.whyItMatters,
+    terms: lesson.terms,
+    expectedResults: lesson.expectedResults,
+    commonMistakes: lesson.commonMistakes,
+    submissionGuide: lesson.submissionGuide,
     objectives: lesson.objectives,
     schedule: lesson.schedule,
     instructions: lesson.steps,
@@ -60,6 +96,15 @@ for (const task of tasks) {
     .map((item) => `- **${item.time} ${item.title}:** ${item.detail}`)
     .join("\n");
   const objectives = task.objectives.map((item) => `- [ ] ${item}`).join("\n");
+  const prerequisites = task.prerequisites.map((item) => `- [ ] ${item}`).join("\n");
+  const terms = task.terms.map((item) => `- **${item.term}:** ${item.meaning}`).join("\n");
+  const expectedResults = task.expectedResults.map((item) => `- [ ] ${item}`).join("\n");
+  const mistakes = task.commonMistakes
+    .map((item) => `| ${item.symptom} | ${item.cause} | ${item.recovery} |`)
+    .join("\n");
+  const submissionGuide = task.submissionGuide
+    .map((item) => `### ${item.section}\n\n- 含めるもの: ${item.include}\n- 記入例: ${item.example}`)
+    .join("\n\n");
   const instructions = task.instructions
     .map((item, index) => {
       const code = item.code ? `\n\n\`\`\`text\n${item.code}\n\`\`\`` : "";
@@ -83,6 +128,18 @@ duration_minutes: ${task.durationMinutes}
 ## Goal
 
 ${task.goal}
+
+## Why this matters
+
+${task.whyItMatters}
+
+## Before you start
+
+${prerequisites}
+
+## Three words for today
+
+${terms}
 
 ## Start command
 
@@ -118,6 +175,20 @@ ${task.practicePrompt}
 
 ${deliverables}
 
+## Success looks like this
+
+${expectedResults}
+
+## If you get stuck
+
+| 見えている症状 | よくある原因 | 安全な戻り方 |
+|---|---|---|
+${mistakes}
+
+## How to write the submission
+
+${submissionGuide}
+
 ## Done when
 
 ${checks}
@@ -133,5 +204,32 @@ ${checks}
 
   await writeFile(resolve(taskDirectory, `day-${day}.md`), markdown);
 }
+
+const glossaryByCategory = Map.groupBy(glossaryTerms, (item) => item.category);
+const glossaryMarkdown = `# 初心者用語集
+
+この用語集は暗記用ではありません。Taskで知らない言葉が出たときに、「何のために使うか」と例を確認するために使います。
+
+教材サイトを起動済みなら、検索できる \`/glossary\` 画面も利用できます。
+
+${[...glossaryByCategory.entries()]
+  .map(
+    ([category, terms]) => `## ${category}
+
+${terms
+  .map(
+    (item) => `### ${item.term}（${item.japanese}）
+
+${item.meaning}
+
+**例:** ${item.example}`,
+  )
+  .join("\n\n")}`,
+  )
+  .join("\n\n")}
+`;
+
+await mkdir(resolve(root, "docs"), { recursive: true });
+await writeFile(resolve(root, "docs", "GLOSSARY.md"), glossaryMarkdown);
 
 console.log(`Generated ${tasks.length} learner tasks in course/tasks.`);

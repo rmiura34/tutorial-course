@@ -15,6 +15,8 @@ export type LearningResource = {
   embedUrl?: string;
 };
 
+import { getLessonSupport, type LessonSupport } from "./lesson-support.ts";
+
 export type Lesson = {
   id: string;
   number: string;
@@ -42,7 +44,9 @@ export type Lesson = {
   deliverables: string[];
   checks: string[];
   quizzes: Quiz[];
-};
+} & LessonSupport;
+
+type LessonCore = Omit<Lesson, keyof LessonSupport>;
 
 const video = (
   title: string,
@@ -69,7 +73,7 @@ const q = (
   explanation: string,
 ): Quiz => ({ question, options, correctIndex, explanation });
 
-export const lessons: Lesson[] = [
+const lessonCore: LessonCore[] = [
   {
     id: "lesson-01",
     number: "01",
@@ -87,7 +91,7 @@ export const lessons: Lesson[] = [
     objectives: ["絶対パスと相対パスを説明する", "VS Codeとターミナルを行き来する", ".envと依存関係の役割を説明する"],
     schedule: [
       { time: "0:00–0:25", title: "動画", detail: "VS Codeの画面、Explorer、検索、Terminalを確認" },
-      { time: "0:25–1:05", title: "公式資料", detail: "Claude Codeの概要・設定場所を順番に読む" },
+      { time: "0:25–1:05", title: "公式資料", detail: "VS Code・Terminal・Codespacesの基本を順番に読む" },
       { time: "1:05–2:25", title: "ハンズオン", detail: "CLIでリポジトリを探索し、AIの説明と照合" },
       { time: "2:25–3:00", title: "提出", detail: "repository-map.md、クイズ、振り返り" },
     ],
@@ -97,15 +101,14 @@ export const lessons: Lesson[] = [
     readings: [
       reading("Getting Started", "https://code.visualstudio.com/docs/getstarted/getting-started", "VS Code Docs", "フォルダを開く、ファイルを編集する、拡張機能を扱う基本手順。", "10分"),
       reading("Getting started with the terminal", "https://code.visualstudio.com/docs/terminal/getting-started", "VS Code Docs", "統合ターミナルの開き方、シェル、コマンド履歴を確認します。", "8分"),
-      reading("Claude Code overview", "https://code.claude.com/docs/en/overview", "Anthropic", "Claude Codeがファイルを読み、編集し、コマンドを実行するエージェントであることを確認します。", "8分"),
-      reading("Explore the .claude directory", "https://code.claude.com/docs/en/claude-directory", "Anthropic", "CLAUDE.md、settings、skills、agentsを置く場所を把握します。", "8分"),
-      reading("Claude Code settings", "https://code.claude.com/docs/en/settings", "Anthropic", "ユーザー設定・プロジェクト設定・ローカル設定の違いを確認します。", "10分"),
+      reading("GitHub Codespaces quickstart", "https://docs.github.com/en/codespaces/getting-started/quickstart", "GitHub Docs", "RepositoryからCodespaceを作り、Browser版VS Codeを開く基本手順。英語画面では Code → Codespaces の順に探します。", "12分"),
+      reading("VS Code: Basic editing", "https://code.visualstudio.com/docs/editing/codebasics", "VS Code Docs", "Fileの作成・保存、検索、複数Cursorなど、演習で使う編集操作を確認します。", "10分"),
     ],
     steps: [
-      { title: "現在地とファイルを調べる", detail: "pwd、ls、findを使い、リポジトリの入口と主要ディレクトリを確認します。", code: "pwd\nls -la\nfind . -maxdepth 2 -type f | sort" },
+      { title: "現在地とファイルを調べる", detail: "1行目のpwdは現在のFolder、2行目のlsは-aで隠しFileも含め-lで詳細表示、3行目のfindは「現在地.から深さ2までのFileだけ」を探し、sortで名前順にします。$記号は入力しません。", code: "pwd\nls -la\nfind . -maxdepth 2 -type f | sort" },
       { title: "技術スタックの根拠を探す", detail: "composer.json、package.json、.env.example、routes、app、testsを探し、推測ではなくファイル名を根拠にします。" },
       { title: "AIへ読み取り専用で依頼する", detail: "変更禁止、根拠ファイル必須、不明点は不明と書く、という条件を付けて構造説明を依頼します。" },
-      { title: "人間が照合して地図を作る", detail: "AIが挙げたパスを自分で開き、正しい説明だけをrepository-map.mdに残します。" },
+      { title: "人間が照合して地図を作る", detail: "learning-log/templates/repository-map.mdを見本にし、AIが挙げたPathを自分で開きます。正しい説明だけをrepository-map.mdへ残し、書き方はlearning-log/examples/day-01-repository-map.example.mdで確認します。" },
     ],
     prompt: "このリポジトリは変更しないでください。技術スタック、主要ディレクトリ、起動方法、テスト方法を調査し、根拠ファイルのパスを示してください。確認できない項目は推測せず「未確認」と書いてください。",
     deliverables: ["learning-log/day-01/repository-map.md", "確認したコマンドと結果", "AIの説明で誤っていた点または未確認だった点"],
@@ -194,7 +197,7 @@ export const lessons: Lesson[] = [
     ],
     steps: [
       { title: "Issueを作る", detail: "現状、期待結果、完了条件、確認方法を記述し、Issue番号を確定します。" },
-      { title: "Issue用Branchで2 Commit作る", detail: "1つ目は実装、2つ目はテストまたは説明更新に分けます。", code: "git switch -c training/day-03-pull-request\ngit push -u origin training/day-03-pull-request" },
+      { title: "Issue用Branchで2 Commit作る", detail: "Course runnerが作成したBranch名を確認します。新しいBranchは作り直しません。1つ目は実装、2つ目はTestまたは説明更新に分け、GitHubへ送ります。", code: "git branch --show-current\ngit push -u origin training/day-03-pull-request" },
       { title: "PRテンプレートを埋める", detail: "変更目的、内容、影響範囲、確認方法、DB変更、リスク、AI利用範囲を空欄なく書きます。" },
       { title: "レビューへ対応する", detail: "指摘を再現し、採用・不採用の理由を書き、必要な修正Commitを追加します。" },
     ],
@@ -991,6 +994,11 @@ export const lessons: Lesson[] = [
     ],
   },
 ];
+
+export const lessons: Lesson[] = lessonCore.map((lesson) => ({
+  ...lesson,
+  ...getLessonSupport(lesson.day),
+}));
 
 export const weekSummaries = [
   { week: 1, title: "AI開発環境とGitHub", range: "Day 1–5", outcome: "調査・計画・ReviewをAI Agentへ分担できる" },

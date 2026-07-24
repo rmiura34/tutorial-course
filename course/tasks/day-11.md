@@ -13,6 +13,22 @@ duration_minutes: 180
 
 利用規約と負荷へ配慮した再実行可能な静的Scraperを作れる
 
+## Why this matters
+
+Scrapingは取得できれば終わりではありません。相手サイトへの負荷、利用条件、失敗時の停止、Data品質まで設計します。
+
+## Before you start
+
+- [ ] 対象サイトの利用規約とrobots.txtを確認
+- [ ] 練習用URLだけを使う
+- [ ] Request回数の上限を決める
+
+## Three words for today
+
+- **Scraping:** Webページから必要な情報を規則的に取得する処理
+- **Selector:** HTMLから対象要素を選ぶ指定
+- **robots.txt:** Crawler向けのアクセス方針を示すファイル
+
 ## Start command
 
 ```bash
@@ -65,6 +81,31 @@ response.raise_for_status()
 - [ ] output/sample.csv
 - [ ] output/errors.csv
 - [ ] learning-log/day-11/scraper-design.md
+
+## Success looks like this
+
+- [ ] 名前とURLを構造化して取得できる
+- [ ] Timeoutと待機時間がある
+- [ ] 失敗URLと理由をLogへ残せる
+
+## If you get stuck
+
+| 見えている症状 | よくある原因 | 安全な戻り方 |
+|---|---|---|
+| Selectorが0件になる | HTML構造が想定と違う | 取得HTMLを保存して対象文字を探し、最小のSelectorから組み直す |
+| 途中で現在地やBranchが分からなくなった | 複数のTerminalやTaskを同時に進めた | 作業を止め、pwdとgit status -sbを実行。対象DayのTaskを読み直してから1手だけ進める |
+
+## How to write the submission
+
+### 事実と根拠
+
+- 含めるもの: 何を確認し、どのファイル・Command・画面を根拠にしたか
+- 記入例: 成功3件、失敗1件。失敗URL・Status・時刻を記録し、無限再試行しない。
+
+### 検証と振り返り
+
+- 含めるもの: 実行したTest、結果、AI案の採否、残っている不明点
+- 記入例: 確認: 指定TestはPASS。AI案のうち1件は根拠不足で不採用。未確認事項は次の質問へ残した。
 
 ## Done when
 

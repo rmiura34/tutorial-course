@@ -6,6 +6,8 @@
 
 **[START-HERE.md](./START-HERE.md)を上から順番に実行してください。**
 
+知らない言葉は[初心者用語集](./docs/GLOSSARY.md)で日本語の説明と例を確認できます。
+
 教材サイト、GitHub、Codexは別のサービスです。ChatGPTアカウントだけではGitHub Repositoryへアクセスできません。受講案内に記載されたメールアドレスとGitHub招待を確認してから開始します。
 
 Codespacesの初回Setupが完了したら、Terminalで次を実行します。
@@ -41,6 +43,9 @@ AIにCodeを書かせられることではなく、AIが作った変更をCode�
 ## 含まれる教材
 
 - 20日すべての動画または公式動画CourseへのLink
+- 全Lessonの「始める前に」「なぜ学ぶか」「成功の見た目」「つまずき復旧」「提出記入例」
+- 50語の検索可能な初心者用語集
+- GitHub・Codespaces・VS Code・Portsの画面Label付きClick guide
 - 公式資料を読む順番、読む目的、目安時間
 - 1日180分の時間割
 - Hands-on手順、実行Command、練習Prompt

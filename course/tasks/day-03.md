@@ -13,6 +13,22 @@ duration_minutes: 180
 
 目的・影響範囲・確認方法・リスクを説明したPull Requestを作成できる
 
+## Why this matters
+
+Pull Requestは単なる提出ボタンではなく、「なぜ変えたか・どう確かめたか」を他の人が判断するための説明書です。
+
+## Before you start
+
+- [ ] GitHubへログイン済み
+- [ ] 自分のRepositoryへPushできる
+- [ ] Day 02でCommitとBranchを区別できた
+
+## Three words for today
+
+- **Issue:** 問題や作業目的を記録する場所
+- **Pull Request:** Branchの変更を取り込んでもらう提案
+- **base / compare:** 取込先 / 変更を持つBranch
+
 ## Start command
 
 ```bash
@@ -42,10 +58,10 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-03.md. Use COACH mode. Do no
 
 1. **Issueを作る** — 現状、期待結果、完了条件、確認方法を記述し、Issue番号を確定します。
 
-2. **Issue用Branchで2 Commit作る** — 1つ目は実装、2つ目はテストまたは説明更新に分けます。
+2. **Issue用Branchで2 Commit作る** — Course runnerが作成したBranch名を確認します。新しいBranchは作り直しません。1つ目は実装、2つ目はTestまたは説明更新に分け、GitHubへ送ります。
 
 ```text
-git switch -c training/day-03-pull-request
+git branch --show-current
 git push -u origin training/day-03-pull-request
 ```
 
@@ -65,6 +81,31 @@ git push -u origin training/day-03-pull-request
 - [ ] 2 Commit以上のBranch
 - [ ] テンプレートが埋まったPR
 - [ ] レビューコメントへの回答
+
+## Success looks like this
+
+- [ ] IssueとPRが相互に参照される
+- [ ] baseがmain、compareが課題Branch
+- [ ] 第三者が手順どおりに確認できる
+
+## If you get stuck
+
+| 見えている症状 | よくある原因 | 安全な戻り方 |
+|---|---|---|
+| PRのFiles changedが空 | 同じBranch同士を比較しているかPush前 | compareを課題Branchへ直し、git push -u origin <branch>を確認する |
+| 途中で現在地やBranchが分からなくなった | 複数のTerminalやTaskを同時に進めた | 作業を止め、pwdとgit status -sbを実行。対象DayのTaskを読み直してから1手だけ進める |
+
+## How to write the submission
+
+### 事実と根拠
+
+- 含めるもの: 何を確認し、どのファイル・Command・画面を根拠にしたか
+- 記入例: 目的: 学習手順を明確化。確認: npm test。Risk: 文書のみ。Rollback: Commitをrevert。
+
+### 検証と振り返り
+
+- 含めるもの: 実行したTest、結果、AI案の採否、残っている不明点
+- 記入例: 確認: 指定TestはPASS。AI案のうち1件は根拠不足で不採用。未確認事項は次の質問へ残した。
 
 ## Done when
 

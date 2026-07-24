@@ -13,6 +13,22 @@ duration_minutes: 180
 
 既存PHP Classの入力、依存、分岐、例外、戻り値を自分の言葉で説明できる
 
+## Why this matters
+
+PHPの配列・条件分岐・関数はLaravelのControllerやServiceを読む土台です。文法暗記より、入力がどの出力へ変わるかを追います。
+
+## Before you start
+
+- [ ] training-labでphp -vが実行できる
+- [ ] 変数と文字列の違いを説明できる
+- [ ] TerminalでTestを実行できる
+
+## Three words for today
+
+- **変数:** 値へ名前を付けたもの
+- **関数:** 入力を受け処理し結果を返すまとまり
+- **配列:** 複数の値を順序やKeyで持つ入れ物
+
 ## Start command
 
 ```bash
@@ -60,6 +76,31 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-08.md. Use COACH mode. Do no
 - [ ] Method契約表
 - [ ] 1つのUnit Test
 - [ ] 未理解の構文一覧
+
+## Success looks like this
+
+- [ ] 小さなPHP関数を実行できる
+- [ ] 正常・空・不正入力をTestできる
+- [ ] Errorの行番号から原因箇所を開ける
+
+## If you get stuck
+
+| 見えている症状 | よくある原因 | 安全な戻り方 |
+|---|---|---|
+| Parse errorが表示される | 括弧・セミコロン・引用符の不足 | 最初のError行を開き、直前の記号を1つずつ確認する |
+| 途中で現在地やBranchが分からなくなった | 複数のTerminalやTaskを同時に進めた | 作業を止め、pwdとgit status -sbを実行。対象DayのTaskを読み直してから1手だけ進める |
+
+## How to write the submission
+
+### 事実と根拠
+
+- 含めるもの: 何を確認し、どのファイル・Command・画面を根拠にしたか
+- 記入例: 入力['name' => 'A社']を受け、空ならError、値があれば整形した名前を返す。
+
+### 検証と振り返り
+
+- 含めるもの: 実行したTest、結果、AI案の採否、残っている不明点
+- 記入例: 確認: 指定TestはPASS。AI案のうち1件は根拠不足で不採用。未確認事項は次の質問へ残した。
 
 ## Done when
 

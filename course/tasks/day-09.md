@@ -13,6 +13,22 @@ duration_minutes: 180
 
 1画面の処理経路をrequest-flow.mdへファイル・Method名付きで記録できる
 
+## Why this matters
+
+LaravelではURLからResponseまでに複数の層があります。処理経路を追えると、AIへ修正場所を丸投げせず根拠付きで指定できます。
+
+## Before you start
+
+- [ ] Port 8000でLabが表示される
+- [ ] PHPの関数と配列を読める
+- [ ] repository-map.mdを開いている
+
+## Three words for today
+
+- **Route:** URLと処理の入口を結ぶ定義
+- **Controller:** Requestを受け処理を組み立てる場所
+- **Model:** DatabaseのDataを扱う部品
+
 ## Start command
 
 ```bash
@@ -64,6 +80,31 @@ php artisan route:list
 - [ ] 処理経路図
 - [ ] 関連Test一覧
 - [ ] 未確認の外部依存一覧
+
+## Success looks like this
+
+- [ ] URLからRoute・Controller・Viewを線で結べる
+- [ ] 各段階の入力と出力を書ける
+- [ ] 根拠となるファイルパスを示せる
+
+## If you get stuck
+
+| 見えている症状 | よくある原因 | 安全な戻り方 |
+|---|---|---|
+| 検索結果が多すぎて経路を追えない | URL・Methodを固定していない | Browserで対象通信を1件選び、Route定義から順に追う |
+| 途中で現在地やBranchが分からなくなった | 複数のTerminalやTaskを同時に進めた | 作業を止め、pwdとgit status -sbを実行。対象DayのTaskを読み直してから1手だけ進める |
+
+## How to write the submission
+
+### 事実と根拠
+
+- 含めるもの: 何を確認し、どのファイル・Command・画面を根拠にしたか
+- 記入例: GET /companies → routes/web.php → CompanyController@index → companies/index.blade.php。
+
+### 検証と振り返り
+
+- 含めるもの: 実行したTest、結果、AI案の採否、残っている不明点
+- 記入例: 確認: 指定TestはPASS。AI案のうち1件は根拠不足で不採用。未確認事項は次の質問へ残した。
 
 ## Done when
 

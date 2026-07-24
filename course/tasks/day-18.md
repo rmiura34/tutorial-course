@@ -13,6 +13,22 @@ duration_minutes: 180
 
 AI生成Diffを全行説明し、Test結果とRollbackを伴う安全な実装Branchを完成できる
 
+## Why this matters
+
+承認済み計画を小さく実装すると、失敗原因・Review範囲・戻す単位を限定できます。AIの生成量より検証可能性を優先します。
+
+## Before you start
+
+- [ ] Day 17の計画が承認済み
+- [ ] 変更前Test結果を保存
+- [ ] Rollback Commandを確認
+
+## Three words for today
+
+- **Baseline:** 変更前の比較基準
+- **Static analysis:** 実行せずCode上の問題を調べる検査
+- **Timeout / Retry:** 待つ上限 / 条件付き再試行
+
 ## Start command
 
 ```bash
@@ -60,6 +76,31 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-18.md. Use COACH mode. Do no
 - [ ] 変更前後のTest結果
 - [ ] Migration rollback結果
 - [ ] 全行説明できるDiff
+
+## Success looks like this
+
+- [ ] 1 Commit 1目的で履歴が並ぶ
+- [ ] 変更前後のTest結果を比較できる
+- [ ] 失敗経路とRollbackを実行できる
+
+## If you get stuck
+
+| 見えている症状 | よくある原因 | 安全な戻り方 |
+|---|---|---|
+| 多数のTestが同時に失敗する | 変更単位が大きすぎる | 直前の小Commitまで戻して最初の失敗1件から調べる |
+| 途中で現在地やBranchが分からなくなった | 複数のTerminalやTaskを同時に進めた | 作業を止め、pwdとgit status -sbを実行。対象DayのTaskを読み直してから1手だけ進める |
+
+## How to write the submission
+
+### 事実と根拠
+
+- 含めるもの: 何を確認し、どのファイル・Command・画面を根拠にしたか
+- 記入例: Step 1: 再現Test。Step 2: 重複Key修正。各Stepで対象Test→Diff→Commit。
+
+### 検証と振り返り
+
+- 含めるもの: 実行したTest、結果、AI案の採否、残っている不明点
+- 記入例: 確認: 指定TestはPASS。AI案のうち1件は根拠不足で不採用。未確認事項は次の質問へ残した。
 
 ## Done when
 

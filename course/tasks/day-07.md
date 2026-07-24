@@ -13,6 +13,22 @@ duration_minutes: 180
 
 既存TSXの入力・状態・通信・描画・エラー処理を日本語で説明できる
 
+## Why this matters
+
+HTTPのRequestとResponseが分かると、画面の不具合をBrowser・Server・Databaseのどこから調べるか判断できます。
+
+## Before you start
+
+- [ ] 教材とLabを起動できる
+- [ ] BrowserのDeveloper Toolsを開ける
+- [ ] URLをAddress barへ入力できる
+
+## Three words for today
+
+- **HTTP:** BrowserとServerが情報を交換する約束
+- **Request:** BrowserからServerへの依頼
+- **Response:** Serverが返すStatus・Header・Body
+
 ## Start command
 
 ```bash
@@ -60,6 +76,31 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-07.md. Use COACH mode. Do no
 - [ ] Props/State/Event/APIの対応表
 - [ ] 最小の文言またはValidation変更
 - [ ] 変更前後の画面確認
+
+## Success looks like this
+
+- [ ] Network panelで1件の通信を選べる
+- [ ] Method・Status・URL・Responseを記録できる
+- [ ] 404と500の調査開始点を説明できる
+
+## If you get stuck
+
+| 見えている症状 | よくある原因 | 安全な戻り方 |
+|---|---|---|
+| Network panelに何も出ない | 記録開始前に通信が終わった | Networkを開いたままページを再読み込みし、AllまたはFetch/XHRを選ぶ |
+| 途中で現在地やBranchが分からなくなった | 複数のTerminalやTaskを同時に進めた | 作業を止め、pwdとgit status -sbを実行。対象DayのTaskを読み直してから1手だけ進める |
+
+## How to write the submission
+
+### 事実と根拠
+
+- 含めるもの: 何を確認し、どのファイル・Command・画面を根拠にしたか
+- 記入例: GET /companies → 200。ResponseはHTML。404ならRoute、500ならServer logから確認する。
+
+### 検証と振り返り
+
+- 含めるもの: 実行したTest、結果、AI案の採否、残っている不明点
+- 記入例: 確認: 指定TestはPASS。AI案のうち1件は根拠不足で不採用。未確認事項は次の質問へ残した。
 
 ## Done when
 

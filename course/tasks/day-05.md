@@ -13,6 +13,22 @@ duration_minutes: 180
 
 3つのAIツールを目的別に使い分け、出力の根拠と不確実性を比較できる
 
+## Why this matters
+
+AIツールは同じではありません。調査・計画・実装・Reviewの得意分野と権限を比較し、目的に合う道具を選びます。
+
+## Before you start
+
+- [ ] GitHub RepositoryをCodexから開ける
+- [ ] 利用するAIごとの送信データ規約を確認
+- [ ] 秘密情報をContextへ入れない
+
+## Three words for today
+
+- **Agent:** 目標に向けて検索・編集・実行を組み合わせるAI
+- **Prompt:** AIへ渡す目的・条件・出力形式
+- **AGENTS.md:** CodexがProjectで読む継続指示
+
 ## Start command
 
 ```bash
@@ -59,6 +75,31 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-05.md. Use COACH mode. Do no
 - [ ] learning-log/day-05/agent-comparison.md
 - [ ] 3ツールのプロンプト記録
 - [ ] 採用した提案・却下した提案と理由
+
+## Success looks like this
+
+- [ ] 同じ質問への3ツールの違いを表で比較できる
+- [ ] 各回答の根拠を実ファイルで確認できる
+- [ ] 採用・不採用理由が残る
+
+## If you get stuck
+
+| 見えている症状 | よくある原因 | 安全な戻り方 |
+|---|---|---|
+| AIの説明がもっともらしいが根拠がない | 確認対象を指定していない | ファイルパスと検証Commandを要求し、自分で開いて照合する |
+| 途中で現在地やBranchが分からなくなった | 複数のTerminalやTaskを同時に進めた | 作業を止め、pwdとgit status -sbを実行。対象DayのTaskを読み直してから1手だけ進める |
+
+## How to write the submission
+
+### 事実と根拠
+
+- 含めるもの: 何を確認し、どのファイル・Command・画面を根拠にしたか
+- 記入例: Codex案を採用: testsまで確認したため。別案を不採用: 存在しないServiceを前提にしていたため。
+
+### 検証と振り返り
+
+- 含めるもの: 実行したTest、結果、AI案の採否、残っている不明点
+- 記入例: 確認: 指定TestはPASS。AI案のうち1件は根拠不足で不採用。未確認事項は次の質問へ残した。
 
 ## Done when
 
