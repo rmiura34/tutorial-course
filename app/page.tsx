@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ProgressTracker } from "./components/ProgressTracker";
-import { lessons } from "./data/lessons";
+import { lessons, weekSummaries } from "./data/lessons";
 
 export default function Home() {
   return (
@@ -26,37 +26,37 @@ export default function Home() {
 
       <section className="hero">
         <div className="hero-copy">
-          <p className="eyebrow">ZERO TO FIRST PULL REQUEST</p>
+          <p className="eyebrow">AI-DRIVEN DEVELOPMENT · 20 DAYS / 60 HOURS</p>
           <h1>
-            見るだけで終わらない。
+            AIで書くだけで終わらない。
             <br />
-            <span>手を動かして、つくる。</span>
+            <span>安全なPRまで、やり切る。</span>
           </h1>
           <p className="hero-description">
-            VS Codeを開くところから、Webページの公開まで。
-            動画・クイズ・実装課題・GitHubレビューがひとつになった、
-            初心者のための実践コースです。
+            CLIとGitから始め、Web・PHP・Laravel・DB・Scrapingを読み、
+            Claude Code・Cursor・CodexのSkills、Hooks、MCP、Pluginsまで実装。
+            最後は未知のIssueを調査・修正・Test・ReviewしてPull Requestへ変えます。
           </p>
           <div className="hero-actions">
-            <Link className="primary-button" href="/lessons/setup">
-              Lesson 01から始める <span aria-hidden="true">→</span>
+            <Link className="primary-button" href="/lessons/terminal-environment">
+              Day 01から始める <span aria-hidden="true">→</span>
             </Link>
             <a className="text-link" href="#roadmap">
-              全8レッスンを見る
+              全20日を見る
             </a>
           </div>
           <dl className="hero-stats">
             <div>
-              <dt>8</dt>
-              <dd>LESSONS</dd>
+              <dt>20</dt>
+              <dd>DAYS</dd>
             </div>
             <div>
-              <dt>3h</dt>
+              <dt>60h</dt>
               <dd>TOTAL</dd>
             </div>
             <div>
               <dt>1</dt>
-              <dd>LIVE SITE</dd>
+              <dd>FINAL PR</dd>
             </div>
           </dl>
         </div>
@@ -66,7 +66,7 @@ export default function Home() {
             <span className="window-dot dot-coral" />
             <span className="window-dot dot-yellow" />
             <span className="window-dot dot-green" />
-            <span className="workspace-title">profile-card / index.html</span>
+            <span className="workspace-title">request-flow.md</span>
           </div>
           <div className="workspace-body">
             <div className="file-rail" aria-hidden="true">
@@ -80,38 +80,36 @@ export default function Home() {
             </div>
             <pre aria-label="HTMLコード例">
               <code>
-                <span className="code-muted">&lt;!doctype html&gt;</span>
+                <span className="code-muted">GET /users</span>
                 {"\n"}
-                <span className="code-pink">&lt;main</span>{" "}
-                <span className="code-yellow">class</span>=
-                <span className="code-green">&quot;profile&quot;</span>
-                <span className="code-pink">&gt;</span>
-                {"\n  "}
-                <span className="code-pink">&lt;h1&gt;</span>
-                はじめまして！
-                <span className="code-pink">&lt;/h1&gt;</span>
-                {"\n  "}
-                <span className="code-pink">&lt;p&gt;</span>
-                今日からWeb制作を
-                {"\n  "}はじめます。
-                <span className="code-pink">&lt;/p&gt;</span>
+                <span className="code-pink">Route</span>
+                {" → "}
+                <span className="code-yellow">Middleware</span>
                 {"\n"}
-                <span className="code-pink">&lt;/main&gt;</span>
+                <span className="code-pink">Controller</span>
+                {" → "}
+                <span className="code-green">Service</span>
+                {"\n"}
+                <span className="code-pink">Model</span>
+                {" → "}
+                <span className="code-yellow">Database</span>
+                {"\n"}
+                <span className="code-green">Test: PASS ✓</span>
               </code>
             </pre>
           </div>
           <div className="workspace-result">
-            <span className="result-label">LIVE PREVIEW</span>
+            <span className="result-label">PULL REQUEST</span>
             <div className="profile-preview">
-              <span className="preview-avatar">R</span>
+              <span className="preview-avatar">PR</span>
               <div>
-                <strong>はじめまして！</strong>
-                <p>今日からWeb制作をはじめます。</p>
+                <strong>安全に変更できる</strong>
+                <p>根拠・Test・Rollback付き</p>
               </div>
             </div>
           </div>
-          <div className="floating-note note-one">編集する</div>
-          <div className="floating-note note-two">すぐ確認 ✓</div>
+          <div className="floating-note note-one">公式Docsで裏取り</div>
+          <div className="floating-note note-two">独立Review ✓</div>
         </div>
       </section>
 
@@ -119,32 +117,32 @@ export default function Home() {
         <div className="section-heading">
           <p className="eyebrow">HOW IT WORKS</p>
           <h2>毎回おなじ4ステップ。</h2>
-          <p>迷う時間を減らして、つくる時間を増やします。</p>
+          <p>AIの回答を鵜呑みにせず、根拠とTestで安全な変更へ変えます。</p>
         </div>
         <ol className="learning-loop">
           <li>
             <span className="loop-number">01</span>
             <span className="loop-icon">▶</span>
-            <strong>見る</strong>
-            <p>3〜7分の短い動画で、完成形と操作を確認。</p>
+            <strong>学ぶ</strong>
+            <p>指定動画と公式資料を、決められた順番で読む。</p>
           </li>
           <li>
             <span className="loop-number">02</span>
             <span className="loop-icon">?</span>
-            <strong>確かめる</strong>
-            <p>3問クイズで、重要なポイントをすぐ確認。</p>
+            <strong>調べる</strong>
+            <p>コードと通信を調査し、AIの説明を実Fileで照合。</p>
           </li>
           <li>
             <span className="loop-number">03</span>
             <span className="loop-icon">&lt;/&gt;</span>
-            <strong>つくる</strong>
-            <p>自分のブランチで、実際のコードを変更。</p>
+            <strong>実装する</strong>
+            <p>自分のBranchで小さく変更し、TestとDiffを確認。</p>
           </li>
           <li>
             <span className="loop-number">04</span>
             <span className="loop-icon">✓</span>
-            <strong>届ける</strong>
-            <p>テストを通してPRを作り、学びを記録。</p>
+            <strong>反証する</strong>
+            <p>別Agentと人間でReviewし、根拠付きPRを提出。</p>
           </li>
         </ol>
       </section>
@@ -153,13 +151,22 @@ export default function Home() {
         <div className="roadmap-header">
           <div className="section-heading">
             <p className="eyebrow">YOUR ROADMAP</p>
-            <h2>最初の公開まで、8レッスン。</h2>
+            <h2>実務PRまで、20日・60時間。</h2>
           </div>
           <div className="roadmap-key">
-            <span><i className="key-dot key-build" /> BUILD</span>
-            <span><i className="key-dot key-git" /> GIT</span>
-            <span><i className="key-dot key-ship" /> SHIP</span>
+            <span><i className="key-dot key-build" /> FOUNDATION</span>
+            <span><i className="key-dot key-git" /> WEB / AUTOMATION</span>
+            <span><i className="key-dot key-ship" /> CAPSTONE</span>
           </div>
+        </div>
+        <div className="week-grid">
+          {weekSummaries.map((week) => (
+            <article key={week.week}>
+              <span>WEEK {week.week} · {week.range}</span>
+              <h3>{week.title}</h3>
+              <p>{week.outcome}</p>
+            </article>
+          ))}
         </div>
         <ProgressTracker lessons={lessons} />
       </section>
@@ -167,11 +174,11 @@ export default function Home() {
       <section className="finish-section">
         <div>
           <p className="eyebrow">THE FINISH LINE</p>
-          <h2>最後に残るのは、<br />あなたが公開したページ。</h2>
+          <h2>最後に残るのは、<br />説明できる実務PR。</h2>
         </div>
         <div className="finish-card">
-          <span className="finish-badge">PUBLIC</span>
-          <p className="finish-url">your-name.github.io/profile</p>
+          <span className="finish-badge">READY TO MERGE</span>
+          <p className="finish-url">fix/scraper-pagination-and-duplicates</p>
           <div className="finish-preview">
             <span className="preview-avatar preview-avatar-large">YOU</span>
             <div>
@@ -188,7 +195,7 @@ export default function Home() {
           <span className="brand-mark">TC</span>
           <span>Tutorial Course</span>
         </Link>
-        <p>小さく学び、確かめ、つくって届ける。</p>
+        <p>Contextを集め、計画し、小さく実装し、別Agentで反証する。</p>
         <a
           href="https://github.com/rmiura34/tutorial-course"
           rel="noreferrer"

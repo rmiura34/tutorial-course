@@ -1,43 +1,41 @@
-# プロダクトロードマップ
+# Product Roadmap
 
-## Phase 1: MVP
+## 実装済み
 
-- 全8レッスンのサイト
-- プロフィールカード演習
-- Codespaces
-- クイズ
-- 進捗表示
-- Pull Requestテンプレート
-- CI
+- 20日・60時間のCourse Site
+- 全Dayの動画または公式動画Course Link
+- 公式資料の読む順番、目的、目安時間
+- 180分の時間割
+- Hands-on、Prompt、複数Quiz、提出物、完了条件
+- Browser内の進捗保存
+- Codespaces / Dev Container
+- Issue / Pull Request Template
+- GitHub ActionsによるLint、Build、表示Test
+- Claude Code Skills / Hooks / Subagent starter
+- Codex Skill / Plugin / Marketplace starter
+- 調査、Refactoring、AI利用、MCP権限監査Template
 
-成功基準:
+## 次の改善候補
 
-- 10分以内に最初のHTMLを表示できる
-- 80%以上がLesson 01を個別サポートなしで完了する
-- 70%以上が最初のPull Requestを作れる
+### 自動採点
 
-## Phase 2: 採点エンジン
+- DayごとのTest workflow
+- HTML / PHP / Python / Playwrightの課題別Check
+- Branch名、提出File、PR本文の自動確認
+- 結果を初心者向け日本語で説明
 
-- HTML構文・アクセシビリティチェック
-- 課題ごとのテスト
-- GitHub Actionsの結果を初心者向け日本語で表示
-- レッスン完了に応じた次課題の案内
+### 演習用Laravel Application
 
-## Phase 3: 言語トラック
+- Project Versionを固定したDocker環境
+- 意図的なBugと段階的Issue
+- Static / Dynamic Scraper
+- ReactまたはBlade画面
+- Seed Dataと安全なReset
 
-- TypeScript / Vite
-- React
-- PHP
-- APIとデータベース
+### 講師運用
 
-言語ごとに別テンプレートを用意し、初学者向けリポジトリを肥大化させません。
-
-## Phase 4: AIコーディングトラック
-
-- 良い依頼の作り方
-- 実装計画と差分レビュー
-- テストと検証
-- `AGENTS.md`とルール
-- Skills
-- Plugins
-- MCPと権限設計
+- Cohort別の進捗Dashboard
+- 採点Rubric
+- Review SLA
+- 動画の日本語字幕
+- 公式資料Linkの定期確認

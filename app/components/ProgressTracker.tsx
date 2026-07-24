@@ -40,7 +40,7 @@ export function ProgressTracker({ lessons }: { lessons: Lesson[] }) {
       <div className="progress-summary">
         <div>
           <span className="progress-label">YOUR PROGRESS</span>
-          <strong>{ready ? `${completed.length} / ${lessons.length}` : "— / 8"}</strong>
+          <strong>{ready ? `${completed.length} / ${lessons.length}` : `— / ${lessons.length}`}</strong>
         </div>
         <div
           className="progress-track"
@@ -77,7 +77,7 @@ export function ProgressTracker({ lessons }: { lessons: Lesson[] }) {
                 <p>{lesson.description}</p>
                 <div className="lesson-meta">
                   <span>{lesson.duration}</span>
-                  <span>動画 + クイズ + 実装</span>
+                  <span>動画 + 公式資料 + クイズ + 実装</span>
                 </div>
                 <span className="card-link">レッスンを開く →</span>
               </Link>

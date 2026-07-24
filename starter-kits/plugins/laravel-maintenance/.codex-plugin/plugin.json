@@ -1,0 +1,21 @@
+{
+  "name": "laravel-maintenance",
+  "version": "0.1.0",
+  "description": "Reusable Laravel investigation and review workflows for training.",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Laravel Maintenance",
+    "shortDescription": "Trace and review Laravel changes safely",
+    "longDescription": "Bundles read-only request tracing and safety-focused Laravel review workflows.",
+    "developerName": "Tutorial Course",
+    "category": "Developer Tools",
+    "capabilities": ["Read", "Review"],
+    "defaultPrompt": [
+      "Trace this Laravel request from route to response.",
+      "Review this Laravel pull request for database and compatibility risks."
+    ],
+    "brandColor": "#C7FF2F"
+  }
+}
+

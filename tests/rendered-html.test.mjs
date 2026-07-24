@@ -31,28 +31,73 @@ test("renders the course homepage", async () => {
   const html = await response.text();
   assert.match(html, /Tutorial Course/);
   assert.match(html, /手を動かして、つくる。/);
-  assert.match(html, /最初の公開まで、8レッスン。/);
-  assert.match(html, /Lesson 01から始める/);
+  assert.match(html, /実務PRまで、20日・60時間。/);
+  assert.match(html, /Day 01から始める/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 
-test("renders a lesson page with practice and quiz", async () => {
-  const response = await render("/lessons/html");
+test("renders a complete lesson page with resources, practice, and quizzes", async () => {
+  const response = await render("/lessons/terminal-environment");
   assert.equal(response.status, 200);
 
   const html = await response.text();
-  assert.match(html, /HTMLで自己紹介を書こう/);
-  assert.match(html, /3分チェック/);
-  assert.match(html, /自分のブランチで実装しよう/);
+  assert.match(html, /ターミナル・ファイル・開発環境/);
+  assert.match(html, /Introductory Videos for VS Code/);
+  assert.match(html, /公式資料をこの順番で読む/);
+  assert.match(html, /そのまま使える練習Prompt/);
+  assert.match(html, /理解確認クイズ/);
+  assert.match(html, /自分のBranchで提出物を作る/);
   assert.match(html, /完了チェック/);
+  assert.doesNotMatch(html, /動画をここに埋め込みます/);
 });
 
-test("keeps course infrastructure in the repository", async () => {
+test("renders all 20 days with the complete learning flow", async () => {
+  const lessonData = await readFile(
+    new URL("../app/data/lessons.ts", import.meta.url),
+    "utf8",
+  );
+  const slugs = [...lessonData.matchAll(/^\s+slug: "([^"]+)",$/gm)].map(
+    ([, slug]) => slug,
+  );
+  assert.equal(slugs.length, 20);
+
+  for (const slug of slugs) {
+    const response = await render(`/lessons/${slug}`);
+    assert.equal(response.status, 200, `${slug} should render`);
+    const html = await response.text();
+    assert.match(html, /VIDEO|youtube-nocookie\.com\/embed/);
+    assert.match(html, /公式資料をこの順番で読む/);
+    assert.match(html, /そのまま使える練習Prompt/);
+    assert.match(html, /理解確認クイズ/);
+    assert.match(html, /必須提出物/);
+    assert.match(html, /完了チェック/);
+  }
+});
+
+test("keeps course infrastructure and agent starters in the repository", async () => {
   await Promise.all([
     access(new URL("../.devcontainer/devcontainer.json", import.meta.url)),
     access(new URL("../.github/workflows/ci.yml", import.meta.url)),
     access(new URL("../exercises/01-profile-card/index.html", import.meta.url)),
     access(new URL("../docs/AUTHORING.md", import.meta.url)),
+    access(
+      new URL(
+        "../starter-kits/claude-code/.claude/skills/trace-laravel-flow/SKILL.md",
+        import.meta.url,
+      ),
+    ),
+    access(
+      new URL(
+        "../starter-kits/codex/.agents/skills/trace-laravel-flow/SKILL.md",
+        import.meta.url,
+      ),
+    ),
+    access(
+      new URL(
+        "../starter-kits/plugins/laravel-maintenance/.codex-plugin/plugin.json",
+        import.meta.url,
+      ),
+    ),
   ]);
 
   const [packageJson, layout, lessonData] = await Promise.all([
@@ -62,5 +107,7 @@ test("keeps course infrastructure in the repository", async () => {
   ]);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   assert.match(layout, /lang="ja"/);
-  assert.match(lessonData, /lesson\/02-html/);
+  assert.match(lessonData, /training\/day-15-plugin-mcp/);
+  assert.equal((lessonData.match(/id: "lesson-\d+"/g) ?? []).length, 20);
+  assert.equal((lessonData.match(/quizzes: \[/g) ?? []).length, 20);
 });

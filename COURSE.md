@@ -1,59 +1,116 @@
-# コース設計
+# 研修設計
 
-## 学習ゴール
+## 目的
 
-このコースの修了条件は「動画を見終えたこと」ではありません。受講者が次の状態になることです。
+この研修は一般的なProgramming Schoolのように、言語文法から順に新規Applicationを作るCourseではありません。
 
-1. 自分でエディタを開ける
-2. HTML、CSS、JavaScriptを小さく変更できる
-3. エラーを読み、確認方法を選べる
-4. Gitで変更を履歴に残せる
-5. ブランチとPull Requestを使える
-6. 自分のWebページを公開し、URLを共有できる
+目標は、AIを使って既存Systemを安全に変更できる人材を育てることです。
 
-## 1レッスンの共通構造
+## 修了条件
 
-1. 完成形を示す
-2. 3〜7分の操作動画
-3. 今日の学習目標
-4. ステップバイステップの練習
-5. 理解確認クイズ
-6. 自分で行う実装課題
-7. 自動チェック
-8. Pull Requestでの振り返り
+受講者が次を一連のFlowとして遂行できることを確認します。
 
-## 評価
+1. GitHubから既存PHP / Laravel Repositoryを取得する
+2. CLI、Cursor、Claude Code、CodexでCodebaseを調査する
+3. 画面、Route、Controller、Service、Model、DBの処理経路を説明する
+4. Issueから変更計画と影響範囲を作る
+5. Branchを作成し、AIを使って小さく修正する
+6. Test、Debug、Log、Migration rollbackを確認する
+7. Scraperの規約、負荷、Timeout、Retry、重複を検証する
+8. Diffを人間がReviewし、問題を修正する
+9. Commit、Push、Pull Request、Review対応まで行う
+10. Project専用のSkill、Hook、Subagent、Pluginを作る
 
-| 領域 | 確認方法 |
-|---|---|
-| 知識 | 3問程度のクイズ |
-| 技術 | Lint、ビルド、DOM・動作テスト |
-| プロセス | ブランチ、コミット、Pull Request |
-| 理解 | PR本文での説明と振り返り |
-| AI活用 | 採用・不採用を含む利用記録 |
+## 毎日の共通構造
 
-クイズだけでは修了にしません。動く成果物、テスト結果、自分の説明がそろって初めて完了です。
+1. 動画・公式Demo
+2. 指定された公式資料を順番に読む
+3. 今日の到達点と完了条件を確認
+4. 既存ProjectでHands-on
+5. AI用Promptを実行し、根拠を照合
+6. 理解確認Quiz
+7. 自分のBranchで提出物を作る
+8. Test、Diff、PR、AI利用記録
 
-## ブランチ運用
+学習20%、Hands-on 30%、実務課題50%を基本にします。
 
-受講者全員を中央リポジトリの別ブランチで管理しません。受講者はテンプレートから自分のリポジトリを作り、その中で課題ブランチを作ります。
+## 60時間の配分
+
+| 領域 | 時間 |
+|---|---:|
+| Git・GitHub・CLI | 9時間 |
+| Cursor・Claude Code・Codex基礎 | 6時間 |
+| Web・Frontend読解 | 6時間 |
+| PHP・Laravel | 9時間 |
+| Database・SQL | 3時間 |
+| Python・Scraping | 6時間 |
+| Test・Debug | 3時間 |
+| Skills・Hooks・MCP・Plugins | 6時間 |
+| 最終実務演習 | 12時間 |
+| 合計 | 60時間 |
+
+## AIの標準Cycle
 
 ```text
-main
-├── lesson/01-setup
-├── lesson/02-html
-├── lesson/03-css
-└── lesson/04-javascript
+仕様を読む
+  ↓
+Contextと根拠を集める
+  ↓
+変更前に計画を作る
+  ↓
+小さな単位で実装する
+  ↓
+別Agentで反証する
+  ↓
+公式資料・Test・Diffで検証する
+  ↓
+Pull Requestで説明する
 ```
 
-## AI・バイブコーディング方針
+Skill、Hook、Rules、Pluginは、このCycleを毎回再現するために使います。
 
-AIは利用可能です。ただし、受講者は以下を説明できる必要があります。
+## 最終試験
 
-- AIに何を頼んだか
-- 提案のどこを採用したか
-- どこを採用しなかったか
-- どの方法で正しさを確認したか
-- まだ理解できていない部分は何か
+未知のIssueを3時間で渡します。
 
-将来の拡張コースでは、`AGENTS.md`、ルールファイル、Skills、Plugins、MCP、権限設計を独立したトラックとして扱います。
+例:
+
+> 特定Siteの会社情報Scrapingで2Page目以降が取得されず、一部企業が重複登録される。Laravel管理画面には再実行Buttonがある。原因を調査し、安全に修正してPRを提出する。
+
+### 採点
+
+| 項目 | 配点 |
+|---|---:|
+| Git / GitHub運用 | 15 |
+| Code調査 | 15 |
+| Laravel理解 | 15 |
+| DB理解 | 10 |
+| Scraping理解 | 10 |
+| AIへの指示・Context設計 | 15 |
+| Testと検証 | 15 |
+| PRの説明品質 | 5 |
+
+合格点は75点です。
+
+次の行為は点数に関係なく不合格です。
+
+- SecretをCommit
+- Test未実行
+- Diff未確認
+- `main`へ直接Push
+- DB破壊操作を無確認で実行
+- 利用規約、robots.txt、負荷を無視したScraping
+- AIの出力を理解せず、自分で説明できない
+
+## 講師が研修前に用意するもの
+
+- 演習対象のLaravel Repositoryと正確なVersion
+- DockerまたはLaravel Sailで起動できる環境
+- MySQLまたはPostgreSQL
+- 意図的なBugを含むPHP / Scraper / Playwright Code
+- Feature Test、Unit Test、CI
+- 小規模なReactまたはBlade画面
+- GitHub Organization、Branch protection、Issue/PR Template
+- Claude Code、Cursor、Codexを使用できるAccount
+
+外部DocumentのURLと画面名は研修開始前に確認します。特にCursor、Claude Code、Codex、Laravelは更新頻度が高いため、SiteのLinkだけでなくProject Versionとの整合を確認してください。

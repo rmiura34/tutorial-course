@@ -65,7 +65,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
         <article className="lesson-content">
           <div className={`lesson-hero lesson-${lesson.color}`}>
             <div>
-              <p className="eyebrow">{lesson.category} · {lesson.duration}</p>
+              <p className="eyebrow">WEEK {lesson.week} · DAY {lesson.day} · {lesson.duration}</p>
               <h1>{lesson.title}</h1>
               <p>{lesson.description}</p>
             </div>
@@ -73,18 +73,84 @@ export default async function LessonPage({ params }: LessonPageProps) {
           </div>
 
           <section className="video-panel">
-            <div className="video-screen">
-              <span className="video-play" aria-hidden="true">▶</span>
-              <span className="video-label">VIDEO {lesson.number}</span>
-              <div className="video-caption">
-                <strong>{lesson.shortTitle}</strong>
-                <span>動画をここに埋め込みます</span>
+            {lesson.videos.map((item, index) => (
+              <div className="video-resource" key={item.url}>
+                {item.embedUrl ? (
+                  <div className="video-embed">
+                    <iframe
+                      src={item.embedUrl}
+                      title={item.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
+                  </div>
+                ) : (
+                  <a className="video-link-card" href={item.url} target="_blank" rel="noreferrer">
+                    <span className="video-play" aria-hidden="true">▶</span>
+                    <span>
+                      <small>VIDEO {String(index + 1).padStart(2, "0")} · {item.source}</small>
+                      <strong>{item.title}</strong>
+                      <em>動画教材を開く ↗</em>
+                    </span>
+                  </a>
+                )}
+                <div className="video-note">
+                  <strong>{item.time}</strong>
+                  <p>{item.description}</p>
+                  {item.embedUrl && (
+                    <a href={item.url} target="_blank" rel="noreferrer">元動画を開く ↗</a>
+                  )}
+                </div>
               </div>
+            ))}
+          </section>
+
+          <section className="schedule-section">
+            <div className="lesson-section-kicker">180 MINUTES</div>
+            <h2>今日の進め方</h2>
+            <ol className="schedule-list">
+              {lesson.schedule.map((item) => (
+                <li key={item.time}>
+                  <time>{item.time}</time>
+                  <div>
+                    <strong>{item.title}</strong>
+                    <p>{item.detail}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <section className="resource-section">
+            <div className="resource-heading">
+              <div>
+                <span className="lesson-section-kicker">READ IN THIS ORDER</span>
+                <h2>公式資料をこの順番で読む</h2>
+              </div>
+              <p>「全部読む」のではなく、今日の演習に必要な範囲を上から順に読みます。</p>
             </div>
-            <div className="video-note">
-              <strong>撮影ガイド</strong>
-              <p>完成形 → 操作 → よくある失敗 → もう一度成功、の順で3〜7分にまとめます。</p>
-            </div>
+            <ol className="resource-list">
+              {lesson.readings.map((item, index) => (
+                <li key={item.url}>
+                  <span className="resource-index">{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <div className="resource-meta">
+                      <span>{item.source}</span>
+                      <span>{item.time}</span>
+                      <span>{item.required ? "必修" : "補助"}</span>
+                    </div>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                  <a href={item.url} target="_blank" rel="noreferrer" aria-label={`${item.title}を開く`}>
+                    読む ↗
+                  </a>
+                </li>
+              ))}
+            </ol>
+            <p className="version-note">
+              Laravel・Cursor・Claude Code・Codexは更新頻度が高いため、演習ProjectのVersionとページの更新日を必ず確認してください。
+            </p>
           </section>
 
           <section className="lesson-objectives">
@@ -101,8 +167,8 @@ export default async function LessonPage({ params }: LessonPageProps) {
           </section>
 
           <section className="step-section">
-            <div className="lesson-section-kicker">STEP BY STEP</div>
-            <h2>一緒にやってみよう</h2>
+            <div className="lesson-section-kicker">HANDS ON</div>
+            <h2>実際のProjectで手を動かす</h2>
             <ol className="step-list">
               {lesson.steps.map((step, index) => (
                 <li key={step.title}>
@@ -117,19 +183,34 @@ export default async function LessonPage({ params }: LessonPageProps) {
             </ol>
           </section>
 
-          <LessonQuiz quiz={lesson.quiz} />
+          <section className="prompt-panel">
+            <div>
+              <span className="lesson-section-kicker">AI PRACTICE</span>
+              <h2>そのまま使える練習Prompt</h2>
+            </div>
+            <blockquote>{lesson.prompt}</blockquote>
+            <p>実行前に対象Project、仕様、禁止事項を追記し、出力後は実File・Test・公式資料で裏取りします。</p>
+          </section>
+
+          <LessonQuiz quizzes={lesson.quizzes} />
 
           <section className="practice-panel">
             <div className="practice-heading">
               <div>
                 <span className="lesson-section-kicker">YOUR TURN</span>
-                <h2>自分のブランチで実装しよう</h2>
+                <h2>自分のBranchで提出物を作る</h2>
               </div>
-              <span className="practice-time">目安 {lesson.duration}</span>
+              <span className="practice-time">Day {lesson.day} · {lesson.duration}</span>
             </div>
             <div className="branch-command">
               <span>BRANCH</span>
               <code>git switch -c {lesson.branch}</code>
+            </div>
+            <div className="deliverables">
+              <h3>必須提出物</h3>
+              <ol>
+                {lesson.deliverables.map((item) => <li key={item}>{item}</li>)}
+              </ol>
             </div>
             <h3>完了チェック</h3>
             <ul className="check-list">
@@ -140,7 +221,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
             <div className="practice-submit">
               <div>
                 <strong>できたらPull Requestへ</strong>
-                <p>作ったもの・確認方法・学んだことを自分の言葉で書きます。</p>
+                <p>変更目的、根拠、確認方法、AI利用、残Risk、Rollbackを自分の言葉で書きます。</p>
               </div>
               <a
                 href="https://github.com/rmiura34/tutorial-course"
