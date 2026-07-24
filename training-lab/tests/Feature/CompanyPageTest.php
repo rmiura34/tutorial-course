@@ -12,6 +12,8 @@ class CompanyPageTest extends TestCase
 
     public function test_company_page_lists_saved_companies(): void
     {
+        $this->withoutVite();
+
         Company::factory()->create(['name' => 'Sakura Systems']);
 
         $this->get('/companies')
