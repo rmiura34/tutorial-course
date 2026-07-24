@@ -41,10 +41,10 @@ export async function generateMetadata(): Promise<Metadata> {
       locale: "ja_JP",
       images: [
         {
-          url: "/og.png",
-          width: 1731,
+          url: "/og-onboarding.png",
+          width: 1730,
           height: 909,
-          alt: "Tutorial Course — 手を動かして、つくる。",
+          alt: "Tutorial Course — START HEREから安全なPull Requestまでの学習ルート",
         },
       ],
     },
@@ -53,7 +53,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: "Tutorial Course — 手を動かして、つくる。",
       description:
         "CLI・GitからLaravel・Scraping・Skills・Pluginsまで。20日・60時間で未知のIssueを安全なPull Requestへ変えるAI駆動開発研修。",
-      images: ["/og.png"],
+      images: ["/og-onboarding.png"],
     },
   };
 }

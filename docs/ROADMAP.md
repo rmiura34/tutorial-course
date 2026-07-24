@@ -11,6 +11,11 @@
 - Codespaces / Dev Container
 - Issue / Pull Request Template
 - GitHub ActionsによるLint、Build、表示Test
+- PHP 8.3 / Laravel 13 / SQLiteの演習Application
+- Demo Import、Seed Data、Feature Test、最終課題用の既知Bug
+- HTML Fixtureを使うPython Scraper演習
+- `START-HERE.md`、受講準備Page、20日分の生成Task
+- Branch作成とCodex Promptを案内するCourse CLI
 - Claude Code Skills / Hooks / Subagent starter
 - Codex Skill / Plugin / Marketplace starter
 - 調査、Refactoring、AI利用、MCP権限監査Template
@@ -24,13 +29,12 @@
 - Branch名、提出File、PR本文の自動確認
 - 結果を初心者向け日本語で説明
 
-### 演習用Laravel Application
+### 演習Applicationの拡張
 
-- Project Versionを固定したDocker環境
-- 意図的なBugと段階的Issue
-- Static / Dynamic Scraper
-- ReactまたはBlade画面
-- Seed Dataと安全なReset
+- MySQL / PostgreSQL版の任意Profile
+- Playwrightを使うDynamic Scraper課題
+- 課題ごとの初期状態を復元するCommand
+- 複数の難易度を持つIssue Pack
 
 ### 講師運用
 

@@ -11,6 +11,7 @@ export default function Home() {
           <span>Tutorial Course</span>
         </Link>
         <nav className="header-nav" aria-label="メインナビゲーション">
+          <Link href="/start">START HERE</Link>
           <a href="#roadmap">ロードマップ</a>
           <a href="#how-it-works">学び方</a>
           <a
@@ -38,12 +39,10 @@ export default function Home() {
             最後は未知のIssueを調査・修正・Test・ReviewしてPull Requestへ変えます。
           </p>
           <div className="hero-actions">
-            <Link className="primary-button" href="/lessons/terminal-environment">
-              Day 01から始める <span aria-hidden="true">→</span>
+            <Link className="primary-button" href="/start">
+              受講準備から始める <span aria-hidden="true">→</span>
             </Link>
-            <a className="text-link" href="#roadmap">
-              全20日を見る
-            </a>
+            <Link className="text-link" href="/lessons/terminal-environment">準備済みならDay 01</Link>
           </div>
           <dl className="hero-stats">
             <div>
@@ -145,6 +144,15 @@ export default function Home() {
             <p>別Agentと人間でReviewし、根拠付きPRを提出。</p>
           </li>
         </ol>
+      </section>
+
+      <section className="onboarding-band">
+        <div>
+          <p className="eyebrow">START BEFORE DAY 01</p>
+          <h2>GitHub・Codespaces・Codexを、最初に分けて理解する。</h2>
+          <p>Account準備、自分のRepository作成、2つのApplication起動、Task読込までを一つのGuideにしました。</p>
+        </div>
+        <Link className="primary-button" href="/start">START HERE →</Link>
       </section>
 
       <section className="roadmap-section" id="roadmap">

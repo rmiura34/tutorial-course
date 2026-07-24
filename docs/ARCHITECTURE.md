@@ -11,7 +11,9 @@
           ↓
 受講者リポジトリ
   ├─ Codespaces / VS Code
-  ├─ training/day-* ブランチ
+  ├─ DayごとのBranch
+  ├─ course/tasks/day-*.md
+  ├─ training-lab / practice
   ├─ learning-log / starter-kits
   ├─ Pull Request
   └─ GitHub Actions
@@ -23,6 +25,10 @@
 
 - `app/`: コースサイト
 - `app/data/lessons.ts`: レッスンの構造化データ
+- `course/tasks/`: Course Dataから生成する20日分の実行Task
+- `scripts/course.mjs`: Task表示、Branch作成、計画File作成
+- `training-lab/`: PHP 8.3 / Laravel 13 / SQLiteの演習Application
+- `practice/python-scraper/`: 外部Siteへ負荷を掛けずに使えるScraper演習
 - `exercises/`: 20日分の演習一覧と受講者向けスターターコード
 - `learning-log/templates/`: 調査・AI利用・権限監査の記録テンプレート
 - `starter-kits/`: Claude Code / Codex Skills / Pluginsの最小構成
@@ -37,4 +43,4 @@ MVPではブラウザの`localStorage`に保存します。ログイン不要で
 
 ## コンテンツの単一ソース
 
-現在は`app/data/lessons.ts`がWeb表示の単一ソースです。20日分の説明、動画、資料、時間割、実装、クイズ、提出物、完了条件をここから生成します。自動採点を拡張するときはYAMLまたはMDXへ移し、サイト表示と採点設定を同じデータから生成します。
+現在は`app/data/lessons.ts`がWeb表示とTask生成の単一ソースです。20日分の説明、動画、資料、時間割、実装、クイズ、提出物、完了条件をWebへ表示し、`npm run course:generate`で`course/tasks/`へ変換します。受講者とCodexは同じTask Fileを読むため、画面上の指示と作業計画がずれません。

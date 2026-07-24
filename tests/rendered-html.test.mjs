@@ -32,7 +32,7 @@ test("renders the course homepage", async () => {
   assert.match(html, /Tutorial Course/);
   assert.match(html, /手を動かして、つくる。/);
   assert.match(html, /実務PRまで、20日・60時間。/);
-  assert.match(html, /Day 01から始める/);
+  assert.match(html, /受講準備から始める/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 
@@ -49,6 +49,22 @@ test("renders a complete lesson page with resources, practice, and quizzes", asy
   assert.match(html, /自分のBranchで提出物を作る/);
   assert.match(html, /完了チェック/);
   assert.doesNotMatch(html, /動画をここに埋め込みます/);
+});
+
+test("renders the learner onboarding route with accounts and exact startup commands", async () => {
+  const response = await render("/start");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /入口は、ここ一つ。/);
+  assert.match(html, /ACCOUNTS ARE SEPARATE/);
+  assert.match(html, /GitHub/);
+  assert.match(html, /Codex \/ ChatGPT/);
+  assert.match(html, /npm run learner:start/);
+  assert.match(html, /npm run course -- start 1/);
+  assert.match(html, /PORT 3000/);
+  assert.match(html, /PORT 8000/);
+  assert.match(html, /Codex用Promptをコピー/);
 });
 
 test("renders all 20 days with the complete learning flow", async () => {
@@ -71,15 +87,33 @@ test("renders all 20 days with the complete learning flow", async () => {
     assert.match(html, /理解確認クイズ/);
     assert.match(html, /必須提出物/);
     assert.match(html, /完了チェック/);
+    assert.match(html, new RegExp(`npm run course -- start ${slugs.indexOf(slug) + 1}`));
   }
 });
 
 test("keeps course infrastructure and agent starters in the repository", async () => {
   await Promise.all([
+    access(new URL("../AGENTS.md", import.meta.url)),
+    access(new URL("../START-HERE.md", import.meta.url)),
     access(new URL("../.devcontainer/devcontainer.json", import.meta.url)),
     access(new URL("../.github/workflows/ci.yml", import.meta.url)),
+    access(new URL("../course/tasks/day-01.md", import.meta.url)),
+    access(new URL("../course/tasks/day-20.md", import.meta.url)),
     access(new URL("../exercises/01-profile-card/index.html", import.meta.url)),
     access(new URL("../docs/AUTHORING.md", import.meta.url)),
+    access(new URL("../training-lab/artisan", import.meta.url)),
+    access(
+      new URL(
+        "../training-lab/app/Services/CompanyImportService.php",
+        import.meta.url,
+      ),
+    ),
+    access(
+      new URL(
+        "../practice/python-scraper/src/company_scraper.py",
+        import.meta.url,
+      ),
+    ),
     access(
       new URL(
         "../starter-kits/claude-code/.claude/skills/trace-laravel-flow/SKILL.md",
@@ -100,14 +134,19 @@ test("keeps course infrastructure and agent starters in the repository", async (
     ),
   ]);
 
-  const [packageJson, layout, lessonData] = await Promise.all([
+  const [packageJson, layout, lessonData, taskIndex] = await Promise.all([
     readFile(new URL("../package.json", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/data/lessons.ts", import.meta.url), "utf8"),
+    readFile(new URL("../course/tasks/index.json", import.meta.url), "utf8"),
   ]);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   assert.match(layout, /lang="ja"/);
   assert.match(lessonData, /training\/day-15-plugin-mcp/);
   assert.equal((lessonData.match(/id: "lesson-\d+"/g) ?? []).length, 20);
   assert.equal((lessonData.match(/quizzes: \[/g) ?? []).length, 20);
+  const taskData = JSON.parse(taskIndex);
+  assert.equal(taskData.tasks.length, 20);
+  assert.equal(taskData.tasks[0].taskFile, "course/tasks/day-01.md");
+  assert.equal(taskData.tasks[19].branch, "exam/final-capstone");
 });

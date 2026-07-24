@@ -2,6 +2,28 @@
 
 非プログラマーが、AIを使って既存PHP / Laravel Systemを安全に調査・変更・Test・Reviewし、Pull Requestへ変換するための20日・60時間の実践研修です。
 
+## 受講者はここから開始
+
+**[START-HERE.md](./START-HERE.md)を上から順番に実行してください。**
+
+教材サイト、GitHub、Codexは別のサービスです。ChatGPTアカウントだけではGitHub Repositoryへアクセスできません。受講案内に記載されたメールアドレスとGitHub招待を確認してから開始します。
+
+Codespacesの初回Setupが完了したら、Terminalで次を実行します。
+
+```bash
+npm run learner:start
+```
+
+- Port 3000: 動画、資料、クイズ、Taskを表示する教材サイト
+- Port 8000: Laravel、SQLite、Scraping、Testを扱うCompany Import Training Lab
+
+DayごとのTaskは`course/tasks/day-XX.md`にあります。
+
+```bash
+npm run course -- show 1
+npm run course -- start 1
+```
+
 ## 研修の完成状態
 
 受講者は最終日に、未知のIssueに対して次を3時間で行います。
@@ -32,6 +54,10 @@ AIにCodeを書かせられることではなく、AIが作った変更をCode�
 - Claude Code Skills / Hooks / Subagentsのstarter
 - Codex Skills / Plugin / Marketplaceのstarter
 - MCP権限監査とAI利用記録のTemplate
+- Laravel 13 / SQLiteで動くCompany Import Training Lab
+- Codexが自動で読むRepository-level `AGENTS.md`
+- 20日分の機械可読TaskとTask runner
+- Codespaces用の自動SetupとVS Code Task
 
 ## 4週間の構成
 
@@ -44,17 +70,18 @@ AIにCodeを書かせられることではなく、AIが作った変更をCode�
 
 詳しい設計は[COURSE.md](./COURSE.md)、演習一覧は[exercises/README.md](./exercises/README.md)を参照してください。
 
-## 受講者の始め方
+## 受講者の毎日のFlow
 
-1. このRepositoryを自分のGitHub AccountへTemplateまたはForkで複製する
-2. `Code` → `Codespaces` → `Create codespace on main`を選ぶ
-3. 教材SiteのDay 01を開く
-4. 指定動画と公式資料を順番に読む
-5. 指定された`training/day-XX-*` Branchを作る
-6. `learning-log/day-XX/`へ提出物を保存する
-7. Test、Commit、Push、Pull Requestの順に提出する
+1. `npm run course -- show <day>`でTaskを読む
+2. `npm run course -- start <day>`で安全にBranchを作る
+3. Codexへ`COACH`、`PLAN`、`IMPLEMENT`、`REVIEW`のModeを指定する
+4. `learning-log/day-XX/plan.md`へTaskと調査根拠を残す
+5. 教材Siteの動画、公式資料、Quizを完了する
+6. Training Labまたは指定WorkspaceでHands-onする
+7. Test、Diff、AI利用記録を確認する
+8. Commit、Push、Pull Requestの順に提出する
 
-> Repository ownerはGitHub SettingsでTemplate repositoryを有効にしてください。
+Task runnerは未Commit変更がある状態では新しいDayを開始しません。受講者の作業を消さないための安全装置です。
 
 ## Starter kit
 
@@ -65,7 +92,7 @@ AIにCodeを書かせられることではなく、AIが作った変更をCode�
 
 Starterはそのまま本番へ入れず、演習ProjectのCommand、Directory、Testへ合わせて調整してください。
 
-## 開発と検証
+## Course運営者向けの開発と検証
 
 Node.js 22以上を使用します。
 
@@ -75,7 +102,11 @@ npm run dev
 npm run lint
 npm run build
 npm test
+npm run lab:lint
+npm run lab:test
 ```
+
+Laravel Training LabだけをSetupし直す場合は`npm run learner:setup`を実行します。Task仕様を更新した場合は`npm run course:generate`で`course/tasks/`を再生成します。
 
 ## 安全ルール
 

@@ -102,15 +102,24 @@ Skill、Hook、Rules、Pluginは、このCycleを毎回再現するために使�
 - 利用規約、robots.txt、負荷を無視したScraping
 - AIの出力を理解せず、自分で説明できない
 
-## 講師が研修前に用意するもの
+## Repositoryに同梱している演習環境
 
-- 演習対象のLaravel Repositoryと正確なVersion
-- DockerまたはLaravel Sailで起動できる環境
-- MySQLまたはPostgreSQL
-- 意図的なBugを含むPHP / Scraper / Playwright Code
-- Feature Test、Unit Test、CI
-- 小規模なReactまたはBlade画面
-- GitHub Organization、Branch protection、Issue/PR Template
-- Claude Code、Cursor、Codexを使用できるAccount
+- PHP 8.3 / Laravel 13 / SQLiteで動く`training-lab/`
+- 会社一覧、Demo Import、Migration、Seed Data、Feature Test
+- 2Page目が取得されず重複対策も不足している、最終課題用の既知Bug
+- HTML Fixtureで安全に練習できるPython Scraper
+- 20日分のBranch名、Task、提出物、完了条件
+- Claude Code / CodexのSkill、Hook、Plugin starter
+- Codespaces / Dev Container、GitHub Actions、Issue/PR Template
+
+受講者は`START-HERE.md`に従って`npm run learner:setup`を実行すれば開始できます。講師が別の実務Repositoryを使う場合だけ、Course Task内のWorkspaceと検証Commandを差し替えます。
+
+## 講師が研修前に確認するもの
+
+- 教材サイトとGitHub Repositoryの公開範囲または招待
+- 受講者がTemplateまたはForkを作成できること
+- CodespacesでPort 3000と8000を開けること
+- GitHub Actionsが成功すること
+- Claude Code、Cursor、Codexを利用する受講者Accountと組織Policy
 
 外部DocumentのURLと画面名は研修開始前に確認します。特にCursor、Claude Code、Codex、Laravelは更新頻度が高いため、SiteのLinkだけでなくProject Versionとの整合を確認してください。

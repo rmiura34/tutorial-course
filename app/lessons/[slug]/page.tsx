@@ -41,7 +41,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
         <div className="lesson-header-progress">
           LESSON {lesson.number} / {String(lessons.length).padStart(2, "0")}
         </div>
-        <Link className="back-link" href="/#roadmap">ロードマップへ</Link>
+        <Link className="back-link" href="/start">受講準備を確認</Link>
       </header>
 
       <div className="lesson-layout">
@@ -71,6 +71,21 @@ export default async function LessonPage({ params }: LessonPageProps) {
             </div>
             <span className="lesson-hero-number">{lesson.number}</span>
           </div>
+
+          <section className="task-launch-panel">
+            <div>
+              <span className="lesson-section-kicker">LOAD TODAY&apos;S TASK</span>
+              <h2>最初にTaskとBranchを準備する</h2>
+              <p>Task fileをCodexと人間が同じ順番で読み、実装前に計画を作ります。</p>
+            </div>
+            <div className="task-commands">
+              <pre><code>{`npm run course -- show ${lesson.day}`}</code></pre>
+              <pre><code>{`npm run course -- start ${lesson.day}`}</code></pre>
+            </div>
+            <blockquote>
+              {`COACHモードで、AGENTS.md、START-HERE.md、course/tasks/day-${lesson.number}.mdを読んでください。まだ実装せず、Goal・Context・Constraints・Done whenからTask checklistを作ってください。`}
+            </blockquote>
+          </section>
 
           <section className="video-panel">
             {lesson.videos.map((item, index) => (

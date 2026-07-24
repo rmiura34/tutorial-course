@@ -1,0 +1,1444 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": "app/data/lessons.ts",
+  "tasks": [
+    {
+      "schemaVersion": 1,
+      "id": "lesson-01",
+      "day": 1,
+      "week": 1,
+      "title": "ターミナル・ファイル・開発環境",
+      "branch": "training/day-01-environment",
+      "workspace": "repository root",
+      "taskFile": "course/tasks/day-01.md",
+      "durationMinutes": 180,
+      "goal": "既存リポジトリを変更せずに調査し、repository-map.mdへ構造と根拠をまとめられる",
+      "objectives": [
+        "絶対パスと相対パスを説明する",
+        "VS Codeとターミナルを行き来する",
+        ".envと依存関係の役割を説明する"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:25",
+          "title": "動画",
+          "detail": "VS Codeの画面、Explorer、検索、Terminalを確認"
+        },
+        {
+          "time": "0:25–1:05",
+          "title": "公式資料",
+          "detail": "Claude Codeの概要・設定場所を順番に読む"
+        },
+        {
+          "time": "1:05–2:25",
+          "title": "ハンズオン",
+          "detail": "CLIでリポジトリを探索し、AIの説明と照合"
+        },
+        {
+          "time": "2:25–3:00",
+          "title": "提出",
+          "detail": "repository-map.md、クイズ、振り返り"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "現在地とファイルを調べる",
+          "detail": "pwd、ls、findを使い、リポジトリの入口と主要ディレクトリを確認します。",
+          "code": "pwd\nls -la\nfind . -maxdepth 2 -type f | sort"
+        },
+        {
+          "title": "技術スタックの根拠を探す",
+          "detail": "composer.json、package.json、.env.example、routes、app、testsを探し、推測ではなくファイル名を根拠にします。"
+        },
+        {
+          "title": "AIへ読み取り専用で依頼する",
+          "detail": "変更禁止、根拠ファイル必須、不明点は不明と書く、という条件を付けて構造説明を依頼します。"
+        },
+        {
+          "title": "人間が照合して地図を作る",
+          "detail": "AIが挙げたパスを自分で開き、正しい説明だけをrepository-map.mdに残します。"
+        }
+      ],
+      "deliverables": [
+        "learning-log/day-01/repository-map.md",
+        "確認したコマンドと結果",
+        "AIの説明で誤っていた点または未確認だった点"
+      ],
+      "checks": [
+        "主要ディレクトリを5つ以上説明した",
+        "すべての説明に根拠パスがある",
+        "秘密情報を記録していない",
+        "リポジトリのファイルを変更せず調査した"
+      ],
+      "practicePrompt": "このリポジトリは変更しないでください。技術スタック、主要ディレクトリ、起動方法、テスト方法を調査し、根拠ファイルのパスを示してください。確認できない項目は推測せず「未確認」と書いてください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-01.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-01-environment and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-01/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-02",
+      "day": 2,
+      "week": 1,
+      "title": "Gitの基本と安全な変更管理",
+      "branch": "training/day-02-git-basics",
+      "workspace": "repository root",
+      "taskFile": "course/tasks/day-02.md",
+      "durationMinutes": 180,
+      "goal": "変更を確認して小さくCommitし、不要な変更だけを安全に戻せる",
+      "objectives": [
+        "git statusとgit diffを読む",
+        "ステージとCommitを区別する",
+        "restoreとstashを使い分ける"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:35",
+          "title": "動画",
+          "detail": "Gitの履歴・Branch・Remoteの全体像を確認"
+        },
+        {
+          "time": "0:35–1:15",
+          "title": "公式資料",
+          "detail": "Pro Gitを指定順で読む"
+        },
+        {
+          "time": "1:15–2:30",
+          "title": "ハンズオン",
+          "detail": "変更、差分確認、Commit、復元、Branch、Push"
+        },
+        {
+          "time": "2:30–3:00",
+          "title": "説明試験",
+          "detail": "Gitの5領域を自分の言葉で説明"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "変更前の基準点を確認",
+          "detail": "現在のBranch、未Commit差分、直近履歴を確認します。",
+          "code": "git branch --show-current\ngit status -sb\ngit log --oneline -5"
+        },
+        {
+          "title": "READMEを1行変更",
+          "detail": "変更後にgit diffを読み、追加行と削除行を説明します。"
+        },
+        {
+          "title": "対象だけをCommit",
+          "detail": "ファイルを明示してステージし、目的が分かるメッセージでCommitします。",
+          "code": "git add README.md\ngit diff --staged\ngit commit -m \"学習目標を追記\""
+        },
+        {
+          "title": "未Commit変更を戻す",
+          "detail": "別の一時変更を作り、git diffを確認した後にgit restoreで戻します。"
+        }
+      ],
+      "deliverables": [
+        "2つ以上の小さなCommit",
+        "git-before-after.md",
+        "Working treeからRemoteまでの状態図"
+      ],
+      "checks": [
+        "Commit前にgit diff --stagedを確認した",
+        "Commitに無関係なファイルが入っていない",
+        "復元前に失われる差分を確認した",
+        "mainへ直接作業していない"
+      ],
+      "practicePrompt": "変更はまだ行わず、git status、git diff、直近5件のlogから現在の状態を説明してください。次に安全なCommit手順を提案し、各コマンドが何を変えるかも説明してください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-02.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-02-git-basics and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-02/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-03",
+      "day": 3,
+      "week": 1,
+      "title": "GitHub・Issue・Pull Request",
+      "branch": "training/day-03-pull-request",
+      "workspace": "repository root",
+      "taskFile": "course/tasks/day-03.md",
+      "durationMinutes": 180,
+      "goal": "目的・影響範囲・確認方法・リスクを説明したPull Requestを作成できる",
+      "objectives": [
+        "baseとcompareを区別する",
+        "Files changedから差分を読む",
+        "レビュー指摘へ根拠付きで回答する"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:25",
+          "title": "動画復習",
+          "detail": "GitHub上のBranchとPR部分を確認"
+        },
+        {
+          "time": "0:25–1:05",
+          "title": "公式資料",
+          "detail": "Branch → Flow → PR → Reviewの順で読む"
+        },
+        {
+          "time": "1:05–2:35",
+          "title": "実務フロー",
+          "detail": "Issue、Branch、2 Commit、PR、Review、修正"
+        },
+        {
+          "time": "2:35–3:00",
+          "title": "振り返り",
+          "detail": "Merge可能性と残リスクを説明"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "Issueを作る",
+          "detail": "現状、期待結果、完了条件、確認方法を記述し、Issue番号を確定します。"
+        },
+        {
+          "title": "Issue用Branchで2 Commit作る",
+          "detail": "1つ目は実装、2つ目はテストまたは説明更新に分けます。",
+          "code": "git switch -c training/day-03-pull-request\ngit push -u origin training/day-03-pull-request"
+        },
+        {
+          "title": "PRテンプレートを埋める",
+          "detail": "変更目的、内容、影響範囲、確認方法、DB変更、リスク、AI利用範囲を空欄なく書きます。"
+        },
+        {
+          "title": "レビューへ対応する",
+          "detail": "指摘を再現し、採用・不採用の理由を書き、必要な修正Commitを追加します。"
+        }
+      ],
+      "deliverables": [
+        "Issue",
+        "2 Commit以上のBranch",
+        "テンプレートが埋まったPR",
+        "レビューコメントへの回答"
+      ],
+      "checks": [
+        "baseがmain、compareが課題Branchになっている",
+        "Files changedを全行確認した",
+        "CIが成功した",
+        "Merge前に未解決コメントがない"
+      ],
+      "practicePrompt": "このPRのレビュアーとして、仕様適合、不要変更、テスト不足、互換性、Secret、Rollbackの観点からレビューしてください。指摘には対象ファイルと根拠を付け、推測は明示してください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-03.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-03-pull-request and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-03/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-04",
+      "day": 4,
+      "week": 1,
+      "title": "Cursorの基本運用とContext設計",
+      "branch": "training/day-04-cursor",
+      "workspace": "repository root",
+      "taskFile": "course/tasks/day-04.md",
+      "durationMinutes": 180,
+      "goal": "既存Laravelコードを変更せずに調査し、根拠パス付きのCursor調査レポートを作れる",
+      "objectives": [
+        "ChatとAgentの権限差を説明する",
+        "Contextへ必要なファイルだけを渡す",
+        "Diff承認前に不要変更を検出する"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:30",
+          "title": "公式デモ",
+          "detail": "Cursor LearnでAgent・Rules・Contextを確認"
+        },
+        {
+          "time": "0:30–1:10",
+          "title": "公式資料",
+          "detail": "QuickstartからPrivacyまで順番に読む"
+        },
+        {
+          "time": "1:10–2:30",
+          "title": "調査演習",
+          "detail": "Laravel versionとユーザー一覧の処理経路を追う"
+        },
+        {
+          "time": "2:30–3:00",
+          "title": "小変更",
+          "detail": "文言だけ変更しDiffを人間が承認"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "変更禁止で技術情報を調査",
+          "detail": "Laravel/PHP versionを根拠ファイル付きで確認します。"
+        },
+        {
+          "title": "1画面の処理経路を追う",
+          "detail": "Route、Controller、Service、Model、Viewの候補をファイルと行で示させます。"
+        },
+        {
+          "title": "不明点と推測を分離",
+          "detail": "実ファイルで確認できない推論をレポートの「未確認」欄へ移します。"
+        },
+        {
+          "title": "Project Ruleを作る",
+          "detail": "変更前計画、根拠パス、テスト、Secret禁止を.cursor/rules/project.mdcへ定義します。"
+        }
+      ],
+      "deliverables": [
+        ".cursor/rules/project.mdc",
+        "learning-log/day-04/cursor-investigation.md",
+        "承認した小変更のDiff"
+      ],
+      "checks": [
+        "Rulesに変更前計画とテストが含まれる",
+        "調査レポートに根拠パスがある",
+        "Agentの変更を一括承認していない",
+        "Ignore対象へSecretを含めた"
+      ],
+      "practicePrompt": "1. このリポジトリは変更しないでください。2. LaravelとPHPのversionを調べてください。3. ユーザー一覧画面の処理経路を調べてください。4. 根拠ファイルと行を示してください。5. 不明な点は推測せず未確認と書いてください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-04.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-04-cursor and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-04/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-05",
+      "day": 5,
+      "week": 1,
+      "title": "Claude CodeとCodexの基礎",
+      "branch": "training/day-05-agent-comparison",
+      "workspace": "repository root",
+      "taskFile": "course/tasks/day-05.md",
+      "durationMinutes": 180,
+      "goal": "3つのAIツールを目的別に使い分け、出力の根拠と不確実性を比較できる",
+      "objectives": [
+        "Agent loopとContextの関係を説明する",
+        "変更前に計画を作らせる",
+        "別Agentで反証レビューする"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:35",
+          "title": "公式動画",
+          "detail": "Claude CodeとCodexの公式動画を選んで視聴"
+        },
+        {
+          "time": "0:35–1:15",
+          "title": "公式資料",
+          "detail": "Overview、Best practices、Codex CLI、Skillsを読む"
+        },
+        {
+          "time": "1:15–2:30",
+          "title": "比較演習",
+          "detail": "同一Issueを調査・計画・レビューへ分業"
+        },
+        {
+          "time": "2:30–3:00",
+          "title": "評価",
+          "detail": "8観点の比較表を提出"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "同一Issueを用意",
+          "detail": "入力、期待結果、制約、完了条件が同じ課題文を作ります。"
+        },
+        {
+          "title": "Cursorで局所調査",
+          "detail": "関連ファイルと処理経路だけを調べ、変更はさせません。"
+        },
+        {
+          "title": "Claude Codeで計画",
+          "detail": "影響範囲、テスト、Rollbackを含む実装計画を作ります。"
+        },
+        {
+          "title": "Codexで独立レビュー",
+          "detail": "計画の見落とし、不要変更、テスト不足を反証し、比較表へまとめます。"
+        }
+      ],
+      "deliverables": [
+        "learning-log/day-05/agent-comparison.md",
+        "3ツールのプロンプト記録",
+        "採用した提案・却下した提案と理由"
+      ],
+      "checks": [
+        "3ツールへ同じ前提を渡した",
+        "調査の深さ・根拠・不要変更・テストなど8観点で比較した",
+        "AIの結論を公式資料またはコードで裏取りした",
+        "最終判断を人間が書いた"
+      ],
+      "practicePrompt": "このIssueをまだ実装せず、現状、Root cause候補、変更計画、影響範囲、テスト計画、Rollback、不明点を作ってください。確認済み事実と推測を分け、根拠ファイルを示してください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-05.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-05-agent-comparison and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-05/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-06",
+      "day": 6,
+      "week": 2,
+      "title": "Web・HTTP・Chrome DevTools",
+      "branch": "training/day-06-web-devtools",
+      "workspace": "training-lab",
+      "taskFile": "course/tasks/day-06.md",
+      "durationMinutes": 180,
+      "goal": "1回の画面操作についてRequestとResponse、DOM、Cookieをbrowser-request-analysis.mdへ記録できる",
+      "objectives": [
+        "MethodとStatusを説明する",
+        "NetworkからFetch/XHRを見つける",
+        "DOMとCSS Selectorを対応させる"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:25",
+          "title": "公式動画",
+          "detail": "DevToolsの6つの基本機能を確認"
+        },
+        {
+          "time": "0:25–1:15",
+          "title": "公式資料",
+          "detail": "HTTP → JSON → DOM → Selectorの順で読む"
+        },
+        {
+          "time": "1:15–2:30",
+          "title": "ブラウザ演習",
+          "detail": "Elements、Console、Network、Applicationを観察"
+        },
+        {
+          "time": "2:30–3:00",
+          "title": "提出",
+          "detail": "Request分析とクイズ"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "画面操作を1つ固定",
+          "detail": "ログイン、検索、保存など、観察対象の操作と期待結果を先に書きます。"
+        },
+        {
+          "title": "Networkを記録",
+          "detail": "URL、Method、Status、Request headers、Payload、Response bodyを記録します。"
+        },
+        {
+          "title": "DOMを特定",
+          "detail": "操作した要素をElementsで選び、役割、属性、安定したSelectorを書きます。"
+        },
+        {
+          "title": "CookieとStorageを確認",
+          "detail": "認証や状態に関係するCookie/Storageの名前と役割だけを記録し、値やTokenは残しません。"
+        }
+      ],
+      "deliverables": [
+        "learning-log/day-06/browser-request-analysis.md",
+        "Request/Responseの表",
+        "対象DOM要素とSelector",
+        "Secretを除いた観察ログ"
+      ],
+      "checks": [
+        "URL・Method・Statusを記録した",
+        "RequestとResponseを混同していない",
+        "Selectorが対象を一意に示す",
+        "CookieやTokenの値を提出物へ含めていない"
+      ],
+      "practicePrompt": "このNetwork記録から、画面操作がどのHTTP Requestを発生させ、ResponseがどのDOM更新につながるか説明してください。認証情報やCookie値は出力せず、確認できない因果関係は未確認としてください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-06.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-06-web-devtools and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-06/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-07",
+      "day": 7,
+      "week": 2,
+      "title": "HTML・JavaScript・TypeScript・React読解",
+      "branch": "training/day-07-frontend-reading",
+      "workspace": "training-lab",
+      "taskFile": "course/tasks/day-07.md",
+      "durationMinutes": 180,
+      "goal": "既存TSXの入力・状態・通信・描画・エラー処理を日本語で説明できる",
+      "objectives": [
+        "HTMLの意味構造を読む",
+        "async/awaitとFetchを追う",
+        "PropsとStateを区別する"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:35",
+          "title": "動画",
+          "detail": "JavaScriptの基礎とDOM操作を復習"
+        },
+        {
+          "time": "0:35–1:20",
+          "title": "公式資料",
+          "detail": "HTML → JS → TS → Reactの指定範囲を読む"
+        },
+        {
+          "time": "1:20–2:30",
+          "title": "TSX読解",
+          "detail": "ComponentからAPIとDOMまで線でつなぐ"
+        },
+        {
+          "time": "2:30–3:00",
+          "title": "小変更",
+          "detail": "表示文言またはValidationだけを安全に変更"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "Component境界を探す",
+          "detail": "export、Function、return JSXから1つのComponentの入力と出力を特定します。"
+        },
+        {
+          "title": "PropsとStateを表にする",
+          "detail": "親から渡る値、Component内で変化する値、計算で得られる値を分けます。"
+        },
+        {
+          "title": "EventからAPIまで追う",
+          "detail": "Button → handler → validation → fetch → response → state更新の順でファイルと行を記録します。"
+        },
+        {
+          "title": "描画状態を説明する",
+          "detail": "Loading、Success、Empty、Errorの各条件とDOMへ描画される内容を説明します。"
+        }
+      ],
+      "deliverables": [
+        "learning-log/day-07/frontend-flow.md",
+        "Props/State/Event/APIの対応表",
+        "最小の文言またはValidation変更",
+        "変更前後の画面確認"
+      ],
+      "checks": [
+        "PropsとStateを正しく分離した",
+        "EventからAPIまで根拠行を記録した",
+        "LoadingとErrorを確認した",
+        "新規Reactアプリへ作り替えていない"
+      ],
+      "practicePrompt": "このTSXを変更せず、Component、Props、State、Event handler、API call、Loading、Error、最終的にDOMへ描画される要素を、ファイルと行を根拠に説明してください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-07.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-07-frontend-reading and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-07/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-08",
+      "day": 8,
+      "week": 2,
+      "title": "PHPコードリーディング",
+      "branch": "training/day-08-php-reading",
+      "workspace": "training-lab",
+      "taskFile": "course/tasks/day-08.md",
+      "durationMinutes": 180,
+      "goal": "既存PHP Classの入力、依存、分岐、例外、戻り値を自分の言葉で説明できる",
+      "objectives": [
+        "Namespaceとuseを読む",
+        "Dependency injectionを見つける",
+        "Exceptionの発生と処理を追う"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–1:15",
+          "title": "公式動画コース",
+          "detail": "Laravel公式PHP Fundamentalsを通しで視聴"
+        },
+        {
+          "time": "1:15–1:45",
+          "title": "Manual",
+          "detail": "OOP、Namespace、Exceptionを確認"
+        },
+        {
+          "time": "1:45–2:35",
+          "title": "読解演習",
+          "detail": "Laravel Classを日本語へ翻訳"
+        },
+        {
+          "time": "2:35–3:00",
+          "title": "確認",
+          "detail": "小さなUnit Testとクイズ"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "Classの外形を読む",
+          "detail": "Namespace、use、Class、Interface、Trait、Constructorを特定します。"
+        },
+        {
+          "title": "Method契約を読む",
+          "detail": "Parameter type、Return type、nullable、例外を表へまとめます。"
+        },
+        {
+          "title": "依存関係を追う",
+          "detail": "Constructor injectionされたInterfaceが、どの実装へBindingされるか探します。"
+        },
+        {
+          "title": "処理を日本語へ翻訳",
+          "detail": "分岐、Collection操作、例外、戻り値を1行ずつ説明し、AIの全面書き換えは行いません。"
+        }
+      ],
+      "deliverables": [
+        "learning-log/day-08/php-class-reading.md",
+        "Method契約表",
+        "1つのUnit Test",
+        "未理解の構文一覧"
+      ],
+      "checks": [
+        "入力と戻り値を型付きで説明した",
+        "依存Interfaceの実装候補を確認した",
+        "例外経路を記録した",
+        "AIに全面書き換えさせていない"
+      ],
+      "practicePrompt": "このPHP Classを変更せず、Namespace、use、Class、Method、Parameter、Return type、Dependency injection、Interface、Trait、Exception、Collectionを特定し、処理順を日本語で説明してください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-08.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-08-php-reading and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-08/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-09",
+      "day": 9,
+      "week": 2,
+      "title": "LaravelのRequest Lifecycle",
+      "branch": "training/day-09-laravel-flow",
+      "workspace": "training-lab",
+      "taskFile": "course/tasks/day-09.md",
+      "durationMinutes": 180,
+      "goal": "1画面の処理経路をrequest-flow.mdへファイル・Method名付きで記録できる",
+      "objectives": [
+        "RouteからControllerを探す",
+        "MiddlewareとValidationの役割を説明する",
+        "Service ContainerのBindingを追う"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:35",
+          "title": "公式動画",
+          "detail": "Route、MVC、Controllerの章を視聴"
+        },
+        {
+          "time": "0:35–1:20",
+          "title": "公式Docs",
+          "detail": "StructureからService Providersまで順番に読む"
+        },
+        {
+          "time": "1:20–2:35",
+          "title": "Code trace",
+          "detail": "対象画面の全処理経路を埋める"
+        },
+        {
+          "time": "2:35–3:00",
+          "title": "説明試験",
+          "detail": "図を見ずに経路を説明"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "URLとHTTP Methodを固定",
+          "detail": "対象画面またはAPIのURL、Method、期待Responseを記録します。"
+        },
+        {
+          "title": "RouteからControllerへ",
+          "detail": "routesファイル、Middleware、Controller ClassとMethodを特定します。",
+          "code": "php artisan route:list"
+        },
+        {
+          "title": "Business処理とDBへ",
+          "detail": "FormRequest、Service、Repository、Model、Relation、Queryを順に追います。"
+        },
+        {
+          "title": "Responseまで戻る",
+          "detail": "Resource、View、Blade、JSON、RedirectのどれでResponseを返すか記録します。"
+        }
+      ],
+      "deliverables": [
+        "learning-log/day-09/request-flow.md",
+        "処理経路図",
+        "関連Test一覧",
+        "未確認の外部依存一覧"
+      ],
+      "checks": [
+        "実プロジェクトと同じLaravel versionのDocsを使用した",
+        "RouteとController Methodを特定した",
+        "Validationと認可を確認した",
+        "Response形式まで追跡した"
+      ],
+      "practicePrompt": "このURLの処理を Browser → Route → Middleware → Controller → FormRequest → Service → Model → Database → Resource/View → Response の順で追跡してください。各段階にファイルとMethod名を付け、存在しない層は「なし」と書いてください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-09.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-09-laravel-flow and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-09/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-10",
+      "day": 10,
+      "week": 2,
+      "title": "SQL・Migration・Eloquent",
+      "branch": "training/day-10-database",
+      "workspace": "training-lab",
+      "taskFile": "course/tasks/day-10.md",
+      "durationMinutes": 180,
+      "goal": "対象QueryのSQL、Eloquent、Schema、件数、性能リスクを説明できる",
+      "objectives": [
+        "SELECTとJOINを読む",
+        "MigrationとSchemaを対応させる",
+        "N+1を検出し修正案を作る"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:35",
+          "title": "動画",
+          "detail": "Laravel公式のDatabaseとModel章を視聴"
+        },
+        {
+          "time": "0:35–1:20",
+          "title": "SQLBolt",
+          "detail": "SELECT、JOIN、Aggregate、INSERT/UPDATE/DELETE"
+        },
+        {
+          "time": "1:20–2:30",
+          "title": "Laravel演習",
+          "detail": "Eloquent、Relation、Migration、N+1"
+        },
+        {
+          "time": "2:30–3:00",
+          "title": "検証",
+          "detail": "Query logとTest結果を提出"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "SQLで期待結果を作る",
+          "detail": "対象のSELECT、WHERE、ORDER、JOINをSQLBoltまたは開発DBで確認します。"
+        },
+        {
+          "title": "Eloquentへ対応付ける",
+          "detail": "Model、Relation、Scope、Query Builderの各部分がSQLのどこに相当するか書きます。"
+        },
+        {
+          "title": "Query回数を確認",
+          "detail": "一覧件数を増やし、N+1の有無とEager loading後のQuery回数を比較します。"
+        },
+        {
+          "title": "Migrationを往復",
+          "detail": "開発用DBでupとrollbackを実行し、既存Dataへの影響を記録します。"
+        }
+      ],
+      "deliverables": [
+        "learning-log/day-10/database-analysis.md",
+        "SQLとEloquentの対応表",
+        "Query回数の変更前後",
+        "Migration rollback結果"
+      ],
+      "checks": [
+        "本番DBへ接続していない",
+        "SELECT結果の件数を確認した",
+        "N+1をQuery回数で検証した",
+        "Migrationのdownを実行した"
+      ],
+      "practicePrompt": "このEloquent Queryが発行するSQL、使用するTable/Column/Index、Relation、N+1の可能性、件数増加時のRiskを説明してください。修正案はSQLとTest方法を併記してください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-10.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-10-database and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-10/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-11",
+      "day": 11,
+      "week": 3,
+      "title": "Python・Requests・Beautiful Soup",
+      "branch": "training/day-11-python-scraper",
+      "workspace": "practice/python-scraper",
+      "taskFile": "course/tasks/day-11.md",
+      "durationMinutes": 180,
+      "goal": "利用規約と負荷へ配慮した再実行可能な静的Scraperを作れる",
+      "objectives": [
+        "Timeoutとraise_for_statusを使う",
+        "Selector失敗を検出する",
+        "重複を除去し失敗をLogへ残す"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:30",
+          "title": "動画",
+          "detail": "Python Web scrapingの実装例を視聴"
+        },
+        {
+          "time": "0:30–1:10",
+          "title": "公式資料",
+          "detail": "Python → Requests → Beautiful Soupの順で読む"
+        },
+        {
+          "time": "1:10–2:35",
+          "title": "Scraper実装",
+          "detail": "取得、解析、正規化、CSV、Log"
+        },
+        {
+          "time": "2:35–3:00",
+          "title": "失敗試験",
+          "detail": "Timeout、404、Selector変更を再現"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "取得条件を決める",
+          "detail": "利用規約、robots.txt、対象URL、間隔、最大Page数、User-Agentを先に記録します。"
+        },
+        {
+          "title": "安全にHTTP取得",
+          "detail": "Timeout、raise_for_status、Retry上限を設定し、無限Retryを禁止します。",
+          "code": "response = requests.get(url, timeout=15)\nresponse.raise_for_status()"
+        },
+        {
+          "title": "HTMLを解析",
+          "detail": "Selectorごとに必須/任意を決め、0件なら正常終了せず失敗として記録します。"
+        },
+        {
+          "title": "正規化して保存",
+          "detail": "URLやIDで重複を除去し、CSV列順を固定し、失敗URLと理由を別Logへ保存します。"
+        }
+      ],
+      "deliverables": [
+        "scraper.py",
+        "output/sample.csv",
+        "output/errors.csv",
+        "learning-log/day-11/scraper-design.md"
+      ],
+      "checks": [
+        "利用規約とrobots.txtを確認した",
+        "TimeoutとRetry上限がある",
+        "0件取得を検出する",
+        "重複除去と失敗Logがある"
+      ],
+      "practicePrompt": "このScraperを、利用規約・robots.txt・負荷・Timeout・Retry上限・Status・Selector変更・重複・文字コード・失敗Logの観点でレビューしてください。無制限巡回や無限Retryは提案しないでください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-11.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-11-python-scraper and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-11/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-12",
+      "day": 12,
+      "week": 3,
+      "title": "Playwright・認証・動的Scraping",
+      "branch": "training/day-12-playwright",
+      "workspace": "practice/python-scraper",
+      "taskFile": "course/tasks/day-12.md",
+      "durationMinutes": 180,
+      "goal": "ログイン状態を安全に保存し、一覧とPaginationを巡回するPlaywright処理を作れる",
+      "objectives": [
+        "role/label/test idを優先する",
+        "Storage stateをSecretとして扱う",
+        "UI操作とAPI直接取得を比較する"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:45",
+          "title": "公式動画",
+          "detail": "Microsoft LearnのPlaywright入門Seriesを視聴"
+        },
+        {
+          "time": "0:45–1:25",
+          "title": "公式資料",
+          "detail": "Locator、Auto-wait、Auth、Network、Debug"
+        },
+        {
+          "time": "1:25–2:35",
+          "title": "自動化演習",
+          "detail": "Login、一覧、Pagination、Download"
+        },
+        {
+          "time": "2:35–3:00",
+          "title": "比較",
+          "detail": "UI操作とAPI取得の選択理由を提出"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "Codegenで操作を記録",
+          "detail": "ログインから一覧到達までを記録し、生成Codeをそのまま完成品にしません。",
+          "code": "npx playwright codegen https://example.test/login"
+        },
+        {
+          "title": "Locatorを作り直す",
+          "detail": "role → label → text → test id → CSSの優先順位で、意味のあるLocatorへ変更します。"
+        },
+        {
+          "title": "認証状態を分離",
+          "detail": "Storage stateをGit管理外へ保存し、期限切れ時の再生成手順を用意します。"
+        },
+        {
+          "title": "NetworkとPaginationを検証",
+          "detail": "API Response、次Pageの停止条件、最大Page数、重複を確認します。"
+        }
+      ],
+      "deliverables": [
+        "tests/scraper.spec.ts",
+        "playwright.config.ts",
+        "認証状態の生成手順",
+        "learning-log/day-12/ui-vs-api.md"
+      ],
+      "checks": [
+        "Storage stateをCommitしていない",
+        "固定sleepを主な待機方法にしていない",
+        "Locatorの優先順位を説明できる",
+        "Paginationに停止条件と上限がある"
+      ],
+      "practicePrompt": "このPlaywright処理を、Locatorの堅牢性、Auto-wait、認証情報、Pagination停止条件、最大Page数、Download、Network API利用、Retry、Debug可能性の観点でレビューしてください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-12.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-12-playwright and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-12/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-13",
+      "day": 13,
+      "week": 3,
+      "title": "テスト・Debug・Log",
+      "branch": "training/day-13-bugfix",
+      "workspace": "starter-kits",
+      "taskFile": "course/tasks/day-13.md",
+      "durationMinutes": 180,
+      "goal": "講師が用意したBugを再現し、失敗Testから最小修正と回帰確認まで完了できる",
+      "objectives": [
+        "Unit/Feature/E2Eを使い分ける",
+        "失敗を再現するTestを先に作る",
+        "LogへContextを残しSecretを除く"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:30",
+          "title": "動画",
+          "detail": "Playwright DebuggingとLaravel Testingの動画"
+        },
+        {
+          "time": "0:30–1:10",
+          "title": "公式資料",
+          "detail": "HTTP Tests、Database Testing、Logging"
+        },
+        {
+          "time": "1:10–2:35",
+          "title": "Bug修正",
+          "detail": "再現 → Test → Root cause → 最小修正"
+        },
+        {
+          "time": "2:35–3:00",
+          "title": "回帰確認",
+          "detail": "全TestとDiffを提出"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "再現条件を固定",
+          "detail": "入力、初期Data、操作、期待結果、実際の結果を文章にします。"
+        },
+        {
+          "title": "失敗Testを作る",
+          "detail": "Bugを再現し、修正前に赤くなる最小のFeature/Unit/E2E Testを追加します。"
+        },
+        {
+          "title": "Root causeを限定",
+          "detail": "Stack traceとLogから関連範囲を絞り、仮説ごとに確認方法を書きます。"
+        },
+        {
+          "title": "最小修正と回帰",
+          "detail": "Testを緑にし、関連Suiteと全Suiteを実行し、不要Diffがないか確認します。"
+        }
+      ],
+      "deliverables": [
+        "再現手順",
+        "修正前に失敗するTest",
+        "Root cause説明",
+        "修正前後のTest結果"
+      ],
+      "checks": [
+        "修正前にTestが失敗した",
+        "Root causeと症状を区別した",
+        "関連Testと全Testを実行した",
+        "LogへSecretや個人情報を出していない"
+      ],
+      "practicePrompt": "次のBugについて、まだ修正せず、再現条件、期待結果、実際の結果、Stack traceの読み方、Root cause候補、各仮説の確認方法、最小Testを提案してください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-13.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-13-bugfix and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-13/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-14",
+      "day": 14,
+      "week": 3,
+      "title": "Claude Code Skills・Hooks・Subagents",
+      "branch": "training/day-14-claude-skills",
+      "workspace": "starter-kits",
+      "taskFile": "course/tasks/day-14.md",
+      "durationMinutes": 180,
+      "goal": "実際に呼び出せるSkill、専門Subagent、4種類の安全Hookを作成できる",
+      "objectives": [
+        "SkillのTriggerと出力契約を書く",
+        "Hookの実行時点と失敗動作を決める",
+        "Subagentへ最小権限を与える"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:25",
+          "title": "公式動画",
+          "detail": "Skills・Hooks・Subagentsの公式デモを視聴"
+        },
+        {
+          "time": "0:25–1:05",
+          "title": "公式資料",
+          "detail": "Skills → Hooks → Subagents → Settings"
+        },
+        {
+          "time": "1:05–2:35",
+          "title": "実装",
+          "detail": "Laravel調査Skill、安全Refactor Skill、Hook"
+        },
+        {
+          "time": "2:35–3:00",
+          "title": "実行試験",
+          "detail": "Trigger、誤Trigger、危険操作Blockを検証"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "Laravel調査Skillを作る",
+          "detail": "Route、Middleware、Controller、Service、Model、Migration、Testを順に探し、事実と推測を分けるSkillを作ります。"
+        },
+        {
+          "title": "安全なRefactor Skillを作る",
+          "detail": "現状、問題、計画、影響、互換性、DB、Test、Rollback、Diffを必須出力にします。"
+        },
+        {
+          "title": "Laravel Reviewer Subagentを作る",
+          "detail": "read-onlyを基本にし、Security、DB、Test、互換性だけをレビューする役割へ限定します。"
+        },
+        {
+          "title": "安全Hookを作る",
+          "detail": "PHP変更後のFormatter、Commit前Test、危険Command block、.env/Secret警告を設定します。"
+        }
+      ],
+      "deliverables": [
+        ".claude/skills/trace-laravel-flow/SKILL.md",
+        ".claude/skills/safe-refactor/SKILL.md",
+        ".claude/agents/laravel-reviewer.md",
+        ".claude/settings.jsonまたはHooks設定"
+      ],
+      "checks": [
+        "各SkillにTriggerと対象外がある",
+        "Skillが根拠パスを必須にする",
+        "SubagentのTool権限が必要最小限",
+        "危険CommandとSecretをHookで検出した"
+      ],
+      "practicePrompt": "LaravelのRequest flow調査を毎回同じ品質で行うSkillを設計してください。Trigger、対象外、入力、手順、必須出力、事実/推測の分離、失敗時の停止条件を含めてください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-14.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-14-claude-skills and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-14/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-15",
+      "day": 15,
+      "week": 3,
+      "title": "Plugins・MCP・Codex Skills",
+      "branch": "training/day-15-plugin-mcp",
+      "workspace": "starter-kits",
+      "taskFile": "course/tasks/day-15.md",
+      "durationMinutes": 180,
+      "goal": "Codexで読み込めるSkillとPlugin starterを作り、MCPのRead/Write権限を説明できる",
+      "objectives": [
+        "SkillとPluginの用途を区別する",
+        "MCPのTool/Resource/Promptを区別する",
+        "外部接続の信頼境界を説明する"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:25",
+          "title": "公式動画",
+          "detail": "CodexとMCPの公式動画を選択"
+        },
+        {
+          "time": "0:25–1:10",
+          "title": "公式資料",
+          "detail": "Claude Plugins、MCP、Codex Skills、Codex Plugins"
+        },
+        {
+          "time": "1:10–2:35",
+          "title": "実装",
+          "detail": "Claude Plugin starterとCodex Skill/Plugin"
+        },
+        {
+          "time": "2:35–3:00",
+          "title": "権限監査",
+          "detail": "読み取り・変更・破壊操作を分類"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "Claude Plugin starterを作る",
+          "detail": ".claude-plugin/plugin.json、skills、agents、hooksを一つの配布Directoryへまとめます。"
+        },
+        {
+          "title": "Codex Skillへ移植",
+          "detail": "同じ目的を.agents/skills/trace-laravel-flow/SKILL.mdとして作り、Triggerと出力を比較します。"
+        },
+        {
+          "title": "Codex Pluginを作る",
+          "detail": ".codex-plugin/plugin.jsonを入口にskillsとhooksを参照する最小Pluginを作ります。"
+        },
+        {
+          "title": "MCP権限を監査",
+          "detail": "各Toolが読めるData、変更できるData、外部送信、Secret、破壊性、承認要否を表にします。"
+        }
+      ],
+      "deliverables": [
+        "examples/laravel-maintenance-plugin",
+        ".agents/skills/trace-laravel-flow/SKILL.md",
+        "plugins/laravel-maintenance-codex",
+        "learning-log/day-15/mcp-permission-audit.md"
+      ],
+      "checks": [
+        "Plugin manifestがSkill directoryを正しく参照する",
+        "Codex Skillにnameとdescriptionがある",
+        "MCPのRead/Write/Destructiveを分類した",
+        "SecretをManifestへ直接書いていない"
+      ],
+      "practicePrompt": "このMCP Server/Pluginについて、Tool、Resource、Prompt、認証、読取範囲、変更範囲、外部送信、Secret、破壊操作、必要な承認を表にしてください。Documentにない権限は推測しないでください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-15.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-15-plugin-mcp and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-15/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-16",
+      "day": 16,
+      "week": 4,
+      "title": "既存Systemを変更せず調査",
+      "branch": "training/day-16-system-investigation",
+      "workspace": "training-lab",
+      "taskFile": "course/tasks/day-16.md",
+      "durationMinutes": 180,
+      "goal": "別の開発者が変更計画を作れる水準のsystem-investigation.mdを提出できる",
+      "objectives": [
+        "調査範囲と変更禁止を守る",
+        "確認済み事実と不明点を分離する",
+        "高Risk箇所へ根拠を付ける"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:20",
+          "title": "動画復習",
+          "detail": "Laravel Courseの全体構造を再確認"
+        },
+        {
+          "time": "0:20–0:40",
+          "title": "調査設計",
+          "detail": "質問、対象、時間配分、変更禁止"
+        },
+        {
+          "time": "0:40–2:20",
+          "title": "並行調査",
+          "detail": "Stack、Flow、DB、External、Queue、Test、Scraper"
+        },
+        {
+          "time": "2:20–3:00",
+          "title": "反証",
+          "detail": "Codexで調査結果を独立レビュー"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "調査の質問を固定",
+          "detail": "何を変更する可能性があるか、何を知らないか、変更禁止の範囲を明記します。"
+        },
+        {
+          "title": "技術Stackと起動経路",
+          "detail": "Laravel/PHP/Node/DB version、Container、Entry point、Build、Testを根拠付きで記録します。"
+        },
+        {
+          "title": "System mapを作る",
+          "detail": "主要Request、DB Schema、External service、Queue/Scheduler、Scraper、Testを一枚へまとめます。"
+        },
+        {
+          "title": "Riskと不明点を反証",
+          "detail": "別Agentへ調査結果の見落としを探させ、実ファイルで確認できた指摘だけ反映します。"
+        }
+      ],
+      "deliverables": [
+        "learning-log/day-16/system-investigation.md",
+        "System map",
+        "Risk register",
+        "不明点と追加質問"
+      ],
+      "checks": [
+        "変更を1つも加えていない",
+        "各事実に根拠がある",
+        "Secret値を記録していない",
+        "不明点を推測で埋めていない"
+      ],
+      "practicePrompt": "このSystemを変更せず調査してください。技術Stack、Laravel/PHP version、主要Directory、Request flow、DB schema、External services、Queue/Scheduler、Test、Scraper、Risk、不明点を、根拠ファイル付きで出してください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-16.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-16-system-investigation and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-16/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-17",
+      "day": 17,
+      "week": 4,
+      "title": "Refactoring計画と承認",
+      "branch": "training/day-17-refactoring-plan",
+      "workspace": "training-lab",
+      "taskFile": "course/tasks/day-17.md",
+      "durationMinutes": 180,
+      "goal": "講師が実装可否を判断できるRefactoring Planを作り、承認後の作業単位へ分割できる",
+      "objectives": [
+        "症状とRoot causeを分ける",
+        "変更しない仕様を明記する",
+        "Rollback可能な実装順へ分解する"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:25",
+          "title": "動画",
+          "detail": "RefactoringとTest safety netの解説を視聴"
+        },
+        {
+          "time": "0:25–0:50",
+          "title": "Issue分析",
+          "detail": "現状・期待・制約・非Goal"
+        },
+        {
+          "time": "0:50–2:20",
+          "title": "計画作成",
+          "detail": "影響、DB、外部通信、Test、Rollback"
+        },
+        {
+          "time": "2:20–3:00",
+          "title": "Design review",
+          "detail": "講師と別Agentの反証を反映"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "現状と問題を分ける",
+          "detail": "観測事実、症状、Root cause、仮説を別欄へ書きます。"
+        },
+        {
+          "title": "変更しない仕様を固定",
+          "detail": "Response、DB、外部API、UI、Performanceなど維持する契約を列挙します。"
+        },
+        {
+          "title": "影響と安全策を設計",
+          "detail": "依存関係、DB、外部通信、互換性、Test、Monitoring、Rollbackを埋めます。"
+        },
+        {
+          "title": "実装順を小さく分割",
+          "detail": "各Stepが独立してTest/Commit/Revertできる順に並べ、承認前は実装しません。"
+        }
+      ],
+      "deliverables": [
+        "learning-log/day-17/refactoring-plan.md",
+        "変更しない仕様一覧",
+        "Test matrix",
+        "講師の承認記録"
+      ],
+      "checks": [
+        "計画承認前にCodeを変更していない",
+        "Root causeに根拠がある",
+        "Rollback方法が実行可能",
+        "各Stepを小さなCommitにできる"
+      ],
+      "practicePrompt": "実装はまだ行わず、Refactoring Planを作ってください。現状、問題、変更しない仕様、変更対象、依存、DB影響、外部通信、Test、Rollback、実装順、不明点を必須にしてください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-17.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-17-refactoring-plan and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-17/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-18",
+      "day": 18,
+      "week": 4,
+      "title": "小さな実装・Test・検証",
+      "branch": "training/day-18-implementation",
+      "workspace": "training-lab",
+      "taskFile": "course/tasks/day-18.md",
+      "durationMinutes": 180,
+      "goal": "AI生成Diffを全行説明し、Test結果とRollbackを伴う安全な実装Branchを完成できる",
+      "objectives": [
+        "実装前のTest基準を保存する",
+        "AI生成Diffを全行Reviewする",
+        "外部通信とDB変更の失敗経路をTestする"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:20",
+          "title": "動画復習",
+          "detail": "Laravel Test/DB章を確認"
+        },
+        {
+          "time": "0:20–0:40",
+          "title": "Baseline",
+          "detail": "Branch、既存Test、再現結果を保存"
+        },
+        {
+          "time": "0:40–2:20",
+          "title": "実装",
+          "detail": "小Commit、Test、Diff reviewを反復"
+        },
+        {
+          "time": "2:20–3:00",
+          "title": "Regression",
+          "detail": "全Test、Rollback、Static analysis"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "Baselineを保存",
+          "detail": "既存Test、再現手順、Query数、Responseを変更前結果として保存します。"
+        },
+        {
+          "title": "1 Stepずつ実装",
+          "detail": "計画の1 Stepを実装し、対象Test、Diff確認、Commitを繰り返します。"
+        },
+        {
+          "title": "失敗経路をTest",
+          "detail": "Null、Validation、Transaction失敗、Timeout、Retry上限、外部Errorを確認します。"
+        },
+        {
+          "title": "全体検証",
+          "detail": "関連Test、全Test、Static analysis、Migration rollbackを実行し、結果をPRへ貼ります。"
+        }
+      ],
+      "deliverables": [
+        "小さなCommit列",
+        "変更前後のTest結果",
+        "Migration rollback結果",
+        "全行説明できるDiff"
+      ],
+      "checks": [
+        "既存Testを実装前に実行した",
+        "1 PR 1目的を守った",
+        "Migration rollbackを確認した",
+        "外部通信にTimeoutとRetry上限がある",
+        "AI生成Codeを無確認でCommitしていない"
+      ],
+      "practicePrompt": "承認済み計画の次の1 Stepだけを実装してください。対象外Fileは変更せず、変更理由、Diff、追加Test、実行Command、残Riskを示してください。完了後は次Stepへ進まず止まってください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-18.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-18-implementation and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-18/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-19",
+      "day": 19,
+      "week": 4,
+      "title": "Pull RequestとReview対応",
+      "branch": "training/day-19-pr-review",
+      "workspace": "training-lab",
+      "taskFile": "course/tasks/day-19.md",
+      "durationMinutes": 180,
+      "goal": "仕様、互換性、DB、Security、Test、Rollbackを説明したMerge可能なPRを完成できる",
+      "objectives": [
+        "Review観点を体系化する",
+        "指摘の採用/不採用を説明する",
+        "修正後に再Testする"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:20",
+          "title": "動画",
+          "detail": "GitHub公式のPR Review動画を選択"
+        },
+        {
+          "time": "0:20–0:45",
+          "title": "Self review",
+          "detail": "Files changedを全行確認"
+        },
+        {
+          "time": "0:45–2:10",
+          "title": "3者Review",
+          "detail": "Codex、Claude、人間で指摘を分類"
+        },
+        {
+          "time": "2:10–3:00",
+          "title": "対応",
+          "detail": "修正、再Test、コメント回答、Merge判定"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "Self review",
+          "detail": "仕様、不要変更、互換性、DB、Transaction、N+1、Null、Exception、Retry、Timeout、Secret、Validation、Test、Rollbackを確認します。"
+        },
+        {
+          "title": "AI Reviewを2系統で実行",
+          "detail": "CodexとClaudeへ同じReview観点を渡し、指摘を重複・相違・誤検知へ分類します。"
+        },
+        {
+          "title": "人間が採否を決める",
+          "detail": "各指摘の根拠を再現し、採用・不採用・保留の理由を記録します。"
+        },
+        {
+          "title": "修正と回答",
+          "detail": "修正Commit、再Test、PRコメント回答、未解決Risk、Merge可否を更新します。"
+        }
+      ],
+      "deliverables": [
+        "完成したPR",
+        "review-comparison.md",
+        "指摘ごとの採用/不採用理由",
+        "修正後のTest結果"
+      ],
+      "checks": [
+        "Files changedを全行確認した",
+        "AI指摘を無条件採用していない",
+        "修正後に関連TestとCIが成功した",
+        "未解決RiskをPRへ明記した"
+      ],
+      "practicePrompt": "このPRを、仕様適合、不要変更、互換性、DB整合性、Transaction、N+1、Null、Exception、Retry、Timeout、Secret、Validation、Test不足、可読性、Rollbackの観点でReviewしてください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-19.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-19-pr-review and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-19/plan.md as a checklist, explain only the first task, and wait."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "lesson-20",
+      "day": 20,
+      "week": 4,
+      "title": "最終実技試験",
+      "branch": "exam/final-capstone",
+      "workspace": "training-lab",
+      "taskFile": "course/tasks/day-20.md",
+      "durationMinutes": 180,
+      "goal": "AIを使いながらも、自分で安全性と正しさを説明できる実務PRを完成する",
+      "objectives": [
+        "未知のIssueを再現する",
+        "最小修正とRegression Testを作る",
+        "AI利用と残Riskを説明する"
+      ],
+      "schedule": [
+        {
+          "time": "0:00–0:15",
+          "title": "試験説明",
+          "detail": "課題、禁止事項、提出物、採点を確認"
+        },
+        {
+          "time": "0:15–0:50",
+          "title": "調査",
+          "detail": "再現、Root cause、計画"
+        },
+        {
+          "time": "0:50–2:10",
+          "title": "実装",
+          "detail": "小Commit、Test、Diff review"
+        },
+        {
+          "time": "2:10–2:40",
+          "title": "Review",
+          "detail": "AI Review、修正、全Test"
+        },
+        {
+          "time": "2:40–3:00",
+          "title": "提出",
+          "detail": "PR、Risk、Rollback、AI利用記録"
+        }
+      ],
+      "instructions": [
+        {
+          "title": "Issueを再現",
+          "detail": "例: 会社情報Scraperで2Page目以降が取れず、一部企業が重複登録される。入力と結果を固定します。"
+        },
+        {
+          "title": "Root causeと計画",
+          "detail": "Pagination停止条件、重複Key、Laravel再実行Buttonの経路を調べ、最小計画を作ります。"
+        },
+        {
+          "title": "実装とTest",
+          "detail": "Branch、小Commit、Regression Test、Timeout/Retry、重複除去、DB整合性を確認します。"
+        },
+        {
+          "title": "PRを提出",
+          "detail": "Issue理解、再現、Root cause、計画、Code、Test、AI利用、Risk、Rollback、Review対応を空欄なく提出します。"
+        }
+      ],
+      "deliverables": [
+        "Issue理解",
+        "再現手順",
+        "Root cause",
+        "変更計画",
+        "BranchとCode",
+        "Testと実行結果",
+        "Pull Request",
+        "AI利用記録",
+        "RiskとRollback",
+        "Review対応"
+      ],
+      "checks": [
+        "SecretをCommitしていない",
+        "Testを実行した",
+        "Diffを全行確認した",
+        "mainへ直接Pushしていない",
+        "DB破壊操作を無確認で行っていない",
+        "Scrapingの規約・負荷・robots.txtを確認した",
+        "AI出力を自分の言葉で説明できる"
+      ],
+      "practicePrompt": "この最終課題について、最初は調査だけ行ってください。Issue理解、再現手順、Root cause候補、変更計画、影響範囲、Test、Risk、Rollback、不明点を作り、実装開始前に停止してください。",
+      "kickoffPrompt": "Read AGENTS.md, START-HERE.md, and course/tasks/day-20.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is exam/final-capstone and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-20/plan.md as a checklist, explain only the first task, and wait."
+    }
+  ]
+}
