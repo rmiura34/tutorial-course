@@ -11,7 +11,7 @@
 - Codespaces / Dev Container
 - Issue / Pull Request Template
 - GitHub ActionsによるLint、Build、表示Test
-- PHP 8.3 / Laravel 13 / SQLiteの演習Application
+- PHP 8.4 / Laravel 13 / SQLiteの演習Application
 - Demo Import、Seed Data、Feature Test、最終課題用の既知Bug
 - HTML Fixtureを使うPython Scraper演習
 - `START-HERE.md`、受講準備Page、20日分の生成Task

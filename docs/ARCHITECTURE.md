@@ -27,7 +27,7 @@
 - `app/data/lessons.ts`: レッスンの構造化データ
 - `course/tasks/`: Course Dataから生成する20日分の実行Task
 - `scripts/course.mjs`: Task表示、Branch作成、計画File作成
-- `training-lab/`: PHP 8.3 / Laravel 13 / SQLiteの演習Application
+- `training-lab/`: PHP 8.4 / Laravel 13 / SQLiteの演習Application
 - `practice/python-scraper/`: 外部Siteへ負荷を掛けずに使えるScraper演習
 - `exercises/`: 20日分の演習一覧と受講者向けスターターコード
 - `learning-log/templates/`: 調査・AI利用・権限監査の記録テンプレート

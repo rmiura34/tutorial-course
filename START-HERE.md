@@ -29,7 +29,7 @@
 - 安定したインターネット接続
 - 講師から案内されたRepositoryへのアクセス
 
-ローカルPCで進める場合は、Git、Node.js 22以上、npm、PHP 8.3以上、Composer 2、SQLiteが必要です。
+ローカルPCで進める場合は、Git、Node.js 22以上、npm、PHP 8.4以上、Composer 2、SQLiteが必要です。
 
 ## 2. 自分のRepositoryを作る
 

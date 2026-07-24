@@ -104,7 +104,7 @@ Skill、Hook、Rules、Pluginは、このCycleを毎回再現するために使�
 
 ## Repositoryに同梱している演習環境
 
-- PHP 8.3 / Laravel 13 / SQLiteで動く`training-lab/`
+- PHP 8.4 / Laravel 13 / SQLiteで動く`training-lab/`
 - 会社一覧、Demo Import、Migration、Seed Data、Feature Test
 - 2Page目が取得されず重複対策も不足している、最終課題用の既知Bug
 - HTML Fixtureで安全に練習できるPython Scraper
