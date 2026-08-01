@@ -62,8 +62,16 @@ test("renders a complete lesson page with resources, practice, and quizzes", asy
 
   const html = await response.text();
   assert.match(html, /ターミナル・ファイル・開発環境/);
+  assert.match(html, /このページは説明を見る場所/);
+  assert.match(html, /localhost:3000[^<]*で同じ教材サイトを起動する必要はありません/);
+  assert.match(html, /実際に作業する画面/);
+  assert.match(html, /今日は開かないもの/);
+  assert.match(html, /course\/tasks\/day-01\.md/);
+  assert.match(html, /元のMarkdown全文/);
+  assert.match(html, /ACTUAL TASK FILE/);
+  assert.match(html, /Required deliverables/);
   assert.match(html, /今日やること/);
-  assert.match(html, /GitHubで作業する場所/);
+  assert.match(html, /今使う画面/);
   assert.match(html, /Task内容をTerminalに表示/);
   assert.match(html, /先に調べる用語/);
   assert.match(html, /用語集で意味・読み方・使用例を調べる/);
@@ -104,13 +112,15 @@ test("renders the learner onboarding route with accounts and exact startup comma
   assert.match(html, /winget install OpenJS\.NodeJS\.LTS/);
   assert.match(html, /File → Open Folder/);
   assert.match(html, /git clone/);
-  assert.match(html, /npm run learner:start/);
   assert.match(html, /npm run course -- show 1/);
   assert.match(html, /npm run course -- start 1/);
-  assert.match(html, /http:\/\/localhost:3000/);
-  assert.match(html, /http:\/\/localhost:8000/);
+  assert.match(html, /公開教材はそのまま見る/);
+  assert.match(html, /Editor内のTerminal/);
+  assert.match(html, /localhost:8000/);
+  assert.doesNotMatch(html, /npm run learner:start/);
+  assert.match(html, /localhostで教材サイトを起動しません/);
   assert.match(html, /Laravel Herd/);
-  assert.match(html, /LoginもInstallも不要/);
+  assert.match(html, /Login不要/);
   assert.match(html, /Create codespace on main/);
   assert.match(html, /command not found: node \/ npm/);
   assert.match(html, /代替手段で、推奨Routeではありません/);
@@ -143,7 +153,7 @@ test("renders all 20 days with the complete learning flow", async () => {
     assert.equal(response.status, 200, `${slug} should render`);
     const html = await response.text();
     assert.match(html, /今日やること/);
-    assert.match(html, /GitHubで作業する場所/);
+    assert.match(html, /今使う画面/);
     assert.match(html, /作業する場所/);
     assert.match(html, /Terminalに入力|Terminal入力なし/);
     assert.match(html, /なぜやるか/);

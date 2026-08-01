@@ -2929,6 +2929,180 @@ footer > a {
 .task-success-note code { color: var(--lime); overflow-wrap: anywhere; }
 .task-launch-panel blockquote strong { color: var(--lime); display: block; font-size: 10px; margin-bottom: 7px; }
 
+/* Day 01: separate the reading surface from the working surface */
+.day-one-orientation {
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  border-top: 0;
+  padding: clamp(24px, 4vw, 44px);
+}
+
+.day-one-orientation-alert {
+  background: var(--yellow);
+  border: 1.5px solid var(--line);
+  box-shadow: 7px 7px 0 var(--ink);
+  padding: clamp(22px, 4vw, 38px);
+}
+
+.day-one-orientation-alert > span,
+.day-one-do-now > div:first-child > span,
+.day-one-surface-grid article > span {
+  display: block;
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+}
+
+.day-one-orientation-alert h2 {
+  font-size: clamp(27px, 3.5vw, 46px);
+  letter-spacing: -0.055em;
+  line-height: 1.15;
+  margin: 12px 0 14px;
+}
+
+.day-one-orientation-alert p {
+  font-size: 12px;
+  line-height: 1.9;
+  margin: 0;
+  max-width: 880px;
+}
+
+.day-one-orientation-alert code,
+.day-one-do-now code {
+  background: rgba(17, 23, 20, 0.1);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.92em;
+  padding: 2px 5px;
+}
+
+.day-one-surface-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 30px;
+}
+
+.day-one-surface-grid article {
+  border: 1px solid #c8cdc8;
+  display: flex;
+  flex-direction: column;
+  min-height: 210px;
+  padding: 22px;
+}
+
+.day-one-surface-grid article.is-primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--white);
+}
+
+.day-one-surface-grid article > span { color: var(--muted); }
+.day-one-surface-grid article.is-primary > span { color: var(--lime); }
+.day-one-surface-grid article strong { font-size: 16px; margin-top: 18px; }
+.day-one-surface-grid article p { color: var(--muted); font-size: 10px; line-height: 1.8; margin: 10px 0 18px; }
+.day-one-surface-grid article.is-primary p { color: #c8d1cb; }
+.day-one-surface-grid article em {
+  border-top: 1px solid currentColor;
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 800;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.day-one-do-now {
+  align-items: start;
+  background: var(--lime);
+  border: 1.5px solid var(--line);
+  display: grid;
+  gap: 30px;
+  grid-template-columns: 1.2fr 1fr;
+  margin-top: 12px;
+  padding: clamp(22px, 4vw, 34px);
+}
+
+.day-one-do-now h3 { font-size: clamp(22px, 2.6vw, 34px); letter-spacing: -0.045em; margin: 8px 0 10px; }
+.day-one-do-now p { font-size: 10px; line-height: 1.8; margin: 0; }
+.day-one-do-now > div:last-child { border-left: 1px solid rgba(17, 23, 20, 0.35); display: grid; gap: 8px; padding-left: 30px; }
+.day-one-do-now > div:last-child strong { font-size: 9px; margin-top: 7px; }
+.day-one-do-now > div:last-child code { overflow-wrap: anywhere; }
+
+.day-one-first-actions {
+  border-top: 1.5px solid var(--line);
+  list-style: none;
+  margin: 34px 0 0;
+  padding: 0;
+}
+
+.day-one-first-actions li {
+  border-bottom: 1px solid #c5cac5;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 46px minmax(0, 1fr);
+  padding: 18px 8px;
+}
+
+.day-one-first-actions li > span { color: var(--muted); font-family: var(--font-mono), monospace; font-size: 10px; padding-top: 3px; }
+.day-one-first-actions strong { font-size: 13px; }
+.day-one-first-actions p { color: var(--muted); font-size: 10px; line-height: 1.7; margin: 5px 0 0; }
+.day-one-first-actions pre { background: var(--ink); color: var(--lime); margin: 10px 0 0; overflow-x: auto; padding: 11px 13px; }
+.day-one-first-actions code { font-family: var(--font-mono), monospace; font-size: 10px; }
+
+.day-one-task-source {
+  margin-top: 70px;
+}
+
+.task-source-heading h2 {
+  font-size: clamp(28px, 3vw, 40px);
+  letter-spacing: -0.05em;
+  margin: 8px 0 10px;
+}
+
+.task-source-heading p { color: var(--muted); font-size: 11px; line-height: 1.8; margin: 0; max-width: 760px; }
+.task-source-heading code { background: #e1e4dd; font-size: 0.92em; padding: 2px 5px; }
+
+.show-output-card,
+.markdown-source-card {
+  border: 1.5px solid var(--line);
+  margin-top: 24px;
+}
+
+.show-output-card > div,
+.markdown-source-card > div {
+  align-items: center;
+  background: var(--white);
+  border-bottom: 1px solid #c5cac5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  padding: 15px 18px;
+}
+
+.show-output-card > div span,
+.markdown-source-card > div span { color: var(--muted); font-family: var(--font-mono), monospace; font-size: 8px; letter-spacing: 0.08em; }
+.show-output-card > div strong,
+.markdown-source-card > div strong { font-family: var(--font-mono), monospace; font-size: 10px; }
+.markdown-source-card > div p { color: var(--muted); flex-basis: 100%; font-size: 10px; line-height: 1.7; margin: 0; }
+.markdown-source-card > div code { background: #e1e4dd; padding: 2px 4px; }
+
+.show-output-card pre,
+.markdown-source-card pre {
+  background: var(--ink);
+  color: #dce6df;
+  line-height: 1.75;
+  margin: 0;
+  overflow: auto;
+  padding: clamp(20px, 4vw, 34px);
+  white-space: pre-wrap;
+}
+
+.show-output-card pre { color: var(--lime); max-height: 430px; }
+.markdown-source-card pre { max-height: 720px; }
+.show-output-card code,
+.markdown-source-card pre code { font-family: var(--font-mono), monospace; font-size: 10px; }
+
 .context-caption,
 .lesson-terms > div > p {
   color: inherit;
@@ -3124,6 +3298,10 @@ footer > a {
 .quiz-score-card p { color: #d5ddd8; font-size: 10px; line-height: 1.8; margin: 10px 0 0; }
 
 @media (max-width: 900px) {
+  .day-one-surface-grid { grid-template-columns: 1fr; }
+  .day-one-surface-grid article { min-height: 0; }
+  .day-one-do-now { grid-template-columns: 1fr; }
+  .day-one-do-now > div:last-child { border-left: 0; border-top: 1px solid rgba(17, 23, 20, 0.35); padding-left: 0; padding-top: 20px; }
   .today-plan ol { grid-template-columns: 1fr 1fr; }
   .workplace-guide { grid-template-columns: 1fr; }
   .workplace-guide > div { border-bottom: 1px solid #435047; border-right: 0; }

@@ -97,25 +97,20 @@ cd tutorial-course
 
 以上を確認してください。ExplorerはCodeとFileを見る場所、Browserは起動したApplication画面を見る場所です。
 
-## 5. 初回準備と2つのApplicationを起動する
+## 5. Day 01で使う2つの画面を分ける
 
-Laravel Labまで起動する場合はPHP 8.4以上とComposer 2も必要です。初心者のmacOS／Windowsでは[Laravel Herd公式](https://herd.laravel.com/)を使うとまとめて導入できます。Install後に`php -v`と`composer --version`を確認します。
+Day 01ではApplicationをlocalhostで起動しません。次の2つだけを使います。
 
-EditorのTerminalで次を上から順番に実行します。
+| 画面 | 用途 | 最初の操作 |
+|---|---|---|
+| Browserの公開教材 | 次にやる操作、Command、成功条件を読む | Day 01ページを開いたままにする |
+| VS CodeまたはCursor | Folder、File、Terminalを操作する | `File` → `Open Folder`でtutorial-courseを開く |
 
-```bash
-npm run learner:setup
-npm run learner:start
-```
+CommandはBrowserのAddress barやGitHub画面ではなく、VS Code / Cursorの`Terminal` → `New Terminal`で開いた欄へ入力します。
 
-- `learner:setup`: 依存Package、Database、学習Taskを初回準備する。最後に`Learner workspace is ready`なら成功
-- `learner:start`: 教材サイトとLaravel Labを同時に起動する。起動中はTerminalを閉じない
-- 停止: 起動中のTerminalで`Control + C`
-
-PCのBrowserのAddress barへ次のURLを入力します。VS Code内のFile名ではなく、Browserで見る画面です。
-
-- `http://localhost:3000` — Tutorial Course。説明、20日間のCourse、Quizを見る
-- `http://localhost:8000` — Company Import Lab。Laravelの練習Applicationを操作する
+- `localhost:3000`: 教材サイト自体を編集する運営者向け。通常受講では不要
+- `localhost:8000`: Laravel演習用Company Import Lab。使用するDayの指示が出るまで不要
+- `training-lab`: Day 01では開かない
 
 ## 6. Day 01のTaskを読む・開始する
 
@@ -126,6 +121,24 @@ npm run course -- show 1
 ```
 
 このCommandは`Day 01のTaskを見せて`という意味です。BranchやFileを変更しないため、何度実行しても構いません。
+
+実行すると、次の項目がTerminalに表示されます。
+
+```text
+Day 01: ターミナル・ファイル・開発環境
+Branch: training/day-01-environment
+Workspace: repository root
+Goal: tutorial-course直下を自分で確認し、既存Codeを変えずにRepositoryの構造と根拠をrepository-map.mdへまとめられる
+Task file: course/tasks/day-01.md
+
+Start:
+  npm run course -- start 1
+
+Codex kickoff:
+Read AGENTS.md, START-HERE.md, and course/tasks/day-01.md. Use COACH mode. Do not edit implementation files yet. Confirm that the current branch is training/day-01-environment and inspect git status. Summarize Goal, Context, Constraints, and Done when. Create learning-log/day-01/plan.md as a checklist, explain only the first task, and wait.
+```
+
+Terminalの要約だけで終わらず、Explorerで`course` → `tasks` → `day-01.md`を開いて全文を読みます。今日作る成果物は`learning-log/day-01/repository-map.md`です。
 
 - `npm`: Node.jsと一緒に入る実行Tool
 - `run`: `package.json`に登録された処理を呼ぶ

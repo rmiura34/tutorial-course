@@ -4,7 +4,7 @@ import { CopyCommand } from "../components/CopyCommand";
 
 export const metadata: Metadata = {
   title: "受講準備 — PCで開発を始める",
-  description: "GitHubで自分用Repositoryを作り、PCへcloneし、VS CodeまたはCursorのTerminalからDay 01を開始する手順。",
+  description: "公開教材をブラウザで見ながら、GitHubのRepositoryをPCへcloneし、VS CodeまたはCursorのTerminalからDay 01を開始する手順。",
 };
 
 const accountRows = [
@@ -16,14 +16,14 @@ const accountRows = [
 
 const commands = [
   {
-    command: "npm run learner:setup",
-    plain: "このRepositoryに必要な依存関係と学習用Fileを準備します。初回と、教材更新後に実行します。",
-    result: "最後に「Learner workspace is ready」と表示され、赤いErrorが残らない。",
+    command: "pwd",
+    plain: "Terminalが現在どのFolderを操作しているか表示します。最初に必ず現在地を確認します。",
+    result: "表示されたPathの末尾がtutorial-courseになる。",
   },
   {
-    command: "npm run learner:start",
-    plain: "教材サイトとLaravel LabをLocal PCで起動します。このTerminalは起動中そのままにします。",
-    result: "http://localhost:3000 と http://localhost:8000 が表示される。終了はControl + C。",
+    command: "node -v && npm -v && git --version",
+    plain: "Day 01で使うNode.js、npm、GitがEditorのTerminalから見つかるか確認します。",
+    result: "3つのVersion番号が表示され、command not foundが出ない。",
   },
   {
     command: "npm run course -- show 1",
@@ -57,10 +57,10 @@ export default function StartPage() {
       </header>
 
       <section className="access-gate-note">
-        <strong>教材を見るだけなら、LoginもInstallも不要です</strong>
+        <strong>公開教材はそのまま見る。localhostで教材サイトを起動しません</strong>
         <p>
-          実際にCodeを書いて演習するときは、GitHub Accountと自分のPCを使います。
-          推奨Routeは<b>自分用Repositoryを作る → PCへclone → VS CodeまたはCursorで開く → Terminalで開始</b>です。
+          このWebページは説明を読む画面です。実際に演習するときだけGitHub Accountと自分のPCを使います。
+          推奨Routeは<b>公開教材をブラウザに残す → 自分用RepositoryをPCへclone → VS CodeまたはCursorで開く → Editor内のTerminalで開始</b>です。
         </p>
       </section>
 
@@ -78,14 +78,14 @@ export default function StartPage() {
             <a className="text-link" href="#tools">必要なToolを確認</a>
           </div>
         </div>
-        <div className="start-route-card" aria-label="Local PCで受講開始する順番">
-          <span>RECOMMENDED LOCAL ROUTE</span>
+        <div className="start-route-card" aria-label="公開教材を見ながらVS Codeで受講開始する順番">
+          <span>RECOMMENDED LEARNING ROUTE</span>
           <ol>
-            <li><i>1</i><strong>自分用Repo</strong><small>GitHub Template</small></li>
-            <li><i>2</i><strong>Toolを準備</strong><small>Editor + Node.js + Git</small></li>
+            <li><i>1</i><strong>公開教材を開く</strong><small>Browser · 説明を見る</small></li>
+            <li><i>2</i><strong>自分用Repo</strong><small>GitHub Template</small></li>
             <li><i>3</i><strong>PCへclone</strong><small>HTTPS URL</small></li>
             <li><i>4</i><strong>Folderを開く</strong><small>VS Code / Cursor</small></li>
-            <li><i>5</i><strong>Day 01開始</strong><small>Terminal + Branch</small></li>
+            <li><i>5</i><strong>Day 01開始</strong><small>Editor内のTerminal</small></li>
           </ol>
         </div>
       </section>
@@ -179,12 +179,12 @@ export default function StartPage() {
           <CopyCommand command={"node -v\nnpm -v\ngit --version"} label="確認Commandをコピー" />
         </div>
         <div className="access-gate-note">
-          <strong>Laravel Labまで起動する場合は、PHPとComposerも必要です</strong>
+          <strong>Day 01ではPHP・Composer・Laravel Labは使いません</strong>
           <p>
             Day 01のTaskを読む<code>show 1</code>と開始する<code>start 1</code>は、Node.js・npm・Gitだけで進められます。
-            一方、<code>npm run learner:setup</code>とPort 8000のLaravel LabにはPHP 8.4以上とComposer 2が必要です。
+            Port 8000のLaravel Labは、後半のLessonで「起動してください」と表示された時に準備します。今は開きません。
+            その段階ではPHP 8.4以上とComposer 2が必要です。
             初心者のMac／Windowsでは、PHPとComposerをまとめて導入できる<a href="https://herd.laravel.com/" target="_blank" rel="noreferrer">Laravel Herd公式 ↗</a>が選択肢です。
-            Install後は<code>php -v</code>と<code>composer --version</code>を確認します。
           </p>
         </div>
       </section>
@@ -257,10 +257,10 @@ export default function StartPage() {
       </section>
 
       <section className="start-section dual-app-section">
-        <div className="section-heading"><p className="eyebrow">SUCCESS LOOKS LIKE THIS</p><h2>Browserで2つのLocal URLを開く。</h2><p>CodespacesのPORTS Tabではありません。PCのBrowserのAddress barへ、Terminalに表示されたlocalhost URLを入力します。</p></div>
+        <div className="section-heading"><p className="eyebrow">DO NOT MIX THESE SCREENS</p><h2>Day 01で使う画面と、後で使う画面。</h2><p>最初から2つのlocalhostを開く必要はありません。教材は公開URL、作業はVS Code / Cursorです。</p></div>
         <div className="dual-app-grid">
-          <article><span>http://localhost:3000</span><h3>Tutorial Course</h3><p>上にTC、Heroに「Repositoryを開くところから」、下に20日間のRoadmapが見えます。</p><code>教材・Quiz・手順</code></article>
-          <article><span>http://localhost:8000</span><h3>Company Import Lab</h3><p>Company一覧とImport操作が見えます。後半のLaravel不具合修正で使う練習用Applicationです。</p><code>Laravel・SQLite・Test</code></article>
+          <article><span>DAY 01 · 今使う</span><h3>公開教材 + VS Code / Cursor</h3><p>Browserでこの教材を読み、Editorでtutorial-courseを開き、Editor内のTerminalへCommandを入力します。</p><code>説明を見る画面 / 作業する画面</code></article>
+          <article><span>LATER · 指示が出てから</span><h3>localhost:8000 · Company Import Lab</h3><p>Laravel、SQLite、不具合修正を学ぶ後半用Applicationです。Day 01では起動も操作もしません。</p><code>今は不要</code></article>
         </div>
       </section>
 
@@ -275,7 +275,7 @@ export default function StartPage() {
           <article><strong>□ Editor</strong><p>VS CodeまたはCursorのどちらか1つを開ける。</p></article>
           <article><strong>□ Tool</strong><p>node -v、npm -v、git --versionがすべて成功する。</p></article>
           <article><strong>□ Local Folder</strong><p>Explorer最上部とpwdがtutorial-courseを示す。</p></article>
-          <article><strong>□ 2つの画面</strong><p>localhost:3000とlocalhost:8000をBrowserで開ける。</p></article>
+          <article><strong>□ 2つの役割</strong><p>Browserは説明、VS Code / Cursorは作業、と区別できる。</p></article>
           <article><strong>□ Day 01</strong><p>show 1でTaskを読み、start 1で課題Branchを作った。</p></article>
         </div>
       </section>

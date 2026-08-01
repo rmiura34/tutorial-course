@@ -5,10 +5,32 @@ import { CopyCommand } from "../../components/CopyCommand";
 import { LessonQuiz } from "../../components/LessonQuiz";
 import { LessonStepChecklist } from "../../components/LessonStepChecklist";
 import { getLesson, lessons } from "../../data/lessons";
+import taskIndex from "../../../course/tasks/index.json";
+import dayOneTaskMarkdown from "../../../course/tasks/day-01.md?raw";
 
 type LessonPageProps = {
   params: Promise<{ slug: string }>;
 };
+
+const dayOneTask = taskIndex.tasks.find((task) => task.day === 1);
+
+if (!dayOneTask) {
+  throw new Error("Day 01 task metadata is missing");
+}
+
+const dayOneShowOutput = [
+  `Day 01: ${dayOneTask.title}`,
+  `Branch: ${dayOneTask.branch}`,
+  `Workspace: ${dayOneTask.workspace}`,
+  `Goal: ${dayOneTask.goal}`,
+  `Task file: ${dayOneTask.taskFile}`,
+  "",
+  "Start:",
+  "  npm run course -- start 1",
+  "",
+  "Codex kickoff:",
+  dayOneTask.kickoffPrompt,
+].join("\n");
 
 function resourceLanguage(resource: {
   language?: "ja" | "en" | "日本語" | "英語";
@@ -44,6 +66,19 @@ export default async function LessonPage({ params }: LessonPageProps) {
   const lessonIndex = lessons.findIndex((item) => item.slug === slug);
   const previous = lessons[lessonIndex - 1];
   const next = lessons[lessonIndex + 1];
+  const routeSteps = lesson.day === 1
+    ? [
+        ["公開教材をブラウザに残す", "このページは手順を見る場所です。localhostで同じ教材を起動する必要はありません。"],
+        ["VS Code / Cursorを開く", "clone済みのtutorial-course FolderをEditorで開きます。実作業はここで行います。"],
+        ["Editor内のTerminalで開始", "Terminal → New Terminalを開き、show 1で課題を読んでからstart 1を実行します。"],
+        ["Repository地図を提出", "主要Fileを調べ、learning-log/day-01/repository-map.mdへ根拠付きでまとめます。"],
+      ]
+    : [
+        ["TaskとBranchを準備", "今日の指示を読み、自分専用の作業場所へ移動します。"],
+        ["事前知識と教材を確認", "必要な用語を調べ、表示されている必須教材だけ先に確認します。"],
+        ["Stepを上から実行", "場所・Command・理由・成功表示を1つずつ照合します。"],
+        ["Quiz・成果物・提出", "理解を確認し、完了条件を満たしてPull Requestを作ります。"],
+      ];
 
   return (
     <main className="lesson-page">
@@ -89,6 +124,63 @@ export default async function LessonPage({ params }: LessonPageProps) {
             <span className="lesson-hero-number">{lesson.number}</span>
           </div>
 
+          {lesson.day === 1 && (
+            <section className="day-one-orientation" aria-labelledby="day-one-orientation-heading">
+              <div className="day-one-orientation-alert">
+                <span>最初に確認 · DAY 01</span>
+                <h2 id="day-one-orientation-heading">このページは説明を見る場所。<br />作業はVS CodeまたはCursorで行います。</h2>
+                <p>
+                  受講者は公開されている教材サイトをそのままブラウザで見ればよく、
+                  <code>localhost:3000</code>で同じ教材サイトを起動する必要はありません。
+                  localhostは、教材サイト自体を開発・修正する運営者向けの確認方法です。
+                </p>
+              </div>
+
+              <div className="day-one-surface-grid" aria-label="Day 01で使う画面の役割">
+                <article>
+                  <span>1 · BROWSER</span>
+                  <strong>今見ている公開教材</strong>
+                  <p>次にやる操作、Command、成功条件を確認します。この画面にCodeを書くことはありません。</p>
+                  <em>残しておく</em>
+                </article>
+                <article className="is-primary">
+                  <span>2 · VS CODE / CURSOR</span>
+                  <strong>実際に作業する画面</strong>
+                  <p>tutorial-course Folder、File、差分を開きます。Day 01の作業はここが中心です。</p>
+                  <em>ここへ移動する</em>
+                </article>
+                <article>
+                  <span>3 · TERMINAL</span>
+                  <strong>Editor下部のTerminal</strong>
+                  <p>VS Code / Cursorの「Terminal → New Terminal」で開き、表示されたCommandを入力します。</p>
+                  <em>Editorの中で開く</em>
+                </article>
+              </div>
+
+              <div className="day-one-do-now">
+                <div>
+                  <span>YOUR TASK</span>
+                  <h3>Repositoryの地図を1ファイル作る</h3>
+                  <p>Codeは変更しません。主要なFolderとFileの役割を調べ、根拠Pathと一緒に記録します。</p>
+                </div>
+                <div>
+                  <strong>今日作るもの</strong>
+                  <code>learning-log/day-01/repository-map.md</code>
+                  <strong>今日は開かないもの</strong>
+                  <p><code>localhost:3000</code>、<code>localhost:8000</code>、<code>training-lab</code>のApplication</p>
+                </div>
+              </div>
+
+              <ol className="day-one-first-actions">
+                <li><span>01</span><div><strong>VS CodeまたはCursorを起動</strong><p>MacならApplications、WindowsならStart menuから開きます。</p></div></li>
+                <li><span>02</span><div><strong>File → Open Folder</strong><p>GitHubからcloneしたtutorial-course Folderを選びます。</p></div></li>
+                <li><span>03</span><div><strong>Terminal → New Terminal</strong><p>Editor下部に文字を入力する欄が開きます。</p></div></li>
+                <li><span>04</span><div><strong>現在地を確認</strong><pre><code>pwd</code></pre><p>末尾がtutorial-courseなら次へ進みます。</p></div></li>
+                <li><span>05</span><div><strong>Day 01を表示</strong><pre><code>npm run course -- show 1</code></pre><p>下に掲載した出力と同じ項目が出れば成功です。</p></div></li>
+              </ol>
+            </section>
+          )}
+
           <section className="today-plan" aria-labelledby="today-plan-heading">
             <div className="today-plan-heading">
               <div>
@@ -99,21 +191,20 @@ export default async function LessonPage({ params }: LessonPageProps) {
               <span>{lesson.duration}</span>
             </div>
             <ol>
-              <li><span>1</span><div><strong>TaskとBranchを準備</strong><p>今日の指示を読み、自分専用の作業場所へ移動します。</p></div></li>
-              <li><span>2</span><div><strong>事前知識と教材を確認</strong><p>必要な用語を調べ、表示されている必須教材だけ先に確認します。</p></div></li>
-              <li><span>3</span><div><strong>Stepを上から実行</strong><p>場所・Command・理由・成功表示を1つずつ照合します。</p></div></li>
-              <li><span>4</span><div><strong>Quiz・成果物・提出</strong><p>理解を確認し、完了条件を満たしてPull Requestを作ります。</p></div></li>
+              {routeSteps.map(([title, detail], index) => (
+                <li key={title}><span>{index + 1}</span><div><strong>{title}</strong><p>{detail}</p></div></li>
+              ))}
             </ol>
           </section>
 
           <section className="task-launch-panel">
             <div>
               <span className="lesson-section-kicker">LOAD TODAY&apos;S TASK</span>
-              <h2>1. TaskとBranchを準備する</h2>
-              <p>VS Code下部のTerminalで実行します。Task fileを人間とAIが同じ順番で読み、実装前に計画を作ります。</p>
+              <h2>1. VS CodeのTerminalでTaskを読む</h2>
+              <p>先にVS CodeまたはCursorでtutorial-courseを開き、Terminal → New Terminalを選びます。GitHubのWeb画面やBrowserのAddress barへCommandを入力しません。</p>
             </div>
             <div className="workplace-guide">
-              <div><span>GitHubで作業する場所</span><strong>自分のtutorial-course Repository</strong></div>
+              <div><span>今使う画面</span><strong>VS Code / Cursor内のTerminal</strong></div>
               <div><span>Branch</span><code>{lesson.branch}</code></div>
               <div><span>今日のTask file</span><code>{`course/tasks/day-${lesson.number}.md`}</code></div>
             </div>
@@ -127,6 +218,36 @@ export default async function LessonPage({ params }: LessonPageProps) {
               {`COACHモードで、AGENTS.md、START-HERE.md、course/tasks/day-${lesson.number}.mdを読んでください。まだ実装せず、Goal・Context・Constraints・Done whenからTask checklistを作ってください。`}
             </blockquote>
           </section>
+
+          <LessonStepChecklist
+            branch={lesson.branch}
+            lessonSlug={lesson.slug}
+            steps={lesson.steps}
+          />
+
+          {lesson.day === 1 && (
+            <section className="day-one-task-source" aria-labelledby="day-one-task-source-heading">
+              <div className="task-source-heading">
+                <span className="lesson-section-kicker">ACTUAL TASK FILE · 省略なし</span>
+                <h2 id="day-one-task-source-heading"><code>show 1</code>の出力と、元のMarkdown全文</h2>
+                <p>Terminal出力はTaskの要約です。実際の全手順は同じRepository内の <code>course/tasks/day-01.md</code> にあります。</p>
+              </div>
+
+              <article className="show-output-card">
+                <div><span>VS Code · Terminal</span><strong>npm run course -- show 1</strong></div>
+                <pre><code>{dayOneShowOutput}</code></pre>
+              </article>
+
+              <article className="markdown-source-card">
+                <div>
+                  <span>VS Code · Explorer</span>
+                  <strong>course/tasks/day-01.md</strong>
+                  <p>Explorerで <code>course</code> → <code>tasks</code> → <code>day-01.md</code> の順に開くと、下と同じ内容を編集画面で確認できます。</p>
+                </div>
+                <pre><code>{dayOneTaskMarkdown}</code></pre>
+              </article>
+            </section>
+          )}
 
           <section className="beginner-context">
             <div className="beginner-before">
@@ -251,12 +372,6 @@ export default async function LessonPage({ params }: LessonPageProps) {
               ))}
             </ul>
           </section>
-
-          <LessonStepChecklist
-            branch={lesson.branch}
-            lessonSlug={lesson.slug}
-            steps={lesson.steps}
-          />
 
           <section className="expected-section">
             <div>

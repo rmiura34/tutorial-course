@@ -8,16 +8,9 @@
 
 知らない言葉は[初心者用語集](./docs/GLOSSARY.md)で日本語の説明と例を確認できます。
 
-教材サイトとGitHub Repositoryは公開されており、閲覧だけならLogin不要です。演習する場合は、自分のRepositoryとCodespacesを作るためのGitHub Accountを用意します。Codexを使う場合のChatGPT AccountはGitHubとは別です。
+教材サイトとGitHub Repositoryは公開されており、閲覧だけならLogin不要です。演習する場合は、自分のRepositoryを作るためのGitHub Accountを用意します。Codexを使う場合のChatGPT AccountはGitHubとは別です。
 
-Codespacesの初回Setupが完了したら、Terminalで次を実行します。
-
-```bash
-npm run learner:start
-```
-
-- Port 3000: 必要な教材、10問クイズ、実行手順、Taskを表示する教材サイト
-- Port 8000: Laravel、SQLite、Scraping、Testを扱うCompany Import Training Lab
+受講者は公開教材をBrowserに開いたまま、cloneしたRepositoryをVS CodeまたはCursorで開き、Editor内のTerminalで演習します。教材サイトを`localhost:3000`で起動する必要はありません。Port 8000のCompany Import Training Labは、Laravel演習の指示が出たDayだけ起動します。
 
 DayごとのTaskは`course/tasks/day-XX.md`にあります。
 
@@ -110,6 +103,8 @@ npm test
 npm run lab:lint
 npm run lab:test
 ```
+
+`npm run dev`で起動するPort 3000は、教材サイト自体を編集・確認する運営者向けです。通常の受講では公開教材サイトを利用します。
 
 Laravel Training LabだけをSetupし直す場合は`npm run learner:setup`を実行します。Task仕様を更新した場合は`npm run course:generate`で`course/tasks/`を再生成します。
 
