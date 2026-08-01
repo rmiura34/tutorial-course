@@ -8,7 +8,7 @@
 
 知らない言葉は[初心者用語集](./docs/GLOSSARY.md)で日本語の説明と例を確認できます。
 
-教材サイト、GitHub、Codexは別のサービスです。ChatGPTアカウントだけではGitHub Repositoryへアクセスできません。受講案内に記載されたメールアドレスとGitHub招待を確認してから開始します。
+教材サイトとGitHub Repositoryは公開されており、閲覧だけならLogin不要です。演習する場合は、自分のRepositoryとCodespacesを作るためのGitHub Accountを用意します。Codexを使う場合のChatGPT AccountはGitHubとは別です。
 
 Codespacesの初回Setupが完了したら、Terminalで次を実行します。
 

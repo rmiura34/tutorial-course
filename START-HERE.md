@@ -2,31 +2,26 @@
 
 このファイルは受講者が最初に読む唯一の入口です。上から順番に進めてください。
 
-## 0. 教材の前に英語のLogin画面が出た場合
+## 0. 教材は誰でも閲覧できます
 
-`You’re almost in` と `Continue with ChatGPT` が表示されるのは、教材の招待確認画面です。
+教材サイトとGitHub Repositoryは公開されています。見るだけなら、ChatGPT AccountもGitHub Accountも招待も不要です。
 
-1. `Continue with ChatGPT`を押す
-2. 講師へ伝えたメールアドレスのChatGPT AccountでLoginする
-3. 教材が開いたら、次の「GitHub」へ進む
-
-ここで使うChatGPT Accountと、Codeを保存するGitHub Accountは別物です。教材へ入れてもGitHub Repositoryを編集できるようにはなりません。招待されていない場合は、講師へChatGPTで使うメールアドレスだけを伝えます。Password、認証Code、Tokenは伝えません。
+実際に演習する場合だけ、自分のRepositoryとCodespacesを作るためのGitHub Accountを用意します。Codexを使う場合のChatGPT AccountはGitHubとは別です。Password、認証Code、Tokenは誰にも伝えません。
 
 ## 1. 何にログインするのか
 
-教材サイト、GitHub、Codexは別のサービスです。1つのアカウントですべてへ自動的に入れるわけではありません。
+教材サイト、GitHub、Codexは別のサービスです。教材を見るだけならLogin不要ですが、演習やAI支援にはそれぞれのAccountを使います。
 
 | サービス | 必要になる時期 | 用途 |
 |---|---|---|
-| 教材サイト | 最初から | 動画、公式資料、クイズ、Taskの確認 |
+| 教材サイト | Login不要 | 動画、公式資料、クイズ、Taskの確認 |
 | GitHub | Day 1から必須 | 自分のRepository、Codespaces、Branch、Commit、PR |
 | Codex / ChatGPT | Day 1からCoachとして利用 | Repositoryを読み、計画、実装、Reviewを支援。正式な比較学習はDay 5 |
 | Cursor / Claude Code | 該当Day | Agent比較、Skills、Hooksの演習 |
 
-- 招待制開催では、講師から案内されたメールアドレスで教材サイトとGitHubへアクセスします。
-- ChatGPTへログインできても、GitHub Repositoryへの権限は付与されません。
-- GitHubへログインできても、Codexの利用権限が自動で付与されるわけではありません。
-- アクセスできない場合は、新しいアカウントを作る前に講師へ「どのメールアドレスを登録したか」を確認してください。
+- 教材サイトとGitHub Repositoryは、URLを知っていれば誰でも閲覧できます。
+- GitHubへLoginしても、Codexの利用権限が自動で付与されるわけではありません。
+- 教材が開かない場合は公開URLを再確認し、別Browserでも開かない場合だけ講師へURLと時刻を伝えてください。
 
 知らない言葉は[docs/GLOSSARY.md](./docs/GLOSSARY.md)で確認できます。暗記する必要はありません。
 
@@ -39,13 +34,13 @@
 - GitHubアカウント
 - Chrome、Edge、Safariなどのブラウザ
 - 安定したインターネット接続
-- 講師から案内されたRepositoryへのアクセス
+- 公開されている教材RepositoryのURL
 
 ローカルPCで進める場合は、Git、Node.js 22以上、npm、PHP 8.4以上、Composer 2、SQLiteが必要です。
 
 ## 3. 自分のRepositoryを作る
 
-開催方法によって、講師からどちらか一方が案内されます。
+`Use this template`が表示される場合はTemplate方式を使います。表示されない場合はFork方式を使います。
 
 ### A. Template方式
 
@@ -53,16 +48,15 @@
 2. `Use this template`を押す
 3. `Create a new repository`を選ぶ
 4. Repository名を`tutorial-course-自分の名前`にする
-5. Visibilityは講師の指示に合わせる
+5. Visibilityは自分だけで練習するならPrivate、成果を公開するならPublicを選ぶ
 6. `Create repository`を押す
 
-### B. 招待・Fork方式
+### B. Fork方式
 
-1. 講師から届いたGitHub招待を承認する
-2. 案内されたRepositoryを開く
-3. `Fork`を押す
-4. Ownerが自分のGitHubアカウントになっていることを確認する
-5. `Create fork`を押す
+1. 公開Repositoryを開く
+2. `Fork`を押す
+3. Ownerが自分のGitHubアカウントになっていることを確認する
+4. `Create fork`を押す
 
 以降は、必ず自分のRepositoryで作業します。元教材のRepositoryへ直接Pushしません。
 
@@ -121,7 +115,7 @@ Codespaces右下に通知が出たら`Open in Browser`を押します。通知�
 
 | Error・症状 | 主な原因 | 安全な戻り方 |
 |---|---|---|
-| `Repository not found` / 404 | GitHub未Login、招待未承認 | github.com右上のAccountと招待メールを確認 |
+| `Repository not found` / 404 | GitHub URLの入力違い、通信Error | `https://github.com/rmiura34/tutorial-course`を直接開く。読むだけならLogin不要 |
 | `command not found: npm` | Codespace準備中、別Terminal | CodespaceのSetup完了を待ち、VS Code内Terminalで`node -v`と`npm -v` |
 | `EADDRINUSE` / Address already in use | 同じPortで前のAppが起動中 | 起動中Terminalで`Control + C`。不明ならCodespaceをStopして再開 |
 | `Branch already exists` | 同じDayを開始済み | `git branch --show-current`を確認し、正しいBranchなら作り直さない |

@@ -5,11 +5,11 @@ import { StartChecklist } from "../components/StartChecklist";
 
 export const metadata: Metadata = {
   title: "START HERE — 受講開始ガイド",
-  description: "招待画面からGitHub、Codespaces、2つのApplication起動、Day 01開始までを画面ラベル付きで案内。",
+  description: "公開教材を開き、GitHub、Codespaces、2つのApplication起動、Day 01開始までを画面ラベル付きで案内。",
 };
 
 const accountRows = [
-  { name: "教材サイト", timing: "最初から", need: "動画・資料・Quizを見る", note: "招待メールと同じChatGPT AccountでContinue with ChatGPTを選ぶ" },
+  { name: "教材サイト", timing: "Login不要", need: "動画・資料・Quizを見る", note: "URLを知っている人は誰でも閲覧できます。ChatGPT Accountも不要です" },
   { name: "GitHub", timing: "Day 01から必須", need: "Repository・Codespaces・Branch・PR", note: "ChatGPTとは別Account。github.comで無料Accountを作成できる" },
   { name: "Codex / ChatGPT", timing: "Day 01からCoachとして利用", need: "調査・計画・実装・Review支援", note: "正式なツール比較はDay 05。GitHub Repositoryは別途開く" },
   { name: "Cursor / Claude Code", timing: "Day 04・05・14以降", need: "Agent比較・Skills・Hooks", note: "講師が指定したAccount・Plan・Data利用範囲を確認する" },
@@ -39,10 +39,10 @@ const commands = [
 ];
 
 const errors = [
-  ["You’re almost in / 権限がありません", "教材サイトの招待Accountと違う", "いったん戻り、招待メールと同じChatGPT AccountでContinue with ChatGPT。招待がなければ講師へメールアドレスだけ伝える。"],
-  ["Repository not found / 404", "GitHubへ未Login、またはRepository招待未承認", "github.comの右上Avatarを確認し、招待メールのView invitationを開く。"],
-  ["Use this templateが見つからない", "講師RepositoryがTemplate設定ではない、または画面幅で隠れている", "緑のUse this templateがなければForkを勝手に選ばず、講師指定URLを確認する。"],
-  ["Codespace creation failed", "権限・利用枠・一時的なBuild失敗", "GitHubのError詳細を保存し、一度だけRetry。繰り返す場合はError全文を講師へ送る。"],
+  ["教材サイトが開かない", "URLの入力違い、通信、Browser cache", "公開URLをもう一度開き、再読み込みします。Login画面は不要です。別Browserでも開かない場合はURLと時刻を講師へ送ります。"],
+  ["Repository not found / 404", "GitHub URLの入力違い、または一時的な通信Error", "https://github.com/rmiura34/tutorial-course を直接開きます。読むだけならGitHub Loginは不要です。"],
+  ["Use this templateが見つからない", "別Repositoryを開いている、または画面幅で隠れている", "公開RepositoryのURLを確認します。それでも表示されなければ右上のForkで自分用Repositoryを作ります。"],
+  ["Codespace creation failed", "GitHub Account、利用枠、一時的なBuild失敗", "GitHubのError詳細を保存し、一度だけRetryします。繰り返す場合はError全文を講師またはGitHub Supportへ送ります。"],
   ["command not found: npm", "CodespaceのSetup中、または通常Terminal以外で実行", "Codespaceの作成完了を待ち、VS Code内のTerminalでnode -vとnpm -vを確認する。"],
   ["EADDRINUSE / Address already in use", "同じPortで前のApplicationが動いている", "別Terminalを探してControl + C。見つからなければCodespaceをStopして再開する。"],
   ["Branch already exists", "同じDayを一度開始済み", "git branch --show-currentを確認。正しい課題Branchなら作り直さず、そのまま続ける。"],
@@ -59,11 +59,11 @@ export default function StartPage() {
       </header>
 
       <section className="access-gate-note">
-        <strong>いま英語の「You’re almost in」が表示されている人へ</strong>
+        <strong>この教材は、誰でも無料で閲覧できます</strong>
         <p>
-          それは教材の前にある招待確認画面です。<b>Continue with ChatGPT</b>を選び、
-          招待されたChatGPT Accountで入ります。その後、このページで<b>別にGitHubへLogin</b>します。
-          ChatGPT AccountだけではRepositoryを編集できません。
+          教材を見るだけならLoginも招待も不要です。実際に演習する人だけ、
+          自分のRepositoryとCodespacesを作るために<b>GitHub Account</b>を用意します。
+          Codexを使う場合のChatGPT Accountも、GitHubとは別です。
         </p>
       </section>
 
@@ -84,7 +84,7 @@ export default function StartPage() {
         <div className="start-route-card" aria-label="受講開始の順番">
           <span>LEARNER ROUTE</span>
           <ol>
-            <li><i>1</i><strong>教材へ入る</strong><small>ChatGPT招待</small></li>
+            <li><i>1</i><strong>教材を見る</strong><small>PUBLIC LINK</small></li>
             <li><i>2</i><strong>自分のRepo</strong><small>GitHub</small></li>
             <li><i>3</i><strong>作業画面</strong><small>Codespaces</small></li>
             <li><i>4</i><strong>2つを起動</strong><small>3000 / 8000</small></li>
@@ -96,8 +96,8 @@ export default function StartPage() {
       <section className="start-section" id="before-you-start">
         <div className="section-heading">
           <p className="eyebrow">BEFORE YOU START</p>
-          <h2>必要なのは2つのLoginと、1つの招待。</h2>
-          <p>「どのAccountで、何をするか」を先に分けます。GitHub Accountがなければ無料作成後、このページへ戻ります。</p>
+          <h2>閲覧はLogin不要。演習にはGitHub。</h2>
+          <p>まず教材を自由に見てください。手を動かす段階でGitHub Accountを作り、AI支援を使う場合だけ各AI ServiceへLoginします。</p>
         </div>
         <div className="account-grid">
           {accountRows.map((account) => (
@@ -105,7 +105,7 @@ export default function StartPage() {
           ))}
         </div>
         <div className="decision-grid">
-          <article><strong>教材の招待がない</strong><p>講師へ、ChatGPTで使うメールアドレスを伝えます。Passwordや認証Codeは送りません。</p></article>
+          <article><strong>まず内容だけ見たい</strong><p>準備は不要です。Roadmap、動画、資料、Quiz、用語集をそのまま閲覧できます。</p></article>
           <article><strong>GitHub Accountがない</strong><p><a href="https://github.com/signup" target="_blank" rel="noreferrer">GitHub Sign up ↗</a>で作成し、メール認証まで完了します。</p></article>
           <article><strong>PCへのInstallが不安</strong><p>問題ありません。推奨RouteはBrowserで動くCodespacesです。VS Code・PHP・Nodeを個別Installしません。</p></article>
         </div>

@@ -73,11 +73,13 @@ test("renders the learner onboarding route with accounts and exact startup comma
   assert.match(html, /PORT 3000/);
   assert.match(html, /PORT 8000/);
   assert.match(html, /Codex用Promptをコピー/);
-  assert.match(html, /You’re almost in/);
+  assert.match(html, /誰でも無料で閲覧できます/);
+  assert.match(html, /閲覧はLogin不要。演習にはGitHub。/);
   assert.match(html, /Create codespace on main/);
   assert.match(html, /command not found: npm/);
   assert.match(html, /Day 01からCoachとして利用/);
   assert.doesNotMatch(html, /Day 05以降/);
+  assert.doesNotMatch(html, /招待されたChatGPT Account/);
 });
 
 test("renders a searchable plain-Japanese glossary", async () => {

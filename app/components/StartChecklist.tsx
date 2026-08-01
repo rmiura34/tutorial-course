@@ -10,7 +10,7 @@ const kickoffPrompt = `COACHモードで進めてください。
 その後、learning-log/day-01/plan.mdに実行Taskをチェックリストで作成し、最初の1項目だけ説明して待ってください。`;
 
 const checks = [
-  "教材サイトの閲覧権限を確認した",
+  "公開教材サイトを開いた（Login不要）",
   "GitHubへログインし、自分のRepositoryを作った",
   "Codespaceの初回Setupが完了した",
   "Port 3000で教材サイトを開いた",
