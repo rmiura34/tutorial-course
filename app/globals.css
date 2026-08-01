@@ -469,91 +469,6 @@ a {
   max-width: 1380px;
 }
 
-.progress-summary {
-  align-items: center;
-  border-bottom: 1.5px solid var(--line);
-  border-top: 1.5px solid var(--line);
-  display: grid;
-  gap: 24px;
-  grid-template-columns: auto 1fr auto;
-  padding: 18px 0;
-}
-
-.progress-summary > div:first-child {
-  align-items: baseline;
-  display: flex;
-  gap: 12px;
-}
-
-.progress-label,
-.progress-percent {
-  color: var(--muted);
-  font-family: var(--font-mono), monospace;
-  font-size: 9px;
-  letter-spacing: 0.1em;
-}
-
-.progress-summary strong {
-  font-family: var(--font-mono), monospace;
-  font-size: 14px;
-}
-
-.progress-track {
-  background: #dcd9cf;
-  height: 5px;
-}
-
-.progress-track span {
-  background: var(--ink);
-  display: block;
-  height: 100%;
-  transition: width 300ms ease;
-}
-
-.progress-storage-note {
-  background: var(--white);
-  border: 1.5px solid var(--line);
-  margin: 20px 0 24px;
-  padding: 18px 20px;
-}
-
-.progress-storage-note > strong {
-  font-size: 14px;
-}
-
-.progress-storage-note ul {
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.7;
-  margin: 10px 0 14px;
-  padding-left: 1.25rem;
-}
-
-.progress-reset {
-  background: transparent;
-  border: 1px solid currentColor;
-  cursor: pointer;
-  font: inherit;
-  font-size: 11px;
-  font-weight: 800;
-  padding: 8px 14px;
-}
-
-.progress-reset:disabled {
-  cursor: not-allowed;
-  opacity: 0.45;
-}
-
-.progress-reset:focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
-}
-
-.progress-storage-status {
-  font-size: 11px;
-  margin: 12px 0 0;
-}
-
 .lesson-grid {
   display: grid;
   grid-auto-rows: 1fr;
@@ -606,7 +521,7 @@ a {
   align-items: center;
   display: grid;
   gap: 8px;
-  grid-template-columns: max-content minmax(0, 1fr) max-content;
+  grid-template-columns: max-content minmax(0, 1fr);
   margin-bottom: 22px;
   min-width: 0;
 }
@@ -630,31 +545,6 @@ a {
   overflow-wrap: anywhere;
   padding: 4px 7px;
   text-align: center;
-}
-
-.complete-toggle {
-  background: rgba(255,255,255,0.5);
-  border: 1.5px solid var(--ink);
-  border-radius: 50%;
-  cursor: pointer;
-  flex: 0 0 auto;
-  height: 44px;
-  justify-self: end;
-  margin: 0;
-  padding: 0;
-  width: 44px;
-}
-
-.complete-toggle:focus-visible {
-  box-shadow: 0 0 0 3px var(--white);
-  outline: 3px solid var(--ink);
-  outline-offset: 2px;
-}
-
-.complete-toggle.is-complete {
-  background: var(--ink);
-  color: var(--lime);
-  font-size: 12px;
 }
 
 .lesson-card h3 {
@@ -1517,7 +1407,7 @@ footer > a {
 .task-commands {
   display: grid;
   gap: 12px;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   margin: 24px 0;
 }
 
@@ -2065,20 +1955,6 @@ footer > a {
     gap: 25px;
   }
 
-  .progress-summary {
-    gap: 10px;
-    grid-template-columns: auto 1fr;
-  }
-
-  .progress-track {
-    grid-column: 1 / -1;
-    grid-row: 2;
-  }
-
-  .progress-percent {
-    text-align: right;
-  }
-
   .lesson-grid {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -2528,6 +2404,42 @@ footer > a {
   color: #aab5ae;
 }
 
+.command-anatomy {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 36px auto 0;
+  max-width: 1120px;
+}
+
+.command-anatomy > div {
+  background: #202923;
+  border: 1px solid #435047;
+  min-width: 0;
+  padding: 18px;
+}
+
+.command-anatomy code {
+  color: var(--lime);
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  overflow-wrap: anywhere;
+}
+
+.command-anatomy strong {
+  display: block;
+  font-size: 11px;
+}
+
+.command-anatomy p {
+  color: #aab5ae;
+  font-size: 10px;
+  line-height: 1.7;
+  margin: 7px 0 0;
+}
+
 .command-lessons {
   list-style: none;
   margin: 45px auto 0;
@@ -2538,14 +2450,23 @@ footer > a {
 .command-lessons > li {
   border-top: 1px solid #48524c;
   display: grid;
-  gap: 14px 24px;
-  grid-template-columns: 45px 1fr 1fr;
-  padding: 28px 0;
+  gap: 16px 22px;
+  grid-template-columns: 58px minmax(0, 1fr);
+  padding: 34px 0;
 }
 
 .command-lessons > li > span {
+  align-items: center;
+  border: 1px solid #647168;
+  border-radius: 50%;
   color: var(--lime);
+  display: flex;
   font-family: var(--font-mono), monospace;
+  font-size: 14px;
+  font-weight: 700;
+  height: 44px;
+  justify-content: center;
+  width: 44px;
 }
 
 .command-code {
@@ -2554,7 +2475,7 @@ footer > a {
   border: 1px solid #435047;
   display: flex;
   gap: 16px;
-  grid-column: 2 / -1;
+  grid-column: 2;
   justify-content: space-between;
   min-width: 0;
   padding: 12px 14px;
@@ -2577,10 +2498,14 @@ footer > a {
 }
 
 .command-lessons p {
+  background: #202923;
+  border: 1px solid #435047;
   color: #c5cec8;
-  font-size: 11px;
+  font-size: 13px;
+  grid-column: 2;
   line-height: 1.8;
   margin: 0;
+  padding: 16px 18px;
 }
 
 .command-lessons p b {
@@ -2590,8 +2515,7 @@ footer > a {
 }
 
 .expected-output {
-  border-left: 3px solid var(--green);
-  padding-left: 13px;
+  border-left: 5px solid var(--green) !important;
 }
 
 .troubleshooting {
@@ -2983,6 +2907,14 @@ footer > a {
   margin-bottom: 7px;
 }
 
+.task-command-explanation {
+  color: #aeb9b2;
+  font-size: 11px;
+  line-height: 1.7;
+  margin: 0 0 10px;
+  max-width: 760px;
+}
+
 .task-success-note {
   background: #26332b;
   border: 1px solid #526259;
@@ -3366,6 +3298,7 @@ footer > a {
 .glossary-next strong { display: block; margin-top: 6px; }
 
 @media (max-width: 1000px) {
+  .command-anatomy { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .click-guide > article { grid-template-columns: 1fr; }
   .click-guide > article:nth-child(even) .mock-window { order: 0; }
   .decision-grid { grid-template-columns: 1fr; }
@@ -3373,6 +3306,7 @@ footer > a {
 }
 
 @media (max-width: 720px) {
+  .command-anatomy { grid-template-columns: 1fr; }
   .start-header-label { display: none; }
   .start-hero h1 { font-size: clamp(40px, 10.8vw, 48px); }
   .access-gate-note { grid-template-columns: 1fr; }
@@ -3381,7 +3315,7 @@ footer > a {
   .click-guide > article { gap: 24px; }
   .mock-window { min-height: 250px; }
   .mock-menu { right: 14px; width: 230px; }
-  .command-lessons > li { grid-template-columns: 32px 1fr; }
+  .command-lessons > li { gap: 12px; grid-template-columns: 46px minmax(0, 1fr); }
   .command-code { grid-column: 2; }
   .command-lessons p { grid-column: 2; }
   .error-table > div,

@@ -1,157 +1,147 @@
 # START HERE — 受講開始ガイド
 
-このファイルは受講者が最初に読む唯一の入口です。上から順番に進めてください。
+このファイルは受講者が最初に読む入口です。実際に演習する人は、上から順番に進めてください。
 
-## 0. 教材は誰でも閲覧できます
+## 0. 教材を見るだけならLoginもInstallも不要
 
-教材サイトとGitHub Repositoryは公開されています。見るだけなら、ChatGPT AccountもGitHub Accountも招待も不要です。
+教材サイトとGitHub Repositoryは公開されています。閲覧だけならGitHub Account、ChatGPT Account、招待は不要です。
 
-実際に演習する場合だけ、自分のRepositoryとCodespacesを作るためのGitHub Accountを用意します。Codexを使う場合のChatGPT AccountはGitHubとは別です。Password、認証Code、Tokenは誰にも伝えません。
+実際にCodeを書いて演習する場合は、次のものを使います。
 
-## 1. 何にログインするのか
+| 必要なもの | 用途 |
+|---|---|
+| GitHub Account | 自分用Repository、Branch、Commit、Pull Request |
+| VS CodeまたはCursor | PC上でFolder、File、Terminalを扱うEditor。どちらか1つでよい |
+| Node.js LTSとnpm | 教材のCommandとWeb Applicationを実行。npmはNode.jsと一緒に入る |
+| Git | GitHubからcloneし、変更履歴とBranchを管理 |
+| Codex / ChatGPT（任意） | 調査・計画・ReviewのCoach。GitHubとは別Account |
 
-教材サイト、GitHub、Codexは別のサービスです。教材を見るだけならLogin不要ですが、演習やAI支援にはそれぞれのAccountを使います。
+知らない言葉は[初心者用語集](./docs/GLOSSARY.md)で確認できます。暗記は不要です。
 
-| サービス | 必要になる時期 | 用途 |
-|---|---|---|
-| 教材サイト | Login不要 | 動画、公式資料、クイズ、Taskの確認 |
-| GitHub | Day 1から必須 | 自分のRepository、Codespaces、Branch、Commit、PR |
-| Codex / ChatGPT | Day 1からCoachとして利用 | Repositoryを読み、計画、実装、Reviewを支援。正式な比較学習はDay 5 |
-| Cursor / Claude Code | 該当Day | Agent比較、Skills、Hooksの演習 |
+## 1. EditorをInstallする
 
-- 教材サイトとGitHub Repositoryは、URLを知っていれば誰でも閲覧できます。
-- GitHubへLoginしても、Codexの利用権限が自動で付与されるわけではありません。
-- 教材が開かない場合は公開URLを再確認し、別Browserでも開かない場合だけ講師へURLと時刻を伝えてください。
+ブラウザ版VS Codeではなく、PCへApplicationとしてInstallしたEditorを推奨します。VS CodeとCursorは同じ役割なので、両方は不要です。
 
-知らない言葉は[docs/GLOSSARY.md](./docs/GLOSSARY.md)で確認できます。暗記する必要はありません。
+- 初めてなら[VS Code公式Download](https://code.visualstudio.com/download)
+- AI統合Editorを使いたいなら[Cursor公式Download](https://cursor.com/download)
 
-## 2. 推奨環境
+会社や学校のPCでInstall権限がない場合だけ、後述のCodespacesを代替として使います。
 
-初心者はGitHub Codespacesを使います。PHP、Node.js、Composer、SQLite、VS Code設定を自動で揃えられるためです。
+## 2. Node.js LTS・npm・GitをInstallする
 
-必要なもの:
+### Node.jsとnpm
 
-- GitHubアカウント
-- Chrome、Edge、Safariなどのブラウザ
-- 安定したインターネット接続
-- 公開されている教材RepositoryのURL
+[Node.js公式Download](https://nodejs.org/en/download)で`LTS`と書かれた版を選びます。npmはNode.jsと一緒にInstallされるため、非公式Siteからnpm単体をDownloadしません。公式説明は[Node.jsとnpmのInstallガイド](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm/)です。
 
-ローカルPCで進める場合は、Git、Node.js 22以上、npm、PHP 8.4以上、Composer 2、SQLiteが必要です。
+macOS初心者は公式の`.pkg` Installer、Windows初心者は公式の`.msi` Installerを使います。
 
-## 3. 自分のRepositoryを作る
+Homebrewをすでに使っているmacOS利用者は、次でもInstallできます。
 
-`Use this template`が表示される場合はTemplate方式を使います。表示されない場合はFork方式を使います。
+```bash
+brew install node
+```
 
-### A. Template方式
+Homebrewを知らない場合は、この教材のために新規導入せず公式Installerを選びます。公式Siteは[brew.sh](https://brew.sh/)です。
 
-1. GitHubで教材Repositoryを開く
+Windowsでwingetを使える場合はPowerShellで次を実行できます。
+
+```powershell
+winget install OpenJS.NodeJS.LTS
+```
+
+winget自体が分からない場合はNode.js公式Installerを使います。詳細は[Microsoft公式winget手順](https://learn.microsoft.com/windows/package-manager/winget/install)を参照してください。
+
+### Git
+
+まず`git --version`を実行し、見つからなければ[Git公式Download](https://git-scm.com/downloads)からInstallします。
+
+Install後はVS CodeまたはCursorを完全に閉じ、開き直してから新しいTerminalで確認します。
+
+```bash
+node -v
+npm -v
+git --version
+```
+
+3行ともVersion番号が表示されれば成功です。
+
+## 3. 自分用Repositoryを作る
+
+1. [元の教材Repository](https://github.com/rmiura34/tutorial-course)を開く
 2. `Use this template`を押す
 3. `Create a new repository`を選ぶ
-4. Repository名を`tutorial-course-自分の名前`にする
-5. Visibilityは自分だけで練習するならPrivate、成果を公開するならPublicを選ぶ
-6. `Create repository`を押す
+4. Ownerが自分のGitHub名になっていることを確認する
+5. Repository名を`tutorial-course`にして作成する
 
-### B. Fork方式
+以降は自分のRepositoryで作業し、元教材へ直接Pushしません。Templateボタンが利用できない場合はForkを使います。
 
-1. 公開Repositoryを開く
-2. `Fork`を押す
-3. Ownerが自分のGitHubアカウントになっていることを確認する
-4. `Create fork`を押す
+## 4. PCへcloneしてEditorで開く
 
-以降は、必ず自分のRepositoryで作業します。元教材のRepositoryへ直接Pushしません。
+1. 自分のRepositoryで`Code` → `Local` → `HTTPS`を選びURLをコピーする
+2. macOSはTerminal、WindowsはPowerShellを開く
+3. Repositoryを保存したいFolderで次を実行する
 
-## 4. Codespacesを起動する
+```bash
+git clone https://github.com/YOUR_GITHUB_NAME/tutorial-course.git
+cd tutorial-course
+```
 
-1. 自分のRepositoryで緑色の`Code`ボタンを押す
-2. `Codespaces`タブを選ぶ
-3. `Create codespace on main`を押す
-4. VS Codeの画面が開くまで待つ
-5. 左に`EXPLORER`、中央にEditor、下にTerminalが表示されることを確認する
+`YOUR_GITHUB_NAME`はそのまま入力せず、自分のRepositoryからコピーしたURLを使います。
 
-初回は依存関係のDownloadに数分かかる場合があります。途中でブラウザを閉じないでください。
+続いてVS CodeまたはCursorで`File` → `Open Folder`を選び、cloneした`tutorial-course` Folderを開きます。
 
-## 5. 初回準備と2つのアプリを起動する
+- 左のExplorer最上部に`tutorial-course`が表示される
+- `app`、`course`、`package.json`が見える
+- `Terminal` → `New Terminal`でTerminalを開ける
+- `pwd`の結果が`tutorial-course` Folderを指す
 
-VS Code上部のメニューから`Terminal` → `New Terminal`を選び、次を実行します。
+以上を確認してください。ExplorerはCodeとFileを見る場所、Browserは起動したApplication画面を見る場所です。
+
+## 5. 初回準備と2つのApplicationを起動する
+
+Laravel Labまで起動する場合はPHP 8.4以上とComposer 2も必要です。初心者のmacOS／Windowsでは[Laravel Herd公式](https://herd.laravel.com/)を使うとまとめて導入できます。Install後に`php -v`と`composer --version`を確認します。
+
+EditorのTerminalで次を上から順番に実行します。
 
 ```bash
 npm run learner:setup
-```
-
-- `npm`: Repositoryに登録された処理を呼び出す道具
-- `run`: `package.json`に定義された名前付き処理を実行
-- `learner:setup`: 受講環境の依存関係とLabを準備する処理名
-- 成功の見た目: 最後に`Learner setup completed`が表示され、赤いErrorが残らない
-
-続けて次を実行します。
-
-```bash
 npm run learner:start
 ```
 
-- このCommandは教材サイトとLaravel Labを同時に起動します。
-- 起動中はこのTerminalを閉じません。
-- 停止するときはTerminalを選び、`Control + C`を1回押します。
+- `learner:setup`: 依存Package、Database、学習Taskを初回準備する。最後に`Learner workspace is ready`なら成功
+- `learner:start`: 教材サイトとLaravel Labを同時に起動する。起動中はTerminalを閉じない
+- 停止: 起動中のTerminalで`Control + C`
 
-起動するもの:
+PCのBrowserのAddress barへ次のURLを入力します。VS Code内のFile名ではなく、Browserで見る画面です。
 
-- 教材サイト: Port `3000`
-- Laravel Training Lab: Port `8000`
+- `http://localhost:3000` — Tutorial Course。説明、20日間のCourse、Quizを見る
+- `http://localhost:8000` — Company Import Lab。Laravelの練習Applicationを操作する
 
-Codespaces右下に通知が出たら`Open in Browser`を押します。通知を閉じた場合は、VS Code下部の`PORTS`タブを開き、Port 3000または8000の地球アイコンを押します。
+## 6. Day 01のTaskを読む・開始する
 
-## 6. 正常起動を確認する
-
-次の6項目を確認します。
-
-- [ ] Port 3000でTutorial Courseが表示される
-- [ ] Port 8000でCompany Import Labが表示される
-- [ ] Company Import Monitorに3社表示される
-- [ ] `Run demo import`を押すと会社が追加される
-- [ ] `npm run lab:test`が成功する
-- [ ] `git status -sb`で予期しない変更が出ていない
-
-## 7. よくあるErrorと安全な戻り方
-
-| Error・症状 | 主な原因 | 安全な戻り方 |
-|---|---|---|
-| `Repository not found` / 404 | GitHub URLの入力違い、通信Error | `https://github.com/rmiura34/tutorial-course`を直接開く。読むだけならLogin不要 |
-| `command not found: npm` | Codespace準備中、別Terminal | CodespaceのSetup完了を待ち、VS Code内Terminalで`node -v`と`npm -v` |
-| `EADDRINUSE` / Address already in use | 同じPortで前のAppが起動中 | 起動中Terminalで`Control + C`。不明ならCodespaceをStopして再開 |
-| `Branch already exists` | 同じDayを開始済み | `git branch --show-current`を確認し、正しいBranchなら作り直さない |
-| `Working tree is not clean` | 未Commit変更がある | `git status -sb`で対象を確認し、勝手に削除せずCommitまたは講師へ相談 |
-
-講師へ送る前に次を実行します。
-
-```bash
-pwd
-node -v
-npm -v
-git status -sb
-```
-
-`pwd`は現在のFolder、`-v`はVersion、`status -sb`は短い形式でBranchと変更を表示します。Error全文、実行Command、止まったStepと一緒に送ります。Secretや`.env`の中身は送りません。
-
-## 8. Day 01のTaskを開始する
-
-Taskを表示します。
+まず内容だけを表示します。
 
 ```bash
 npm run course -- show 1
 ```
 
-`show 1`はDay 01のTaskを読むだけで、Fileを変更しません。
+このCommandは`Day 01のTaskを見せて`という意味です。BranchやFileを変更しないため、何度実行しても構いません。
 
-作業Branchと学習Logを作ります。
+- `npm`: Node.jsと一緒に入る実行Tool
+- `run`: `package.json`に登録された処理を呼ぶ
+- `course`: この教材のTask runner
+- `--`: ここから後ろをcourseへ渡す区切り
+- `show 1`: Day 01を読む
+
+内容を理解したら1回だけ開始します。
 
 ```bash
 npm run course -- start 1
 ```
 
-このコマンドは未Commit変更がある場合には停止します。既存の作業を勝手に失わないためです。
-成功するとBranchは`training/day-01-environment`になります。この後で`git switch -c`をもう一度実行しません。
+`start 1`は安全確認後に`training/day-01-environment` Branchへ移動し、`learning-log/day-01/plan.md`を作ります。未Commit変更があると停止し、既存の作業を勝手に失いません。
 
-## 9. Codexへ最初に渡す指示
+## 7. Codexへ最初に渡す指示
 
 CodexでこのRepositoryを開き、次を貼り付けます。
 
@@ -163,27 +153,27 @@ COACHモードで進めてください。
 その後、learning-log/day-01/plan.mdに実行Taskをチェックリストで作成し、最初の1項目だけ説明して待ってください。
 ```
 
-Codexは`AGENTS.md`を自動的に読みますが、最初の演習では読み込んだファイルと理解した条件を言葉で確認します。
+## 8. よくあるErrorと戻り方
 
-## 10. 毎日の提出Flow
+| Error・症状 | 原因 | 戻り方 |
+|---|---|---|
+| `command not found: node / npm` | Node.js未Install、またはEditorを再起動していない | Node.js LTSをInstallしEditorを完全に開き直す |
+| `command not found: git` | Git未Install | Git公式SiteからInstallしEditorを開き直す |
+| `Repository not found / 404` | clone URLのOwnerや綴りが違う | 自分のRepositoryの`Code` → `Local` → `HTTPS`から再コピー |
+| `package.json not found` | Terminalの現在地が違う | `pwd`を確認し`tutorial-course`へ`cd`する |
+| `Working tree is not clean` | 未Commit変更がある | `git status -sb`を確認。削除やresetをせずCommitまたは講師へ相談 |
+| `EADDRINUSE` | 同じPortですでにApplicationが起動中 | 前のTerminalで`Control + C`を押してから再実行 |
 
-```text
-Taskを読む
-  → Branchを作る
-  → 計画を作る
-  → 調査の根拠を残す
-  → 小さく実装する
-  → Testする
-  → Diffを全行読む
-  → Commitする
-  → Pushする
-  → Pull Requestを作る
-```
-
-現在のTask確認:
+相談するときは、Error全文、OS、実行したCommand、次の結果を共有します。ただし`.env`、Token、Password、認証Codeは共有しません。
 
 ```bash
-npm run course -- check 1
+pwd
+node -v
+npm -v
+git --version
+git status -sb
 ```
 
-Day番号は受講日に合わせて変更してください。
+## 9. CodespacesはInstallできない場合の代替
+
+会社・学校の制限などでPCへApplicationをInstallできない場合のみ、自分のRepositoryで`Code` → `Codespaces` → `Create codespace on main`を使えます。この場合はBrowser版VS Codeと`PORTS` Tabを使いますが、通常の推奨RouteはローカルのVS CodeまたはCursorです。

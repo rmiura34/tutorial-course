@@ -18,12 +18,12 @@ type SupportSeed = {
 
 const supportByDay: Record<number, SupportSeed> = {
   1: {
-    why: "CLIは文字でPCへ命令する方法、VS Codeはファイルを見て編集する開発用アプリです。AIに正しく調査を頼むには、自分でも『いまどのRepositoryの、どの場所を見ているか』を確認できる必要があります。ここが曖昧だと別Projectを編集したり、存在しない設定を信じたりします。",
-    before: ["START HEREの完了チェックが5つともON", "用語集で『CLI』『Terminal』『VS Code』『Repository』『Path』を検索し、意味を一度読んだ", "GitHubへログインし、自分のtutorial-course Repositoryの Code ボタンが見える", "CodespacesでBrowser版VS Codeを開ける（ローカル受講ならVS CodeでRepository Folderを開ける）"],
+    why: "VS CodeやCursorは、いま開いているFolderを基準にExplorerとTerminalを動かします。tutorial-courseではなくtraining-labだけを開くと、教材Commandや学習Logを見つけられません。AIへ調査を頼む前に、人がRepositoryのroot、現在地、Branchを確認できることが安全な開発の出発点です。",
+    before: ["tutorial-course RepositoryをローカルPCへcloneまたはダウンロード済み", "VS CodeまたはCursorを起動できる", "用語集で『CLI』『Terminal』『VS Code』『Repository』『Path』を一度読んだ", "node -vとnpm -vでVersion番号が表示される。command not foundならStart Guide（/start）の環境準備へ戻る"],
     terms: [["CLI", "Command Line Interface。Buttonではなく文字のCommandでPCを操作する方法"], ["Terminal", "CLI Commandを入力し、結果やErrorを読むための画面"], ["VS Code", "Explorer・Editor・Terminalを一画面で使える開発用アプリ"], ["Repository", "Code、教材、変更履歴をまとめたProjectの保管場所"], ["Path", "ファイルやFolderの場所を表す住所。/から始まる絶対Pathと現在地基準の相対Pathがある"]],
-    results: ["pwdの結果がRepositoryの場所を指す", "主要ファイルを5つ以上、役割と根拠付きで記録できる", "調査だけを行い、git statusに意図しない変更がない"],
-    mistake: ["pwdが想定外の場所を表示する", "Terminalで別フォルダを開いている", "Explorerでtutorial-courseを右クリックし「Open in Integrated Terminal」を選ぶ"],
-    example: "package.json — 教材サイトの起動CommandとJavaScript依存関係を定義している。確認: scripts欄。",
+    results: ["Explorer最上部がtutorial-courseで、直下にpackage.jsonとtraining-labが見える", "show 1の前後でBranchとFileが変わらず、課題・目的・予定Branch・Promptが表示される", "start 1の後にtraining/day-01-environmentとlearning-log/day-01を確認できる", "主要Fileを5つ以上、役割と根拠Path付きで記録できる"],
+    mistake: ["Explorerにtraining-labしか見えない、またはpwdの末尾がtutorial-courseではない", "Repository全体ではなく子Folder、または広すぎる親Folderを開いている", "File → Open Folderへ戻り、package.jsonとtraining-labの両方を含むtutorial-course Folderを選び直す"],
+    example: "package.json — tutorial-course直下にあり、教材サイトのCommandとJavaScript依存関係を定義している。確認: scripts欄。",
   },
   2: {
     why: "Gitは失敗を消す道具ではなく、変更を小さく記録して安全に比較・復元する道具です。AIの変更も、Commit前の差分を読めれば自分で止められます。",

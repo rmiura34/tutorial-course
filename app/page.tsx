@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ProgressTracker } from "./components/ProgressTracker";
+import { LessonRoadmap } from "./components/ProgressTracker";
 import { lessons, weekSummaries } from "./data/lessons";
 
 export default function Home() {
@@ -188,7 +188,7 @@ export default function Home() {
             </article>
           ))}
         </div>
-        <ProgressTracker lessons={lessons} />
+        <LessonRoadmap lessons={lessons} />
       </section>
 
       <footer>

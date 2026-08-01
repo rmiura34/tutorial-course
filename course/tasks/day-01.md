@@ -11,18 +11,18 @@ duration_minutes: 180
 
 ## Goal
 
-既存リポジトリを変更せずに調査し、repository-map.mdへ構造と根拠をまとめられる
+tutorial-course直下を自分で確認し、既存Codeを変えずにRepositoryの構造と根拠をrepository-map.mdへまとめられる
 
 ## Why this matters
 
-CLIは文字でPCへ命令する方法、VS Codeはファイルを見て編集する開発用アプリです。AIに正しく調査を頼むには、自分でも『いまどのRepositoryの、どの場所を見ているか』を確認できる必要があります。ここが曖昧だと別Projectを編集したり、存在しない設定を信じたりします。
+VS CodeやCursorは、いま開いているFolderを基準にExplorerとTerminalを動かします。tutorial-courseではなくtraining-labだけを開くと、教材Commandや学習Logを見つけられません。AIへ調査を頼む前に、人がRepositoryのroot、現在地、Branchを確認できることが安全な開発の出発点です。
 
 ## Before you start
 
-- [ ] START HEREの完了チェックが5つともON
-- [ ] 用語集で『CLI』『Terminal』『VS Code』『Repository』『Path』を検索し、意味を一度読んだ
-- [ ] GitHubへログインし、自分のtutorial-course Repositoryの Code ボタンが見える
-- [ ] CodespacesでBrowser版VS Codeを開ける（ローカル受講ならVS CodeでRepository Folderを開ける）
+- [ ] tutorial-course RepositoryをローカルPCへcloneまたはダウンロード済み
+- [ ] VS CodeまたはCursorを起動できる
+- [ ] 用語集で『CLI』『Terminal』『VS Code』『Repository』『Path』を一度読んだ
+- [ ] node -vとnpm -vでVersion番号が表示される。command not foundならStart Guide（/start）の環境準備へ戻る
 
 ## 先に調べる用語
 
@@ -46,64 +46,80 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-01.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–0:20 用語と画面を確認:** 用語集でCLI・Terminal・VS Code・Repository・Pathを調べ、GitHubとVS Codeの役割を区別する
-- **0:20–0:40 Codespacesを開く:** GitHubのRepositoryページで Code → Codespaces → Create codespace on main を選び、Browser版VS Codeが開くまで待つ
-- **0:40–1:00 任意の操作デモ:** 画面操作が不安な人だけVS Code公式動画を見る。操作できる人は演習へ進む
-- **1:00–2:25 Terminal演習:** Repository rootで指定Commandを1ブロックずつ実行し、表示結果とExplorer上のファイルを照合する
-- **2:25–3:00 成果物と完了確認:** learning-log/day-01/repository-map.mdを作成し、git diffとgit statusで意図しない変更がないことを確認する
+- **0:00–0:20 用語を確認:** CLI・Terminal・Editor・Repository・Pathの意味を用語集で読む
+- **0:20–0:45 Projectを開く:** File → Open Folderでtutorial-courseを選び、Explorerの一番上を確認する
+- **0:45–1:05 環境を確認:** Terminalを開き、現在地とNode・npmのVersionを確認する
+- **1:05–1:35 Taskを開始:** show 1で内容を読み、安全確認後にstart 1を実行する
+- **1:35–2:35 Repositoryを調査:** Explorerと読み取り専用Commandで主要FolderとFileを照合する
+- **2:35–3:00 成果物を確認:** repository-map.mdを作り、差分とBranchを確認する
 
 ## Learning resources
 
 ### 必修
 
-- **GitHub Codespacesのクイックスタート**（日本語・8分）— GitHubからBrowser版VS Codeを開く手順です。『Codespaceを作成する』までを必ず確認します。 [開く](https://docs.github.com/ja/codespaces/quickstart)
+このDayに事前の必修資料はありません。Taskから開始してください。
 
 ### 任意・困ったときだけ
 
-- **VS Code入門動画（任意・英語）**（英語・必要な章だけ・約20分）— Explorer、検索、統合Terminalの場所が分からない場合だけ視聴します。動画を見なくても演習は完了できます。 [必要なときだけ開く](https://code.visualstudio.com/docs/getstarted/introvideos)
-- **VS Code: Getting Started（英語・補助）**（英語・必要時10分）— Explorer、編集、保存の場所が分からないときだけ参照します。日本語公式版がないため英語です。 [必要なときだけ開く](https://code.visualstudio.com/docs/getstarted/getting-started)
-- **VS Code: Terminal入門（英語・補助）**（英語・必要時8分）— 統合Terminalの開き方が分からないときだけ参照します。日本語公式版がないため英語です。 [必要なときだけ開く](https://code.visualstudio.com/docs/terminal/getting-started)
+- **Visual Studio Codeを7分で学ぶ（任意）**（日本語・必要なら7分）— File → Open Folder、Explorer、Editorの位置が分からない場合だけ見ます。動画なしでも演習できます。 [必要なときだけ開く](https://learn.microsoft.com/ja-jp/shows/visual-studio-code/learn-visual-studio-code-in-7min-official-beginner-tutorial)
+- **VS Code: フォルダーを開く入門（英語・補助）**（英語・必要時10分）— File → Open FolderとExplorerの見方を画像付きで確認できます。画面で迷った時だけ参照します。 [必要なときだけ開く](https://code.visualstudio.com/docs/editing/getting-started)
+- **Cursor: インストール（英語・補助）**（英語・必要時5分）— Cursorを選ぶ人向けの導入資料です。すでにVS Codeを使える場合は読む必要がありません。 [必要なときだけ開く](https://docs.cursor.com/get-started/installation)
+- **VS Code: Terminal入門（英語・補助）**（英語・必要時8分）— 統合Terminalの開き方が分からない場合だけ参照します。 [必要なときだけ開く](https://code.visualstudio.com/docs/terminal/getting-started)
 
 ## Objectives
 
-- [ ] CLI・Terminal・VS Code・Repositoryの違いを説明する
-- [ ] GitHubからCodespacesを開き、ExplorerとTerminalを行き来する
-- [ ] 絶対パスと相対パスを説明する
-- [ ] .envと依存関係を秘密情報を開示せず確認する
+- [ ] CLI・Terminal・Editor・Repositoryの違いを説明する
+- [ ] VS CodeまたはCursorで正しいProject Folderを開く
+- [ ] ExplorerでRepository直下と主要Fileを見つける
+- [ ] show 1とstart 1の違いを説明する
+- [ ] Pathと秘密情報を安全に確認する
 
 ## Tasks
 
-1. **GitHubで教材を開く** — GitHubのtutorial-course Repositoryを開き、緑色の Code ボタン → Codespaces タブ → Create codespace on main をクリックします。すでに自分のTemplate Repositoryを作成済みなら、そのRepositoryからCodespaceを開きます。
+1. **tutorial-course Folderを開く** — VS CodeまたはCursorで File → Open Folder を選び、ダウンロードまたはclone済みのtutorial-course Folderを選びます。training-labだけや、その一つ上のDocuments全体は選びません。成功: Window上部またはExplorer最上部にtutorial-courseが表示されます。
 
-2. **VS Codeの3か所を見つける** — 左のExplorerはファイル一覧、中央のEditorはファイル内容、下のTerminalは文字でCommandを実行する場所です。メニュー Terminal → New Terminal を選び、入力欄の末尾にカーソルがあることを確認します。
+2. **ExplorerでRepository直下を確認する** — 左端のExplorerアイコンを押し、tutorial-course左の山形を開きます。直下にpackage.json、app、course、learning-log、training-labが並べば正しいrootです。training-labしか見えない場合は File → Open Folder へ戻り、その親のtutorial-courseを開き直します。
 
-3. **Taskと作業Branchを準備する** — Terminalで次の2行を上から1行ずつ実行します。showは課題を表示するだけ、startはtraining/day-01-environment Branchとlearning-log/day-01を準備します。
-
-```text
-npm run course -- show 1
-npm run course -- start 1
-```
-
-4. **現在地とBranchを確認する** — pwdの末尾がtutorial-course、git branch --show-currentがtraining/day-01-environmentになっていることを確認します。違う場合は先へ進まず、Terminalを開き直します。
+3. **TerminalとNode・npmを確認する** — Terminal → New Terminalを選び、3行を1行ずつ実行します。pwdの末尾がtutorial-courseで、nodeとnpmのVersion番号が表示されれば成功です。command not foundになったら先へ進まず、Start Guide（/start）の環境準備へ戻ります。
 
 ```text
 pwd
-git branch --show-current
-git status -sb
+node -v
+npm -v
 ```
 
-5. **Repositoryを読み取り専用で探索する** — lsは直下、findは深さ2までのファイルを表示します。表示が多くてもErrorではありません。$記号は入力しません。ここではファイルを削除・移動・編集しません。
+4. **show 1でTaskを読む** — show 1は読み取り専用です。FileやBranchを変更せず、Day 01の課題、目的、予定Branch、AIへ渡すPromptをTerminalへ表示します。成功: DAY 01、Goal、training/day-01-environment、Promptを確認できます。
+
+```text
+npm run course -- show 1
+```
+
+5. **安全を確認してstart 1を実行する** — 最初にgit status -sbを読み、残したい未Commit変更がないことを確認します。その後start 1を実行します。startは学習Branchとlearning-log/day-01を準備し、危険な未Commit変更があれば停止します。
+
+```text
+git status -sb
+npm run course -- start 1
+```
+
+6. **Branchと学習Logを確認する** — 成功: Branch名がtraining/day-01-environmentになり、Explorerでlearning-log/day-01 Folderを展開できます。別のBranchなら作業を止め、startのErrorを読み直します。
+
+```text
+git branch --show-current
+ls -la learning-log/day-01
+```
+
+7. **Repositoryを読み取り専用で探索する** — lsで直下、findで深さ2までを表示します。Explorerのpackage.json、training-lab、app、course、testsと照合します。ここでは削除・移動・編集をしません。
 
 ```text
 ls -la
 find . -maxdepth 2 -type f | sort
 ```
 
-6. **技術スタックの根拠を開く** — Explorerからpackage.json、training-lab/composer.json、.env.example、app、course/tasks、testsを順に開きます。.env.exampleは変数名だけ確認し、値・Token・Passwordを学習ログへ貼りません。
+8. **主要Fileを開いて役割を確認する** — Explorerでpackage.json、training-lab/composer.json、.env.exampleを一つずつ開きます。package.jsonは教材側、training-labはLaravel側です。.env.exampleは変数名だけ見て、TokenやPasswordを記録しません。
 
-7. **AIへ調査だけを依頼する** — 下のPractice PromptをCodexへ貼り、変更禁止・根拠Path必須・不明は未確認という条件を守らせます。返答にあるPathをExplorerで実際に開き、存在しないPathは採用しません。
+9. **AIへ読み取り専用の調査を頼む** — 下のAIへの依頼文を使います。返答に出たPathはExplorerで実在を確認し、見つからないものは『未確認』として残します。AIの説明だけで成果物を確定しません。
 
-8. **Repository地図を作って検証する** — learning-log/templates/repository-map.mdをlearning-log/day-01/repository-map.mdへコピーし、learning-log/examples/day-01-repository-map.example.mdを完成見本として記入します。最後にgit diffで内容を読み、git status -sbでこの成果物以外の意図しない変更がないことを確認します。
+10. **Repository地図を作って検証する** — Templateをday-01へコピーして記入します。成功: repository-map.mdだけが意図した差分として表示され、主要Fileを5つ以上、根拠Path付きで説明できています。
 
 ```text
 cp learning-log/templates/repository-map.md learning-log/day-01/repository-map.md
@@ -126,15 +142,16 @@ git status -sb
 
 ## Success looks like this
 
-- [ ] pwdの結果がRepositoryの場所を指す
-- [ ] 主要ファイルを5つ以上、役割と根拠付きで記録できる
-- [ ] 調査だけを行い、git statusに意図しない変更がない
+- [ ] Explorer最上部がtutorial-courseで、直下にpackage.jsonとtraining-labが見える
+- [ ] show 1の前後でBranchとFileが変わらず、課題・目的・予定Branch・Promptが表示される
+- [ ] start 1の後にtraining/day-01-environmentとlearning-log/day-01を確認できる
+- [ ] 主要Fileを5つ以上、役割と根拠Path付きで記録できる
 
 ## If you get stuck
 
 | 見えている症状 | よくある原因 | 安全な戻り方 |
 |---|---|---|
-| pwdが想定外の場所を表示する | Terminalで別フォルダを開いている | Explorerでtutorial-courseを右クリックし「Open in Integrated Terminal」を選ぶ |
+| Explorerにtraining-labしか見えない、またはpwdの末尾がtutorial-courseではない | Repository全体ではなく子Folder、または広すぎる親Folderを開いている | File → Open Folderへ戻り、package.jsonとtraining-labの両方を含むtutorial-course Folderを選び直す |
 | 途中で現在地やBranchが分からなくなった | 複数のTerminalやTaskを同時に進めた | 作業を止め、pwdとgit status -sbを実行。対象DayのTaskを読み直してから1手だけ進める |
 
 ## How to write the submission
@@ -142,7 +159,7 @@ git status -sb
 ### 事実と根拠
 
 - 含めるもの: 何を確認し、どのファイル・Command・画面を根拠にしたか
-- 記入例: package.json — 教材サイトの起動CommandとJavaScript依存関係を定義している。確認: scripts欄。
+- 記入例: package.json — tutorial-course直下にあり、教材サイトのCommandとJavaScript依存関係を定義している。確認: scripts欄。
 
 ### 検証と振り返り
 
@@ -151,7 +168,9 @@ git status -sb
 
 ## Done when
 
-- [ ] GitHub・VS Code・Terminalの役割を自分の言葉で説明できる
+- [ ] VS CodeまたはCursorでtutorial-course Folderを開いている
+- [ ] Explorer直下にpackage.jsonとtraining-labが見える
+- [ ] show 1が読み取り専用、start 1がBranchと学習Logの準備だと説明できる
 - [ ] 現在地とBranchが指定どおりである
 - [ ] 主要ディレクトリを5つ以上説明した
 - [ ] すべての説明に根拠Pathがある

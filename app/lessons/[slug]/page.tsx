@@ -118,8 +118,8 @@ export default async function LessonPage({ params }: LessonPageProps) {
               <div><span>今日のTask file</span><code>{`course/tasks/day-${lesson.number}.md`}</code></div>
             </div>
             <div className="task-commands">
-              <div><span>① Task内容をTerminalに表示</span><pre><code>{`npm run course -- show ${lesson.day}`}</code></pre><CopyCommand command={`npm run course -- show ${lesson.day}`} /></div>
-              <div><span>② Branchと学習Logを作成</span><pre><code>{`npm run course -- start ${lesson.day}`}</code></pre><CopyCommand command={`npm run course -- start ${lesson.day}`} /></div>
+              <div><span>① Task内容をTerminalに表示</span><p className="task-command-explanation">読むだけの安全なCommandです。今日のGoal、Task file、予定Branch、AI用Promptを表示し、FileやBranchは変更しません。</p><pre><code>{`npm run course -- show ${lesson.day}`}</code></pre><CopyCommand command={`npm run course -- show ${lesson.day}`} /></div>
+              <div><span>② Branchと学習Logを作成</span><p className="task-command-explanation">内容を理解してから実行します。未保存の変更がないか確認し、今日のBranchとlearning-logを準備します。</p><pre><code>{`npm run course -- start ${lesson.day}`}</code></pre><CopyCommand command={`npm run course -- start ${lesson.day}`} /></div>
             </div>
             <p className="task-success-note"><strong>✓ 成功時の見え方：</strong> TerminalにDay {lesson.number}のGoalと完了条件が表示され、現在のBranchが <code>{lesson.branch}</code> になります。</p>
             <blockquote>

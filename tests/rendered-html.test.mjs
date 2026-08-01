@@ -39,9 +39,10 @@ test("renders the course homepage as a direct 20-day learning route", async () =
   const lessonCards = html.match(/class="lesson-card lesson-[^"]+"/g) ?? [];
   assert.equal(lessonCards.length, 20, "the homepage should render all 20 Day cards");
 
-  assert.match(html, /(この端末|このブラウザ|ブラウザ内)[\s\S]{0,80}(保存|記録)/);
-  assert.match(html, /別の端末や別のブラウザには同期されません/);
-  assert.match(html, /アカウントへの保存も行いません/);
+  assert.doesNotMatch(html, /YOUR PROGRESS/);
+  assert.doesNotMatch(html, /進捗をリセット/);
+  assert.doesNotMatch(html, /tutorial-course-progress/);
+  assert.doesNotMatch(html, /完了にする|未完了にする/);
 
   assert.doesNotMatch(html, /START BEFORE DAY 01/);
   assert.doesNotMatch(html, /THE FINISH LINE/);
@@ -90,22 +91,30 @@ test("renders the learner onboarding route with accounts and exact startup comma
   assert.equal(response.status, 200);
 
   const html = await response.text();
-  assert.match(html, /入口は、ここ一つ。/);
+  assert.match(html, /自分のPCを/);
   assert.match(html, /BEFORE YOU START/);
   assert.match(html, /GitHub/);
   assert.match(html, /Codex \/ ChatGPT/);
+  assert.match(html, /VS Code または Cursor/);
+  assert.match(html, /https:\/\/code\.visualstudio\.com\/download/);
+  assert.match(html, /https:\/\/cursor\.com\/download/);
+  assert.match(html, /https:\/\/nodejs\.org\/en\/download/);
+  assert.match(html, /Node\.jsをInstallすると一緒にInstallされます/);
+  assert.match(html, /brew install node/);
+  assert.match(html, /winget install OpenJS\.NodeJS\.LTS/);
+  assert.match(html, /File → Open Folder/);
+  assert.match(html, /git clone/);
   assert.match(html, /npm run learner:start/);
+  assert.match(html, /npm run course -- show 1/);
   assert.match(html, /npm run course -- start 1/);
-  assert.match(html, /PORT 3000/);
-  assert.match(html, /PORT 8000/);
-  assert.match(html, /Codex用Promptをコピー/);
-  assert.match(html, /誰でも無料で閲覧できます/);
-  assert.match(html, /閲覧はLogin不要。演習にはGitHub。/);
+  assert.match(html, /http:\/\/localhost:3000/);
+  assert.match(html, /http:\/\/localhost:8000/);
+  assert.match(html, /Laravel Herd/);
+  assert.match(html, /LoginもInstallも不要/);
   assert.match(html, /Create codespace on main/);
-  assert.match(html, /command not found: npm/);
-  assert.match(html, /Day 01からCoachとして利用/);
-  assert.doesNotMatch(html, /Day 05以降/);
-  assert.doesNotMatch(html, /招待されたChatGPT Account/);
+  assert.match(html, /command not found: node \/ npm/);
+  assert.match(html, /代替手段で、推奨Routeではありません/);
+  assert.doesNotMatch(html, /推奨環境はCodespaces|Browser版VS Codeを推奨/);
 });
 
 test("renders a searchable plain-Japanese glossary", async () => {

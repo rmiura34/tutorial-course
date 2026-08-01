@@ -22,6 +22,25 @@ function available(command) {
   return spawnSync(command, ["--version"], { stdio: "ignore" }).status === 0;
 }
 
+// This repository tracks package-lock.json at the root, so always use npm
+// here. The Laravel lab has its own pnpm-lock.yaml and may use pnpm below.
+run(npm, ["ci"], root);
+
+const missingLabTools = ["php", "composer"].filter((command) => !available(command));
+if (missingLabTools.length > 0) {
+  console.error(`
+Laravel Labの準備に必要なToolが見つかりません: ${missingLabTools.join(", ")}
+
+Day 01のTaskは次のCommandで先に確認できます:
+  npm run course -- show 1
+
+Port 8000のLaravel Labも使う場合は、受講準備ページの案内に沿って
+PHP 8.4以上とComposer 2をInstallしてから、もう一度実行してください:
+  https://herd.laravel.com/
+`);
+  process.exit(1);
+}
+
 try {
   await readFile(resolve(lab, ".env"), "utf8");
 } catch {
@@ -36,7 +55,9 @@ run("composer", ["install", "--no-interaction"], lab);
 const labPackageManager = available(pnpm) ? pnpm : npm;
 run(
   labPackageManager,
-  ["install", "--ignore-scripts"],
+  labPackageManager === pnpm
+    ? ["install", "--ignore-scripts", "--frozen-lockfile"]
+    : ["install", "--ignore-scripts", "--package-lock=false"],
   lab,
   labPackageManager === pnpm ? { CI: "true" } : {},
 );
