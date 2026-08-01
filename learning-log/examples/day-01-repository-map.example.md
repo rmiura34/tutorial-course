@@ -8,7 +8,7 @@
 
 ## 2. このRepositoryは何をするものか
 
-初心者が20日間でCLI、Git、Web、Laravel、Scraping、AI Agentを学ぶ教材です。Port 3000の教材サイトとPort 8000の練習用Laravel Appを同時に起動します。
+初心者が20日間でCLI、Git、Web、Laravel、Scraping、AI Agentを学ぶ教材です。受講者は公開教材をブラウザで読み、クローンしたRepositoryをVS CodeまたはCursorで操作します。
 
 ## 3. 主要File・Directory
 
@@ -24,9 +24,9 @@
 
 | 目的 | Command | 実行結果 |
 |---|---|---|
-| 教材とLabを起動 | `npm run learner:start` | Port 3000 / 8000を確認 |
+| Day 1の課題を表示 | `npm run course -- show 1` | Goal、Branch、Task fileを確認 |
+| Day 1のBranchと学習Logを準備 | `npm run course -- start 1` | `training/day-01-environment`と`learning-log/day-01`を確認 |
 | 教材を検査 | `npm test` | PASS |
-| Labを検査 | `npm run lab:test` | PASS |
 
 ## 5. AIの説明を照合した結果
 

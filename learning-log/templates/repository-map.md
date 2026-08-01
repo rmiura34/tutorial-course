@@ -26,9 +26,9 @@
 
 | 目的 | Command | 実行結果 |
 |---|---|---|
-| 教材とLabを起動 | `npm run learner:start` |  |
+| Day 1の課題を表示 | `npm run course -- show 1` |  |
+| Day 1のBranchと学習Logを準備 | `npm run course -- start 1` |  |
 | 教材を検査 | `npm test` |  |
-| Labを検査 | `npm run lab:test` |  |
 
 ## 5. AIの説明を照合した結果
 

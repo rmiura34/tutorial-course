@@ -7,6 +7,8 @@ import { LessonStepChecklist } from "../../components/LessonStepChecklist";
 import { getLesson, lessons } from "../../data/lessons";
 import taskIndex from "../../../course/tasks/index.json";
 import dayOneTaskMarkdown from "../../../course/tasks/day-01.md?raw";
+import dayOneRepositoryMapTemplate from "../../../learning-log/templates/repository-map.md?raw";
+import dayOneRepositoryMapExample from "../../../learning-log/examples/day-01-repository-map.example.md?raw";
 
 type LessonPageProps = {
   params: Promise<{ slug: string }>;
@@ -219,18 +221,19 @@ export default async function LessonPage({ params }: LessonPageProps) {
             </blockquote>
           </section>
 
-          <LessonStepChecklist
-            branch={lesson.branch}
-            lessonSlug={lesson.slug}
-            steps={lesson.steps}
-          />
-
           {lesson.day === 1 && (
             <section className="day-one-task-source" aria-labelledby="day-one-task-source-heading">
               <div className="task-source-heading">
-                <span className="lesson-section-kicker">ACTUAL TASK FILE · 省略なし</span>
-                <h2 id="day-one-task-source-heading"><code>show 1</code>の出力と、元のMarkdown全文</h2>
-                <p>Terminal出力はTaskの要約です。実際の全手順は同じRepository内の <code>course/tasks/day-01.md</code> にあります。</p>
+                <span className="lesson-section-kicker">FILES IN YOUR CLONE · 省略なし</span>
+                <h2 id="day-one-task-source-heading">クローンしたRepositoryのMarkdownを、そのまま確認する</h2>
+                <p>下は説明用に書き直した文章ではありません。Repositoryに入っている実ファイルをBuild時に直接読み込み、全文を表示しています。</p>
+              </div>
+
+              <div className="clone-file-inventory" aria-label="Day 01のMarkdownファイル状態">
+                <article><span className="file-state exists">最初から存在</span><code>course/tasks/day-01.md</code><p>Day 1の正式な課題原本。下に全文を表示します。</p></article>
+                <article><span className="file-state generated">start 1で生成済み</span><code>learning-log/day-01/TASK.md</code><p>正式な課題原本をDay 1の作業場所へコピーしたものです。</p></article>
+                <article><span className="file-state generated">start 1で生成済み</span><code>learning-log/day-01/plan.md</code><p>受講者がチェック項目・根拠・AI判断を記録する作業計画です。</p></article>
+                <article><span className="file-state pending">まだ未作成</span><code>learning-log/day-01/repository-map.md</code><p>下のTemplateをコピーし、自分の調査結果を記入して完成させます。</p></article>
               </div>
 
               <article className="show-output-card">
@@ -241,13 +244,37 @@ export default async function LessonPage({ params }: LessonPageProps) {
               <article className="markdown-source-card">
                 <div>
                   <span>VS Code · Explorer</span>
-                  <strong>course/tasks/day-01.md</strong>
+                  <strong>正式な課題原本 · course/tasks/day-01.md</strong>
                   <p>Explorerで <code>course</code> → <code>tasks</code> → <code>day-01.md</code> の順に開くと、下と同じ内容を編集画面で確認できます。</p>
                 </div>
                 <pre><code>{dayOneTaskMarkdown}</code></pre>
               </article>
+
+              <article className="markdown-source-card">
+                <div>
+                  <span>これからコピーする提出Template</span>
+                  <strong>learning-log/templates/repository-map.md</strong>
+                  <p><code>cp learning-log/templates/repository-map.md learning-log/day-01/repository-map.md</code> を実行すると、右側のPathにこの内容がコピーされます。</p>
+                </div>
+                <pre><code>{dayOneRepositoryMapTemplate}</code></pre>
+              </article>
+
+              <article className="markdown-source-card">
+                <div>
+                  <span>完成形の参考 · 丸写し禁止</span>
+                  <strong>learning-log/examples/day-01-repository-map.example.md</strong>
+                  <p>書き方だけを確認する短い例です。Pathや実行結果は、自分のTerminalで確認した内容へ置き換えます。</p>
+                </div>
+                <pre><code>{dayOneRepositoryMapExample}</code></pre>
+              </article>
             </section>
           )}
+
+          <LessonStepChecklist
+            branch={lesson.branch}
+            lessonSlug={lesson.slug}
+            steps={lesson.steps}
+          />
 
           <section className="beginner-context">
             <div className="beginner-before">

@@ -3063,6 +3063,48 @@ footer > a {
 .task-source-heading p { color: var(--muted); font-size: 11px; line-height: 1.8; margin: 0; max-width: 760px; }
 .task-source-heading code { background: #e1e4dd; font-size: 0.92em; padding: 2px 5px; }
 
+.clone-file-inventory {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 24px;
+}
+
+.clone-file-inventory article {
+  background: var(--white);
+  border: 1px solid #c5cac5;
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 16px 18px;
+}
+
+.clone-file-inventory code {
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+  overflow-wrap: anywhere;
+}
+
+.clone-file-inventory p {
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.file-state {
+  border: 1px solid currentColor;
+  font-family: var(--font-mono), monospace;
+  font-size: 7px;
+  justify-self: start;
+  letter-spacing: 0.08em;
+  padding: 3px 6px;
+}
+
+.file-state.exists { color: #24613d; }
+.file-state.generated { color: #315c80; }
+.file-state.pending { color: #8a4b26; }
+
 .show-output-card,
 .markdown-source-card {
   border: 1.5px solid var(--line);
@@ -3102,6 +3144,10 @@ footer > a {
 .markdown-source-card pre { max-height: 720px; }
 .show-output-card code,
 .markdown-source-card pre code { font-family: var(--font-mono), monospace; font-size: 10px; }
+
+@media (max-width: 720px) {
+  .clone-file-inventory { grid-template-columns: 1fr; }
+}
 
 .context-caption,
 .lesson-terms > div > p {

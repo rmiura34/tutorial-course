@@ -67,8 +67,13 @@ test("renders a complete lesson page with resources, practice, and quizzes", asy
   assert.match(html, /実際に作業する画面/);
   assert.match(html, /今日は開かないもの/);
   assert.match(html, /course\/tasks\/day-01\.md/);
-  assert.match(html, /元のMarkdown全文/);
-  assert.match(html, /ACTUAL TASK FILE/);
+  assert.match(html, /クローンしたRepositoryのMarkdownを、そのまま確認する/);
+  assert.match(html, /FILES IN YOUR CLONE/);
+  assert.match(html, /learning-log\/day-01\/TASK\.md/);
+  assert.match(html, /learning-log\/day-01\/plan\.md/);
+  assert.match(html, /learning-log\/templates\/repository-map\.md/);
+  assert.match(html, /day-01-repository-map\.example\.md/);
+  assert.match(html, /まだ未作成/);
   assert.match(html, /Required deliverables/);
   assert.match(html, /今日やること/);
   assert.match(html, /今使う画面/);
