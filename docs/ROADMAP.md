@@ -1,43 +1,45 @@
-# プロダクトロードマップ
+# Product Roadmap
 
-## Phase 1: MVP
+## 実装済み
 
-- 全8レッスンのサイト
-- プロフィールカード演習
-- Codespaces
-- クイズ
-- 進捗表示
-- Pull Requestテンプレート
-- CI
+- 20日・60時間のCourse Site
+- 必要なDayだけに出す任意動画
+- 日本語優先の公式資料、読む順番、目的、目安時間、必須／任意表示
+- 180分の時間割
+- 作業場所・Command・理由・成功状態付きHands-on、Prompt、各日10問Quiz、提出物、完了条件
+- Browser内の進捗保存
+- Codespaces / Dev Container
+- Issue / Pull Request Template
+- GitHub ActionsによるLint、Build、表示Test
+- PHP 8.4 / Laravel 13 / SQLiteの演習Application
+- Demo Import、Seed Data、Feature Test、最終課題用の既知Bug
+- HTML Fixtureを使うPython Scraper演習
+- `START-HERE.md`、受講準備Page、20日分の生成Task
+- Branch作成とCodex Promptを案内するCourse CLI
+- Claude Code Skills / Hooks / Subagent starter
+- Codex Skill / Plugin / Marketplace starter
+- 調査、Refactoring、AI利用、MCP権限監査Template
 
-成功基準:
+## 次の改善候補
 
-- 10分以内に最初のHTMLを表示できる
-- 80%以上がLesson 01を個別サポートなしで完了する
-- 70%以上が最初のPull Requestを作れる
+### 自動採点
 
-## Phase 2: 採点エンジン
+- DayごとのTest workflow
+- HTML / PHP / Python / Playwrightの課題別Check
+- Branch名、提出File、PR本文の自動確認
+- 結果を初心者向け日本語で説明
 
-- HTML構文・アクセシビリティチェック
-- 課題ごとのテスト
-- GitHub Actionsの結果を初心者向け日本語で表示
-- レッスン完了に応じた次課題の案内
+### 演習Applicationの拡張
 
-## Phase 3: 言語トラック
+- MySQL / PostgreSQL版の任意Profile
+- Playwrightを使うDynamic Scraper課題
+- 課題ごとの初期状態を復元するCommand
+- 複数の難易度を持つIssue Pack
 
-- TypeScript / Vite
-- React
-- PHP
-- APIとデータベース
+### 講師運用
 
-言語ごとに別テンプレートを用意し、初学者向けリポジトリを肥大化させません。
-
-## Phase 4: AIコーディングトラック
-
-- 良い依頼の作り方
-- 実装計画と差分レビュー
-- テストと検証
-- `AGENTS.md`とルール
-- Skills
-- Plugins
-- MCPと権限設計
+- Cohort別の進捗Dashboard
+- 採点Rubric
+- Review SLA
+- 動画の日本語字幕
+- 公式資料Linkの定期確認

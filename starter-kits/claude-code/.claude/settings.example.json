@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(git push --force*)",
+      "Bash(git reset --hard*)",
+      "Read(./.env)",
+      "Read(./storage/oauth-private.key)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test \"${CLAUDE_FILE_PATH##*.}\" != \"php\" || ./vendor/bin/pint --dirty"
+          }
+        ]
+      }
+    ]
+  }
+}
+

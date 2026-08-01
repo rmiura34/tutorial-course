@@ -1,14 +1,33 @@
 {
   "name": "Tutorial Course",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
-  "forwardPorts": [3000],
-  "postCreateCommand": "npm ci",
+  "image": "mcr.microsoft.com/devcontainers/php:1-8.4-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    },
+    "ghcr.io/devcontainers-extra/features/pnpm:2": {
+      "version": "latest"
+    }
+  },
+  "forwardPorts": [3000, 8000],
+  "portsAttributes": {
+    "3000": {
+      "label": "Tutorial Course",
+      "onAutoForward": "openPreview"
+    },
+    "8000": {
+      "label": "Laravel Training Lab",
+      "onAutoForward": "notify"
+    }
+  },
+  "postCreateCommand": "npm ci && npm run learner:setup",
   "customizations": {
     "vscode": {
       "extensions": [
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "ritwickdey.LiveServer"
+        "xdebug.php-debug",
+        "bmewburn.vscode-intelephense-client"
       ],
       "settings": {
         "editor.formatOnSave": true,

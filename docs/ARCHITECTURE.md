@@ -4,24 +4,34 @@
 
 ```text
 コースサイト
-  ├─ レッスン・動画枠・クイズ
-  ├─ ロードマップ・端末内進捗
-  └─ 実装課題への案内
+  ├─ 20 Days / 60 Hours のロードマップ
+  ├─ 条件付き動画・日本語優先の公式資料・各日10問クイズ
+  ├─ AIプロンプト・作業場所・Command・成功状態・完了条件
+  └─ 端末内の進捗
           ↓
 受講者リポジトリ
   ├─ Codespaces / VS Code
-  ├─ lesson/* ブランチ
+  ├─ DayごとのBranch
+  ├─ course/tasks/day-*.md
+  ├─ training-lab / practice
+  ├─ learning-log / starter-kits
   ├─ Pull Request
   └─ GitHub Actions
           ↓
-公開されたプロフィールページ
+調査記録・実装・テスト・ロールバックを説明できる実務PR
 ```
 
 ## 主要ディレクトリ
 
 - `app/`: コースサイト
 - `app/data/lessons.ts`: レッスンの構造化データ
-- `exercises/`: 受講者向けスターターコード
+- `course/tasks/`: Course Dataから生成する20日分の実行Task
+- `scripts/course.mjs`: Task表示、Branch作成、計画File作成
+- `training-lab/`: PHP 8.4 / Laravel 13 / SQLiteの演習Application
+- `practice/python-scraper/`: 外部Siteへ負荷を掛けずに使えるScraper演習
+- `exercises/`: 20日分の演習一覧と受講者向けスターターコード
+- `learning-log/templates/`: 調査・AI利用・権限監査の記録テンプレート
+- `starter-kits/`: Claude Code / Codex Skills / Pluginsの最小構成
 - `.devcontainer/`: Codespaces環境
 - `.github/`: 自動チェックと提出テンプレート
 - `docs/`: 運営・制作ガイド
@@ -33,4 +43,4 @@ MVPではブラウザの`localStorage`に保存します。ログイン不要で
 
 ## コンテンツの単一ソース
 
-現在は`app/data/lessons.ts`がWeb表示の単一ソースです。レッスン数が増えたら、YAMLまたはMDXへ移し、サイト表示と採点設定を同じデータから生成します。
+現在は`app/data/lessons.ts`がWeb表示とTask生成の単一ソースです。20日分の説明、条件付き教材、時間割、実装、提出物、完了条件をWebへ表示し、`npm run course:generate`で`course/tasks/`へ変換します。クイズは`app/data/lesson-quizzes.ts`のDay別10問と統合して表示します。受講者とCodexは同じTask Fileを読むため、画面上の指示と作業計画がずれません。

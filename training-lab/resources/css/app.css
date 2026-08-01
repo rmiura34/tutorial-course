@@ -1,0 +1,176 @@
+@import 'tailwindcss';
+
+:root {
+    color-scheme: dark;
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    background: #0b0f14;
+    color: #f7f8fa;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 10% 0%, rgb(182 255 59 / 10%), transparent 28rem),
+        #0b0f14;
+}
+
+button {
+    border: 0;
+    border-radius: 999px;
+    padding: 0.9rem 1.25rem;
+    background: #b6ff3b;
+    color: #11170a;
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.lab-shell {
+    width: min(1120px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 4rem 0;
+}
+
+.lab-header,
+.lab-panel-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.lab-header h1 {
+    margin: 0.4rem 0;
+    font-size: clamp(2.3rem, 6vw, 4.8rem);
+    letter-spacing: -0.06em;
+}
+
+.lab-header p {
+    max-width: 46rem;
+    color: #aab2be;
+}
+
+.lab-kicker {
+    margin: 0;
+    color: #b6ff3b !important;
+    font-family: ui-monospace, SFMono-Regular, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+}
+
+.lab-notice,
+.lab-hint {
+    margin-top: 2rem;
+    border: 1px solid rgb(182 255 59 / 30%);
+    border-radius: 1rem;
+    padding: 1rem 1.2rem;
+    background: rgb(182 255 59 / 7%);
+}
+
+.lab-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 2.5rem 0 1rem;
+}
+
+.lab-stats article,
+.lab-panel {
+    border: 1px solid #27303b;
+    border-radius: 1rem;
+    background: #111820;
+}
+
+.lab-stats article {
+    padding: 1.2rem;
+}
+
+.lab-stats span {
+    display: block;
+    color: #8290a1;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+}
+
+.lab-stats strong {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 1.8rem;
+}
+
+.lab-panel {
+    padding: 1.4rem;
+}
+
+.lab-panel h2 {
+    margin: 0.3rem 0 0;
+}
+
+.lab-panel code {
+    color: #b6ff3b;
+}
+
+.lab-table-wrap {
+    overflow-x: auto;
+    margin-top: 1.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border-top: 1px solid #27303b;
+    padding: 1rem 0.75rem;
+    text-align: left;
+}
+
+th {
+    color: #8290a1;
+    font-size: 0.75rem;
+}
+
+.lab-status {
+    border-radius: 999px;
+    padding: 0.25rem 0.55rem;
+    background: rgb(94 234 212 / 12%);
+    color: #5eead4;
+    font-size: 0.75rem;
+}
+
+.lab-hint strong {
+    color: #b6ff3b;
+}
+
+.lab-hint p {
+    margin-bottom: 0;
+    color: #aab2be;
+}
+
+@media (max-width: 760px) {
+    .lab-header,
+    .lab-panel-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .lab-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}

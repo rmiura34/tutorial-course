@@ -31,27 +31,29 @@ export async function generateMetadata(): Promise<Metadata> {
       template: "%s | Tutorial Course",
     },
     description:
-      "VS Codeを開くところから、Webページの公開まで。動画・クイズ・実装課題・GitHubレビューで学ぶ初心者向け実践コース。",
+      "CLI・GitからLaravel・Scraping・Skills・Pluginsまで。20日・60時間で未知のIssueを安全なPull Requestへ変えるAI駆動開発研修。",
     metadataBase: new URL(`${protocol}://${host}`),
     openGraph: {
       title: "Tutorial Course — 手を動かして、つくる。",
-      description: "最初のPull RequestとWeb公開まで、全8レッスン。",
+      description:
+        "CLI・GitからLaravel・Scraping・Skills・Pluginsまで。20日・60時間で未知のIssueを安全なPull Requestへ変えるAI駆動開発研修。",
       type: "website",
       locale: "ja_JP",
       images: [
         {
-          url: "/og.png",
+          url: "/og-beginner-course.png",
           width: 1731,
           height: 909,
-          alt: "Tutorial Course — 手を動かして、つくる。",
+          alt: "Tutorial Course — ゼロから、安全なPRまで。20日・60時間の学習ルート",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: "Tutorial Course — 手を動かして、つくる。",
-      description: "最初のPull RequestとWeb公開まで、全8レッスン。",
-      images: ["/og.png"],
+      description:
+        "CLI・GitからLaravel・Scraping・Skills・Pluginsまで。20日・60時間で未知のIssueを安全なPull Requestへ変えるAI駆動開発研修。",
+      images: ["/og-beginner-course.png"],
     },
   };
 }

@@ -22,14 +22,45 @@ jobs:
           node-version: 22
           cache: npm
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: sqlite3
+          coverage: none
+
       - name: Install dependencies
         run: npm ci
 
+      - name: Install Laravel dependencies
+        run: composer install --working-dir=training-lab --no-interaction --prefer-dist
+
+      - name: Prepare Laravel lab
+        run: |
+          cp training-lab/.env.example training-lab/.env
+          touch training-lab/database/database.sqlite
+          php training-lab/artisan key:generate
+          php training-lab/artisan migrate:fresh --seed --force
+
+      - name: Verify generated tasks
+        run: |
+          npm run course:generate
+          git diff --exit-code -- course/tasks
+
       - name: Lint
         run: npm run lint
+
+      - name: Lint Laravel lab
+        run: npm run lab:lint
 
       - name: Build
         run: npm run build
 
       - name: Test rendered course
         run: npm test
+
+      - name: Test Laravel lab
+        run: npm run lab:test
+
+      - name: Test Python scraper practice
+        run: npm run scraper:test
