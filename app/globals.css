@@ -341,30 +341,6 @@ a {
   margin: 4px 0 0;
 }
 
-.floating-note {
-  background: var(--yellow);
-  border: 1.5px solid var(--ink);
-  color: var(--ink);
-  font-family: var(--font-mono), monospace;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 10px 13px;
-  position: absolute;
-}
-
-.note-one {
-  left: -35px;
-  top: 115px;
-  transform: rotate(-5deg);
-}
-
-.note-two {
-  background: var(--pink);
-  bottom: 90px;
-  right: -27px;
-  transform: rotate(4deg);
-}
-
 .loop-section {
   background: var(--ink);
   color: var(--white);
@@ -451,30 +427,6 @@ a {
   max-width: 1380px;
 }
 
-.roadmap-key {
-  display: flex;
-  font-family: var(--font-mono), monospace;
-  font-size: 9px;
-  gap: 18px;
-}
-
-.roadmap-key span {
-  align-items: center;
-  display: flex;
-  gap: 6px;
-}
-
-.key-dot {
-  border-radius: 50%;
-  display: inline-block;
-  height: 8px;
-  width: 8px;
-}
-
-.key-build { background: var(--lime); }
-.key-git { background: var(--lavender); }
-.key-ship { background: var(--green); }
-
 .week-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -558,9 +510,54 @@ a {
   transition: width 300ms ease;
 }
 
+.progress-storage-note {
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  margin: 20px 0 24px;
+  padding: 18px 20px;
+}
+
+.progress-storage-note > strong {
+  font-size: 14px;
+}
+
+.progress-storage-note ul {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+  margin: 10px 0 14px;
+  padding-left: 1.25rem;
+}
+
+.progress-reset {
+  background: transparent;
+  border: 1px solid currentColor;
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 8px 14px;
+}
+
+.progress-reset:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.progress-reset:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.progress-storage-status {
+  font-size: 11px;
+  margin: 12px 0 0;
+}
+
 .lesson-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   list-style: none;
   margin: 28px 0 0;
   padding: 0;
@@ -568,9 +565,12 @@ a {
 
 .lesson-card {
   border: 1.5px solid var(--line);
+  display: flex;
+  flex-direction: column;
   margin: -1px 0 0 -1px;
-  min-height: 285px;
-  padding: 22px;
+  min-height: 500px;
+  min-width: 0;
+  padding: clamp(18px, 2vw, 22px);
   position: relative;
   transition: transform 160ms ease, box-shadow 160ms ease;
 }
@@ -583,8 +583,14 @@ a {
 
 .lesson-card > a {
   display: flex;
+  flex: 1;
   flex-direction: column;
-  height: calc(100% - 36px);
+  min-width: 0;
+}
+
+.lesson-card > a:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 5px;
 }
 
 .lesson-lime { background: color-mix(in srgb, var(--lime) 66%, var(--white)); }
@@ -598,9 +604,11 @@ a {
 
 .lesson-card-top {
   align-items: center;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 27px;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: max-content minmax(0, 1fr) max-content;
+  margin-bottom: 22px;
+  min-width: 0;
 }
 
 .lesson-number {
@@ -614,8 +622,14 @@ a {
   color: var(--white);
   font-family: var(--font-mono), monospace;
   font-size: 8px;
+  justify-self: start;
   letter-spacing: 0.1em;
+  line-height: 1.35;
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
   padding: 4px 7px;
+  text-align: center;
 }
 
 .complete-toggle {
@@ -623,11 +637,18 @@ a {
   border: 1.5px solid var(--ink);
   border-radius: 50%;
   cursor: pointer;
-  height: 22px;
-  margin-left: auto;
-  margin-right: 9px;
+  flex: 0 0 auto;
+  height: 44px;
+  justify-self: end;
+  margin: 0;
   padding: 0;
-  width: 22px;
+  width: 44px;
+}
+
+.complete-toggle:focus-visible {
+  box-shadow: 0 0 0 3px var(--white);
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
 }
 
 .complete-toggle.is-complete {
@@ -640,7 +661,9 @@ a {
   font-size: 20px;
   font-weight: 900;
   letter-spacing: -0.04em;
+  line-height: 1.3;
   margin: 0;
+  overflow-wrap: anywhere;
 }
 
 .lesson-card p {
@@ -651,12 +674,20 @@ a {
 }
 
 .lesson-meta {
+  align-items: flex-start;
   color: #5c665f;
   display: flex;
+  flex-wrap: wrap;
   font-family: var(--font-mono), monospace;
   font-size: 8px;
-  gap: 12px;
+  gap: 6px 12px;
   margin-top: auto;
+  min-width: 0;
+}
+
+.lesson-meta span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .card-link {
@@ -665,99 +696,6 @@ a {
   font-weight: 800;
   margin-top: 16px;
   padding-top: 12px;
-}
-
-.finish-section {
-  align-items: center;
-  background: var(--sky);
-  border-bottom: 1.5px solid var(--line);
-  border-top: 1.5px solid var(--line);
-  display: grid;
-  gap: 70px;
-  grid-template-columns: 1fr 1fr;
-  padding: 90px clamp(24px, 8vw, 130px);
-}
-
-.finish-section h2 {
-  font-size: clamp(38px, 4.3vw, 64px);
-  font-weight: 900;
-  letter-spacing: -0.065em;
-  line-height: 1.15;
-  margin: 0;
-}
-
-.finish-card {
-  background: var(--white);
-  border: 1.5px solid var(--line);
-  box-shadow: 12px 12px 0 var(--ink);
-  min-height: 270px;
-  padding: 24px;
-  position: relative;
-  transform: rotate(-1.5deg);
-}
-
-.finish-badge {
-  background: var(--green);
-  border: 1px solid var(--line);
-  font-family: var(--font-mono), monospace;
-  font-size: 8px;
-  font-weight: 700;
-  padding: 5px 8px;
-}
-
-.finish-url {
-  border-bottom: 1px solid #d7dad5;
-  font-family: var(--font-mono), monospace;
-  font-size: 11px;
-  padding-bottom: 15px;
-}
-
-.finish-preview {
-  align-items: center;
-  display: flex;
-  gap: 22px;
-  margin-top: 28px;
-}
-
-.preview-avatar-large {
-  background: var(--pink);
-  font-size: 11px;
-  height: 72px;
-  width: 72px;
-}
-
-.finish-preview > div {
-  flex: 1;
-}
-
-.finish-line {
-  background: #d9ddd9;
-  display: block;
-  height: 10px;
-  margin: 10px 0;
-  width: 58%;
-}
-
-.finish-line-long {
-  background: var(--ink);
-  height: 15px;
-  width: 82%;
-}
-
-.finish-check {
-  align-items: center;
-  background: var(--lime);
-  border: 1.5px solid var(--line);
-  border-radius: 50%;
-  bottom: -18px;
-  display: flex;
-  font-size: 20px;
-  font-weight: 900;
-  height: 48px;
-  justify-content: center;
-  position: absolute;
-  right: -16px;
-  width: 48px;
 }
 
 footer {
@@ -1558,33 +1496,6 @@ footer > a {
   width: 1px;
 }
 
-.onboarding-band {
-  align-items: center;
-  background: var(--lime);
-  border-bottom: 1.5px solid var(--line);
-  border-top: 1.5px solid var(--line);
-  display: flex;
-  gap: 40px;
-  justify-content: space-between;
-  padding: 52px clamp(20px, 6vw, 96px);
-}
-
-.onboarding-band > div {
-  max-width: 760px;
-}
-
-.onboarding-band h2 {
-  font-size: clamp(28px, 4vw, 52px);
-  letter-spacing: -0.055em;
-  line-height: 1.04;
-  margin: 8px 0 14px;
-}
-
-.onboarding-band p:last-child {
-  margin: 0;
-  max-width: 650px;
-}
-
 .task-launch-panel {
   background: var(--ink);
   color: var(--white);
@@ -2013,6 +1924,12 @@ footer > a {
   margin: 8px 0 0;
 }
 
+@media (max-width: 1250px) {
+  .lesson-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 1000px) {
   .hero {
     grid-template-columns: 1fr;
@@ -2029,7 +1946,7 @@ footer > a {
   }
 
   .lesson-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .week-grid {
@@ -2092,12 +2009,18 @@ footer > a {
     height: 62px;
   }
 
-  .header-nav > a:not(.github-link) {
+  .header-nav > a:not(.header-start),
+  .github-link {
     display: none;
   }
 
-  .github-link {
-    padding: 7px 11px;
+  .header-nav {
+    gap: 0;
+  }
+
+  .header-start {
+    border: 1.5px solid var(--line);
+    padding: 7px 10px;
   }
 
   .hero {
@@ -2126,14 +2049,6 @@ footer > a {
   .hero-workspace {
     box-shadow: 12px 14px 0 var(--sky);
     min-height: 430px;
-  }
-
-  .note-one {
-    left: -12px;
-  }
-
-  .note-two {
-    right: -10px;
   }
 
   .learning-loop {
@@ -2165,7 +2080,7 @@ footer > a {
   }
 
   .lesson-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .week-grid {
@@ -2175,10 +2090,6 @@ footer > a {
   .week-grid article {
     margin-left: 0;
     margin-top: -1px;
-  }
-
-  .finish-section {
-    grid-template-columns: 1fr;
   }
 
   footer {
@@ -2256,7 +2167,6 @@ footer > a {
     text-align: left;
   }
 
-  .onboarding-band,
   .start-next {
     align-items: flex-start;
     flex-direction: column;

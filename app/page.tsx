@@ -11,10 +11,10 @@ export default function Home() {
           <span>Tutorial Course</span>
         </Link>
         <nav className="header-nav" aria-label="メインナビゲーション">
-          <Link href="/start">START HERE</Link>
-          <Link href="/glossary">用語集</Link>
-          <a href="#roadmap">ロードマップ</a>
           <a href="#how-it-works">学び方</a>
+          <a href="#roadmap">20日ロードマップ</a>
+          <Link href="/glossary">用語集</Link>
+          <Link className="header-start" href="/lessons/terminal-environment">Day 01を開始</Link>
           <a
             className="github-link"
             href="https://github.com/rmiura34/tutorial-course"
@@ -30,20 +30,20 @@ export default function Home() {
         <div className="hero-copy">
           <p className="eyebrow">AI-DRIVEN DEVELOPMENT · 20 DAYS / 60 HOURS</p>
           <h1>
-            AIで書くだけで終わらない。
+            Repositoryを開くところから、
             <br />
-            <span>安全なPRまで、やり切る。</span>
+            <span>安全なPull Requestまで。</span>
           </h1>
           <p className="hero-description">
-            CLIとGitから始め、Web・PHP・Laravel・DB・Scrapingを読み、
-            Claude Code・Cursor・CodexのSkills、Hooks、MCP、Pluginsまで実装。
-            最後は未知のIssueを調査・修正・Test・ReviewしてPull Requestへ変えます。
+            GitHubとVS Codeの開き方、Terminalへ入力するCommandから始めます。
+            20日間、各DayのTaskを読み、自分のBranchで実装し、TestとReviewを行い、
+            最後は用意されたLaravelの不具合を直してPull Requestとして提出します。
           </p>
           <div className="hero-actions">
-            <Link className="primary-button" href="/start">
-              受講準備から始める <span aria-hidden="true">→</span>
+            <Link className="primary-button" href="/lessons/terminal-environment">
+              Day 01から始める <span aria-hidden="true">→</span>
             </Link>
-            <Link className="text-link" href="/lessons/terminal-environment">準備済みならDay 01</Link>
+            <a className="text-link" href="#roadmap">20日間の内容を見る</a>
           </div>
           <dl className="hero-stats">
             <div>
@@ -66,7 +66,7 @@ export default function Home() {
             <span className="window-dot dot-coral" />
             <span className="window-dot dot-yellow" />
             <span className="window-dot dot-green" />
-            <span className="workspace-title">request-flow.md</span>
+            <span className="workspace-title">day-01 / repository-map.md</span>
           </div>
           <div className="workspace-body">
             <div className="file-rail" aria-hidden="true">
@@ -78,46 +78,70 @@ export default function Home() {
               <span>06</span>
               <span>07</span>
             </div>
-            <pre aria-label="HTMLコード例">
+            <pre aria-label="Day 01で入力するTerminalコマンド例">
               <code>
-                <span className="code-muted">GET /users</span>
+                <span className="code-muted">$ pwd</span>
                 {"\n"}
-                <span className="code-pink">Route</span>
-                {" → "}
-                <span className="code-yellow">Middleware</span>
+                <span className="code-pink">tutorial-course</span>
                 {"\n"}
-                <span className="code-pink">Controller</span>
-                {" → "}
-                <span className="code-green">Service</span>
+                <span className="code-muted">$ git status -sb</span>
                 {"\n"}
-                <span className="code-pink">Model</span>
-                {" → "}
-                <span className="code-yellow">Database</span>
+                <span className="code-yellow">training/day-01-environment</span>
                 {"\n"}
-                <span className="code-green">Test: PASS ✓</span>
+                <span className="code-green">Task ready ✓</span>
               </code>
             </pre>
           </div>
           <div className="workspace-result">
-            <span className="result-label">PULL REQUEST</span>
+            <span className="result-label">DAY 01 OUTPUT</span>
             <div className="profile-preview">
-              <span className="preview-avatar">PR</span>
+              <span className="preview-avatar">01</span>
               <div>
-                <strong>安全に変更できる</strong>
-                <p>根拠・Test・Rollback付き</p>
+                <strong>Repositoryの地図</strong>
+                <p>主要File・起動方法・Test方法</p>
               </div>
             </div>
           </div>
-          <div className="floating-note note-one">公式Docsで裏取り</div>
-          <div className="floating-note note-two">独立Review ✓</div>
+        </div>
+      </section>
+
+      <section className="roadmap-section" aria-labelledby="course-outcomes-title">
+        <div className="roadmap-header">
+          <div className="section-heading">
+            <p className="eyebrow">WHAT YOU WILL BE ABLE TO DO</p>
+            <h2 id="course-outcomes-title">このコースで、できるようになること。</h2>
+            <p>操作方法だけでなく、実務で安全に変更を届ける一連の流れを身につけます。</p>
+          </div>
+        </div>
+        <div className="week-grid">
+          <article>
+            <span>DEVELOPMENT ENVIRONMENT</span>
+            <h3>GitHubから開発を始める</h3>
+            <p>Codespaces、VS Code、Terminalを使い、現在地・Branch・差分を自分で確認できます。</p>
+          </article>
+          <article>
+            <span>CODE READING</span>
+            <h3>画面からDBまで処理を追う</h3>
+            <p>HTTP、TypeScript、PHP、Laravel、Databaseを実Fileと行番号を根拠に説明できます。</p>
+          </article>
+          <article>
+            <span>IMPLEMENTATION</span>
+            <h3>AIと小さく実装する</h3>
+            <p>Scraper、Test、Skill、Hook、Pluginを自分のBranchで作り、動作を検証できます。</p>
+          </article>
+          <article>
+            <span>DELIVERY</span>
+            <h3>Review可能なPRを提出する</h3>
+            <p>再現、原因、変更、Test、Risk、Rollbackを揃え、第三者が判断できるPRを作れます。</p>
+          </article>
         </div>
       </section>
 
       <section className="loop-section" id="how-it-works">
         <div className="section-heading">
           <p className="eyebrow">HOW IT WORKS</p>
-          <h2>毎回おなじ4ステップ。</h2>
-          <p>AIの回答を鵜呑みにせず、根拠とTestで安全な変更へ変えます。</p>
+          <h2>毎回同じ4ステップ × 20日。</h2>
+          <p>各Dayのページに、Task、Command、成果物、完了条件、クイズがまとまっています。</p>
         </div>
         <ol className="learning-loop">
           <li>
@@ -141,31 +165,18 @@ export default function Home() {
           <li>
             <span className="loop-number">04</span>
             <span className="loop-icon">✓</span>
-            <strong>反証する</strong>
-            <p>別Agentと人間でReviewし、根拠付きPRを提出。</p>
+            <strong>確かめる</strong>
+            <p>完了条件とクイズで理解を確認し、必要なDayではReviewやPR提出まで行う。</p>
           </li>
         </ol>
-      </section>
-
-      <section className="onboarding-band">
-        <div>
-          <p className="eyebrow">START BEFORE DAY 01</p>
-          <h2>GitHub・Codespaces・Codexを、最初に分けて理解する。</h2>
-          <p>Account準備、自分のRepository作成、2つのApplication起動、Task読込までを一つのGuideにしました。</p>
-        </div>
-        <Link className="primary-button" href="/start">START HERE →</Link>
       </section>
 
       <section className="roadmap-section" id="roadmap">
         <div className="roadmap-header">
           <div className="section-heading">
-            <p className="eyebrow">YOUR ROADMAP</p>
-            <h2>実務PRまで、20日・60時間。</h2>
-          </div>
-          <div className="roadmap-key">
-            <span><i className="key-dot key-build" /> FOUNDATION</span>
-            <span><i className="key-dot key-git" /> WEB / AUTOMATION</span>
-            <span><i className="key-dot key-ship" /> CAPSTONE</span>
+            <p className="eyebrow">4 WEEKS / 20 DAYS</p>
+            <h2>4週間の概要と、20日ロードマップ。</h2>
+            <p>Weekの到達点を確認し、下のDayカードから今日のレッスンを開きます。</p>
           </div>
         </div>
         <div className="week-grid">
@@ -180,31 +191,12 @@ export default function Home() {
         <ProgressTracker lessons={lessons} />
       </section>
 
-      <section className="finish-section">
-        <div>
-          <p className="eyebrow">THE FINISH LINE</p>
-          <h2>最後に残るのは、<br />説明できる実務PR。</h2>
-        </div>
-        <div className="finish-card">
-          <span className="finish-badge">READY TO MERGE</span>
-          <p className="finish-url">fix/scraper-pagination-and-duplicates</p>
-          <div className="finish-preview">
-            <span className="preview-avatar preview-avatar-large">YOU</span>
-            <div>
-              <span className="finish-line finish-line-long" />
-              <span className="finish-line" />
-            </div>
-          </div>
-          <span className="finish-check">✓</span>
-        </div>
-      </section>
-
       <footer>
         <Link className="brand footer-brand" href="/">
           <span className="brand-mark">TC</span>
           <span>Tutorial Course</span>
         </Link>
-        <p>Contextを集め、計画し、小さく実装し、別Agentで反証する。</p>
+        <p>Day 01から順に、Taskを読み、手を動かし、完了条件を確認します。</p>
         <a
           href="https://github.com/rmiura34/tutorial-course"
           rel="noreferrer"

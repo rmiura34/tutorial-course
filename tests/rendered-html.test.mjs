@@ -23,17 +23,36 @@ async function render(pathname = "/") {
   );
 }
 
-test("renders the course homepage", async () => {
+test("renders the course homepage as a direct 20-day learning route", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
   assert.match(html, /Tutorial Course/);
-  assert.match(html, /手を動かして、つくる。/);
-  assert.match(html, /実務PRまで、20日・60時間。/);
-  assert.match(html, /受講準備から始める/);
+  assert.match(
+    html,
+    /<a(?=[^>]*class="primary-button")(?=[^>]*href="\/lessons\/terminal-environment")[^>]*>[\s\S]*?Day\s*01から始める[\s\S]*?<\/a>/,
+  );
+  assert.match(html, /毎回同じ4ステップ\s*[×x]\s*20日/);
+
+  const lessonCards = html.match(/class="lesson-card lesson-[^"]+"/g) ?? [];
+  assert.equal(lessonCards.length, 20, "the homepage should render all 20 Day cards");
+
+  assert.match(html, /(この端末|このブラウザ|ブラウザ内)[\s\S]{0,80}(保存|記録)/);
+  assert.match(html, /別の端末や別のブラウザには同期されません/);
+  assert.match(html, /アカウントへの保存も行いません/);
+
+  assert.doesNotMatch(html, /START BEFORE DAY 01/);
+  assert.doesNotMatch(html, /THE FINISH LINE/);
+  assert.doesNotMatch(html, /受講準備から始める/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
+
+  const homepageSource = await readFile(
+    new URL("../app/page.tsx", import.meta.url),
+    "utf8",
+  );
+  assert.doesNotMatch(homepageSource, /START HERE|href="\/start"/);
 });
 
 test("renders a complete lesson page with resources, practice, and quizzes", async () => {
