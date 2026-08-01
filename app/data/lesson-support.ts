@@ -18,9 +18,9 @@ type SupportSeed = {
 
 const supportByDay: Record<number, SupportSeed> = {
   1: {
-    why: "AIに正しく調査を頼むには、まず自分が「いまどのフォルダにいて、どのファイルを見ているか」を確認できる必要があります。ここが曖昧だと、別Projectを編集したり、存在しない設定を信じたりします。",
-    before: ["START HEREの完了チェックが5つともON", "教材サイト（Port 3000）とLab（Port 8000）が開く", "VS CodeのExplorerとTerminalを表示できる"],
-    terms: [["パス", "ファイルやフォルダの住所"], ["ターミナル", "文字でPCへ命令する画面"], ["Repository", "Codeと変更履歴をまとめたProjectフォルダ"]],
+    why: "CLIは文字でPCへ命令する方法、VS Codeはファイルを見て編集する開発用アプリです。AIに正しく調査を頼むには、自分でも『いまどのRepositoryの、どの場所を見ているか』を確認できる必要があります。ここが曖昧だと別Projectを編集したり、存在しない設定を信じたりします。",
+    before: ["START HEREの完了チェックが5つともON", "用語集で『CLI』『Terminal』『VS Code』『Repository』『Path』を検索し、意味を一度読んだ", "GitHubへログインし、自分のtutorial-course Repositoryの Code ボタンが見える", "CodespacesでBrowser版VS Codeを開ける（ローカル受講ならVS CodeでRepository Folderを開ける）"],
+    terms: [["CLI", "Command Line Interface。Buttonではなく文字のCommandでPCを操作する方法"], ["Terminal", "CLI Commandを入力し、結果やErrorを読むための画面"], ["VS Code", "Explorer・Editor・Terminalを一画面で使える開発用アプリ"], ["Repository", "Code、教材、変更履歴をまとめたProjectの保管場所"], ["Path", "ファイルやFolderの場所を表す住所。/から始まる絶対Pathと現在地基準の相対Pathがある"]],
     results: ["pwdの結果がRepositoryの場所を指す", "主要ファイルを5つ以上、役割と根拠付きで記録できる", "調査だけを行い、git statusに意図しない変更がない"],
     mistake: ["pwdが想定外の場所を表示する", "Terminalで別フォルダを開いている", "Explorerでtutorial-courseを右クリックし「Open in Integrated Terminal」を選ぶ"],
     example: "package.json — 教材サイトの起動CommandとJavaScript依存関係を定義している。確認: scripts欄。",
@@ -171,9 +171,9 @@ const supportByDay: Record<number, SupportSeed> = {
   },
   20: {
     why: "最終課題では、Codeを書く速さではなく、未知の問題を安全に調査し、判断と検証を説明できるかを確認します。",
-    before: ["Day 01–19の提出物が揃う", "試験用Branch以外はClean", "禁止事項と採点表を読む"],
+    before: ["Day 01–19の提出物が揃う", "npm run course -- show 20で課題全文を読んだ", "git status -sbがCleanで、試験用Branch exam/final-capstoneへ移動した", "禁止事項・成果物・10項目の完了条件を声に出して確認した"],
     terms: [["Root cause", "症状を生む根本原因"], ["Capstone", "学んだ内容を統合する最終課題"], ["Audit trail", "誰が何を判断・実行したかの記録"]],
-    results: ["再現→原因→計画→実装→Test→PRがつながる", "AI利用と人間の判断が区別される", "第三者がRollbackまで再現できる"],
+    results: ["再現→原因→計画→実装→Test→PRが一つの証拠でつながる", "同じwebsiteの企業が複数ページに出てもDBには1件だけ保存される", "2ページ目まで取得され、companies=3・pages_visited=2・seen=4・saved=3をTestで証明できる", "AI利用と人間の判断が区別され、第三者がRollbackまで再現できる"],
     mistake: ["時間が足りず検証前に提出しそう", "実装範囲を広げすぎた", "非Goalを増やし、再現する最小修正とRegression Testへ絞る"],
     example: "AIは原因候補列挙に使用。採用案は実Fileと失敗Testで確認。残Riskと戻し方も記載。",
   },

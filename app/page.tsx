@@ -124,7 +124,7 @@ export default function Home() {
             <span className="loop-number">01</span>
             <span className="loop-icon">▶</span>
             <strong>学ぶ</strong>
-            <p>指定動画と公式資料を、決められた順番で読む。</p>
+            <p>そのDayに必要な教材だけを確認する。動画や資料が任意なら飛ばしてよい。</p>
           </li>
           <li>
             <span className="loop-number">02</span>

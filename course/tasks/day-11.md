@@ -23,7 +23,7 @@ Scrapingは取得できれば終わりではありません。相手サイトへ
 - [ ] 練習用URLだけを使う
 - [ ] Request回数の上限を決める
 
-## Three words for today
+## 先に調べる用語
 
 - **Scraping:** Webページから必要な情報を規則的に取得する処理
 - **Selector:** HTMLから対象要素を選ぶ指定
@@ -43,10 +43,24 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-11.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–0:30 動画:** Python Web scrapingの実装例を視聴
+- **0:00–0:30 任意動画／安全確認:** PythonまたはScraping未経験者だけ実装例を見る。経験者はrobots.txt・回数上限・Fixtureを確認する
 - **0:30–1:10 公式資料:** Python → Requests → Beautiful Soupの順で読む
 - **1:10–2:35 Scraper実装:** 取得、解析、正規化、CSV、Log
 - **2:35–3:00 失敗試験:** Timeout、404、Selector変更を再現
+
+## Learning resources
+
+### 必修
+
+- **Pythonチュートリアル**（日本語・20分）— Data structure、制御フロー、Function、Module、例外、File I/O。演習で使う章だけ読みます。 [開く](https://docs.python.org/ja/3/tutorial/)
+
+### 任意・困ったときだけ
+
+- **Web scraping videos**（英語・約25分）— RequestsとBeautiful Soupを使う動画を1本選び、取得・解析・保存の責務分離を確認します。 [必要なときだけ開く](https://www.youtube.com/@realpython/search?query=web%20scraping)
+- **Requests Quickstart**（英語・15分）— Request、Response、JSON、Header、Timeout、Error。 [必要なときだけ開く](https://requests.readthedocs.io/en/latest/user/quickstart/)
+- **Beautiful Soup documentation**（英語・20分）— Quick Start、Tree navigation、Search、CSS selectors、Encoding。 [必要なときだけ開く](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+- **Robots.txt specification**（英語・10分）— robots.txtの読み方とCrawlerの境界。 [必要なときだけ開く](https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt)
+- **Automate the Boring Stuff**（英語・辞書）— Python自動化の無料補助教材。 [必要なときだけ開く](https://automatetheboringstuff.com/)
 
 ## Objectives
 

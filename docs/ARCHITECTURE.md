@@ -5,8 +5,8 @@
 ```text
 コースサイト
   ├─ 20 Days / 60 Hours のロードマップ
-  ├─ 動画・公式資料・クイズ
-  ├─ AIプロンプト・実装手順・完了条件
+  ├─ 条件付き動画・日本語優先の公式資料・各日10問クイズ
+  ├─ AIプロンプト・作業場所・Command・成功状態・完了条件
   └─ 端末内の進捗
           ↓
 受講者リポジトリ
@@ -43,4 +43,4 @@ MVPではブラウザの`localStorage`に保存します。ログイン不要で
 
 ## コンテンツの単一ソース
 
-現在は`app/data/lessons.ts`がWeb表示とTask生成の単一ソースです。20日分の説明、動画、資料、時間割、実装、クイズ、提出物、完了条件をWebへ表示し、`npm run course:generate`で`course/tasks/`へ変換します。受講者とCodexは同じTask Fileを読むため、画面上の指示と作業計画がずれません。
+現在は`app/data/lessons.ts`がWeb表示とTask生成の単一ソースです。20日分の説明、条件付き教材、時間割、実装、提出物、完了条件をWebへ表示し、`npm run course:generate`で`course/tasks/`へ変換します。クイズは`app/data/lesson-quizzes.ts`のDay別10問と統合して表示します。受講者とCodexは同じTask Fileを読むため、画面上の指示と作業計画がずれません。

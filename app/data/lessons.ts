@@ -12,10 +12,12 @@ export type LearningResource = {
   description: string;
   time: string;
   required?: boolean;
+  language: "日本語" | "英語";
   embedUrl?: string;
 };
 
 import { getLessonSupport, type LessonSupport } from "./lesson-support.ts";
+import { getLessonQuizzes } from "./lesson-quizzes.ts";
 
 export type Lesson = {
   id: string;
@@ -55,7 +57,9 @@ const video = (
   description: string,
   time: string,
   embedUrl?: string,
-): LearningResource => ({ title, url, source, description, time, required: true, embedUrl });
+  required = false,
+  language: LearningResource["language"] = "英語",
+): LearningResource => ({ title, url, source, description, time, required, language, embedUrl });
 
 const reading = (
   title: string,
@@ -63,8 +67,9 @@ const reading = (
   source: string,
   description: string,
   time: string,
-  required = true,
-): LearningResource => ({ title, url, source, description, time, required });
+  required = false,
+  language: LearningResource["language"] = "英語",
+): LearningResource => ({ title, url, source, description, time, required, language });
 
 const q = (
   question: string,
@@ -83,36 +88,40 @@ const lessonCore: LessonCore[] = [
     category: "FOUNDATION",
     title: "ターミナル・ファイル・開発環境",
     shortTitle: "CLI / VS Code",
-    description: "AIエージェントが操作しているファイル、現在地、プロセス、環境変数を自分でも確認できるようにします。",
+    description: "CLIとVS Codeが何をする道具かを知り、GitHub上の教材Repositoryを開いて、Terminalから安全にファイルを調査します。",
     duration: "3時間",
     outcome: "既存リポジトリを変更せずに調査し、repository-map.mdへ構造と根拠をまとめられる",
     branch: "training/day-01-environment",
     color: "lime",
-    objectives: ["絶対パスと相対パスを説明する", "VS Codeとターミナルを行き来する", ".envと依存関係の役割を説明する"],
+    objectives: ["CLI・Terminal・VS Code・Repositoryの違いを説明する", "GitHubからCodespacesを開き、ExplorerとTerminalを行き来する", "絶対パスと相対パスを説明する", ".envと依存関係を秘密情報を開示せず確認する"],
     schedule: [
-      { time: "0:00–0:25", title: "動画", detail: "VS Codeの画面、Explorer、検索、Terminalを確認" },
-      { time: "0:25–1:05", title: "公式資料", detail: "VS Code・Terminal・Codespacesの基本を順番に読む" },
-      { time: "1:05–2:25", title: "ハンズオン", detail: "CLIでリポジトリを探索し、AIの説明と照合" },
-      { time: "2:25–3:00", title: "提出", detail: "repository-map.md、クイズ、振り返り" },
+      { time: "0:00–0:20", title: "用語と画面を確認", detail: "用語集でCLI・Terminal・VS Code・Repository・Pathを調べ、GitHubとVS Codeの役割を区別する" },
+      { time: "0:20–0:40", title: "Codespacesを開く", detail: "GitHubのRepositoryページで Code → Codespaces → Create codespace on main を選び、Browser版VS Codeが開くまで待つ" },
+      { time: "0:40–1:00", title: "任意の操作デモ", detail: "画面操作が不安な人だけVS Code公式動画を見る。操作できる人は演習へ進む" },
+      { time: "1:00–2:25", title: "Terminal演習", detail: "Repository rootで指定Commandを1ブロックずつ実行し、表示結果とExplorer上のファイルを照合する" },
+      { time: "2:25–3:00", title: "成果物と完了確認", detail: "learning-log/day-01/repository-map.mdを作成し、git diffとgit statusで意図しない変更がないことを確認する" },
     ],
     videos: [
-      video("Introductory Videos for VS Code", "https://code.visualstudio.com/docs/getstarted/introvideos", "Visual Studio Code", "Basics・Code Editing・Version Controlの短い公式動画から、画面構成と基本操作を確認します。", "約20分"),
+      video("VS Code入門動画（任意・英語）", "https://code.visualstudio.com/docs/getstarted/introvideos", "Visual Studio Code", "Explorer、検索、統合Terminalの場所が分からない場合だけ視聴します。動画を見なくても演習は完了できます。", "必要な章だけ・約20分"),
     ],
     readings: [
-      reading("Getting Started", "https://code.visualstudio.com/docs/getstarted/getting-started", "VS Code Docs", "フォルダを開く、ファイルを編集する、拡張機能を扱う基本手順。", "10分"),
-      reading("Getting started with the terminal", "https://code.visualstudio.com/docs/terminal/getting-started", "VS Code Docs", "統合ターミナルの開き方、シェル、コマンド履歴を確認します。", "8分"),
-      reading("GitHub Codespaces quickstart", "https://docs.github.com/en/codespaces/getting-started/quickstart", "GitHub Docs", "RepositoryからCodespaceを作り、Browser版VS Codeを開く基本手順。英語画面では Code → Codespaces の順に探します。", "12分"),
-      reading("VS Code: Basic editing", "https://code.visualstudio.com/docs/editing/codebasics", "VS Code Docs", "Fileの作成・保存、検索、複数Cursorなど、演習で使う編集操作を確認します。", "10分"),
+      reading("GitHub Codespacesのクイックスタート", "https://docs.github.com/ja/codespaces/quickstart", "GitHub Docs", "GitHubからBrowser版VS Codeを開く手順です。『Codespaceを作成する』までを必ず確認します。", "8分", true, "日本語"),
+      reading("VS Code: Getting Started（英語・補助）", "https://code.visualstudio.com/docs/getstarted/getting-started", "VS Code Docs", "Explorer、編集、保存の場所が分からないときだけ参照します。日本語公式版がないため英語です。", "必要時10分"),
+      reading("VS Code: Terminal入門（英語・補助）", "https://code.visualstudio.com/docs/terminal/getting-started", "VS Code Docs", "統合Terminalの開き方が分からないときだけ参照します。日本語公式版がないため英語です。", "必要時8分"),
     ],
     steps: [
-      { title: "現在地とファイルを調べる", detail: "1行目のpwdは現在のFolder、2行目のlsは-aで隠しFileも含め-lで詳細表示、3行目のfindは「現在地.から深さ2までのFileだけ」を探し、sortで名前順にします。$記号は入力しません。", code: "pwd\nls -la\nfind . -maxdepth 2 -type f | sort" },
-      { title: "技術スタックの根拠を探す", detail: "composer.json、package.json、.env.example、routes、app、testsを探し、推測ではなくファイル名を根拠にします。" },
-      { title: "AIへ読み取り専用で依頼する", detail: "変更禁止、根拠ファイル必須、不明点は不明と書く、という条件を付けて構造説明を依頼します。" },
-      { title: "人間が照合して地図を作る", detail: "learning-log/templates/repository-map.mdを見本にし、AIが挙げたPathを自分で開きます。正しい説明だけをrepository-map.mdへ残し、書き方はlearning-log/examples/day-01-repository-map.example.mdで確認します。" },
+      { title: "GitHubで教材を開く", detail: "GitHubのtutorial-course Repositoryを開き、緑色の Code ボタン → Codespaces タブ → Create codespace on main をクリックします。すでに自分のTemplate Repositoryを作成済みなら、そのRepositoryからCodespaceを開きます。" },
+      { title: "VS Codeの3か所を見つける", detail: "左のExplorerはファイル一覧、中央のEditorはファイル内容、下のTerminalは文字でCommandを実行する場所です。メニュー Terminal → New Terminal を選び、入力欄の末尾にカーソルがあることを確認します。" },
+      { title: "Taskと作業Branchを準備する", detail: "Terminalで次の2行を上から1行ずつ実行します。showは課題を表示するだけ、startはtraining/day-01-environment Branchとlearning-log/day-01を準備します。", code: "npm run course -- show 1\nnpm run course -- start 1" },
+      { title: "現在地とBranchを確認する", detail: "pwdの末尾がtutorial-course、git branch --show-currentがtraining/day-01-environmentになっていることを確認します。違う場合は先へ進まず、Terminalを開き直します。", code: "pwd\ngit branch --show-current\ngit status -sb" },
+      { title: "Repositoryを読み取り専用で探索する", detail: "lsは直下、findは深さ2までのファイルを表示します。表示が多くてもErrorではありません。$記号は入力しません。ここではファイルを削除・移動・編集しません。", code: "ls -la\nfind . -maxdepth 2 -type f | sort" },
+      { title: "技術スタックの根拠を開く", detail: "Explorerからpackage.json、training-lab/composer.json、.env.example、app、course/tasks、testsを順に開きます。.env.exampleは変数名だけ確認し、値・Token・Passwordを学習ログへ貼りません。" },
+      { title: "AIへ調査だけを依頼する", detail: "下のPractice PromptをCodexへ貼り、変更禁止・根拠Path必須・不明は未確認という条件を守らせます。返答にあるPathをExplorerで実際に開き、存在しないPathは採用しません。" },
+      { title: "Repository地図を作って検証する", detail: "learning-log/templates/repository-map.mdをlearning-log/day-01/repository-map.mdへコピーし、learning-log/examples/day-01-repository-map.example.mdを完成見本として記入します。最後にgit diffで内容を読み、git status -sbでこの成果物以外の意図しない変更がないことを確認します。", code: "cp learning-log/templates/repository-map.md learning-log/day-01/repository-map.md\ngit diff -- learning-log/day-01/repository-map.md\ngit status -sb" },
     ],
     prompt: "このリポジトリは変更しないでください。技術スタック、主要ディレクトリ、起動方法、テスト方法を調査し、根拠ファイルのパスを示してください。確認できない項目は推測せず「未確認」と書いてください。",
-    deliverables: ["learning-log/day-01/repository-map.md", "確認したコマンドと結果", "AIの説明で誤っていた点または未確認だった点"],
-    checks: ["主要ディレクトリを5つ以上説明した", "すべての説明に根拠パスがある", "秘密情報を記録していない", "リポジトリのファイルを変更せず調査した"],
+    deliverables: ["learning-log/day-01/repository-map.md", "同ファイル内の『実行したCommandと結果』欄", "同ファイル内の『AIの誤り・未確認事項』欄", "git status -sbの最終結果"],
+    checks: ["GitHub・VS Code・Terminalの役割を自分の言葉で説明できる", "現在地とBranchが指定どおりである", "主要ディレクトリを5つ以上説明した", "すべての説明に根拠Pathがある", "秘密情報を記録していない", "成果物以外のファイルを変更していない"],
     quizzes: [
       q("pwdが表示するものは何ですか？", ["現在の作業ディレクトリ", "GitHubのURL", "実行中の全プロセス"], 0, "pwdはprint working directoryの略で、現在地の絶対パスを表示します。"),
       q(".env.exampleの安全な扱いはどれですか？", ["実際の秘密鍵を追記する", "必要な環境変数名の見本として読む", "必ず削除する"], 1, ".env.exampleは必要なキーの見本です。実値やSecretはコミットしません。"),
@@ -134,7 +143,7 @@ const lessonCore: LessonCore[] = [
     color: "sky",
     objectives: ["git statusとgit diffを読む", "ステージとCommitを区別する", "restoreとstashを使い分ける"],
     schedule: [
-      { time: "0:00–0:35", title: "動画", detail: "Gitの履歴・Branch・Remoteの全体像を確認" },
+      { time: "0:00–0:35", title: "任意動画／先行演習", detail: "Gitが初めてなら動画の必要な章を見る。git statusを説明できる人は日本語資料と演習へ進む" },
       { time: "0:35–1:15", title: "公式資料", detail: "Pro Gitを指定順で読む" },
       { time: "1:15–2:30", title: "ハンズオン", detail: "変更、差分確認、Commit、復元、Branch、Push" },
       { time: "2:30–3:00", title: "説明試験", detail: "Gitの5領域を自分の言葉で説明" },
@@ -143,11 +152,7 @@ const lessonCore: LessonCore[] = [
       video("Git and GitHub for Beginners", "https://www.youtube.com/watch?v=RGOj5yH7evk", "freeCodeCamp.org", "初期化、Commit、Branch、Remote、GitHubまでを一つのリポジトリで追う入門動画です。最初の35分を視聴します。", "35分", "https://www.youtube-nocookie.com/embed/RGOj5yH7evk"),
     ],
     readings: [
-      reading("Pro Git: Getting a Git Repository", "https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository", "Pro Git", "既存リポジトリと新規リポジトリの違い。", "8分"),
-      reading("Recording Changes", "https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository", "Pro Git", "tracked、modified、staged、committedの状態遷移。", "15分"),
-      reading("Viewing Commit History", "https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History", "Pro Git", "git logで変更履歴とCommitの関係を読む方法。", "8分"),
-      reading("Undoing Things", "https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things", "Pro Git", "変更を戻す前に何が失われるかを確認する習慣。", "10分"),
-      reading("Working with Remotes", "https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes", "Pro Git", "origin、fetch、pull、pushの役割。", "10分"),
+      reading("Pro Git 第2章「Gitの基本」", "https://git-scm.com/book/ja/v2", "Pro Git", "日本語版の2.2『変更内容のRepositoryへの記録』を必修範囲として読みます。2.1、2.3〜2.5は操作で迷った箇所だけ参照します。", "必修15分", true, "日本語"),
     ],
     steps: [
       { title: "変更前の基準点を確認", detail: "現在のBranch、未Commit差分、直近履歴を確認します。", code: "git branch --show-current\ngit status -sb\ngit log --oneline -5" },
@@ -179,7 +184,7 @@ const lessonCore: LessonCore[] = [
     color: "pink",
     objectives: ["baseとcompareを区別する", "Files changedから差分を読む", "レビュー指摘へ根拠付きで回答する"],
     schedule: [
-      { time: "0:00–0:25", title: "動画復習", detail: "GitHub上のBranchとPR部分を確認" },
+      { time: "0:00–0:25", title: "任意動画／前Day復習", detail: "BranchとPRの画面操作が不安な人だけ視聴。理解済みならIssue作成へ進む" },
       { time: "0:25–1:05", title: "公式資料", detail: "Branch → Flow → PR → Reviewの順で読む" },
       { time: "1:05–2:35", title: "実務フロー", detail: "Issue、Branch、2 Commit、PR、Review、修正" },
       { time: "2:35–3:00", title: "振り返り", detail: "Merge可能性と残リスクを説明" },
@@ -188,12 +193,10 @@ const lessonCore: LessonCore[] = [
       video("GitHub Flow部分を視聴", "https://www.youtube.com/watch?v=RGOj5yH7evk&t=3528s", "freeCodeCamp.org", "BranchをPushし、GitHub上でPull Requestへ変える部分を視聴します。", "25分", "https://www.youtube-nocookie.com/embed/RGOj5yH7evk?start=3528"),
     ],
     readings: [
-      reading("About branches", "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches", "GitHub Docs", "Branchが独立した変更系列であることを確認します。", "8分"),
-      reading("GitHub flow", "https://docs.github.com/en/get-started/using-github/github-flow", "GitHub Docs", "Branch、Commit、PR、Review、Mergeの標準フロー。", "8分"),
-      reading("About pull requests", "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests", "GitHub Docs", "PRが変更の提案・議論・レビュー単位である理由。", "10分"),
-      reading("Creating a pull request", "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request", "GitHub Docs", "baseとcompareを指定してPRを作る手順。", "8分"),
-      reading("Introduction to GitHub", "https://github.com/skills/introduction-to-github", "GitHub Skills", "実際のIssueとActionsを使う公式ハンズオン。", "30分"),
-      reading("Review pull requests", "https://github.com/skills/review-pull-requests", "GitHub Skills", "Files changed、コメント、承認、修正の演習。", "30分"),
+      reading("GitHub Flow", "https://docs.github.com/ja/get-started/using-github/github-flow", "GitHub Docs", "Branch、Commit、Pull Request、Review、Mergeの標準フロー。", "8分", true, "日本語"),
+      reading("Pull Requestについて", "https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests", "GitHub Docs", "Pull Requestが変更の提案・議論・Review単位である理由。", "8分", false, "日本語"),
+      reading("Pull Requestを作成する", "https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request", "GitHub Docs", "baseとcompareの操作で迷った場合だけ参照します。", "必要時8分", false, "日本語"),
+      reading("GitHub Skills: Review Pull Requests（英語・補助）", "https://github.com/skills/review-pull-requests", "GitHub Skills", "Review操作を追加練習したい場合の公式ハンズオンです。", "任意30分"),
     ],
     steps: [
       { title: "Issueを作る", detail: "現状、期待結果、完了条件、確認方法を記述し、Issue番号を確定します。" },
@@ -225,7 +228,7 @@ const lessonCore: LessonCore[] = [
     color: "yellow",
     objectives: ["ChatとAgentの権限差を説明する", "Contextへ必要なファイルだけを渡す", "Diff承認前に不要変更を検出する"],
     schedule: [
-      { time: "0:00–0:30", title: "公式デモ", detail: "Cursor LearnでAgent・Rules・Contextを確認" },
+      { time: "0:00–0:30", title: "任意デモ／操作確認", detail: "Cursorが初めてならAgent・Rules・Contextのデモを見る。操作経験者は調査対象の確認へ進む" },
       { time: "0:30–1:10", title: "公式資料", detail: "QuickstartからPrivacyまで順番に読む" },
       { time: "1:10–2:30", title: "調査演習", detail: "Laravel versionとユーザー一覧の処理経路を追う" },
       { time: "2:30–3:00", title: "小変更", detail: "文言だけ変更しDiffを人間が承認" },
@@ -234,7 +237,7 @@ const lessonCore: LessonCore[] = [
       video("Cursor Learn", "https://cursor.com/learn", "Cursor", "Cursor公式の短いデモから、Agent、Tab、コードベースContextの操作を確認します。", "30分"),
     ],
     readings: [
-      reading("Cursor Quickstart", "https://docs.cursor.com/en/get-started/quickstart", "Cursor Docs", "最初のプロジェクトとAgent操作。", "8分"),
+      reading("Cursor Quickstart（英語）", "https://docs.cursor.com/en/get-started/quickstart", "Cursor Docs", "最初のProjectとAgent操作。日本語公式版がないため英語です。", "8分", true),
       reading("Agent overview", "https://docs.cursor.com/en/agent/overview", "Cursor Docs", "Agentが検索、編集、Terminal実行を行う範囲。", "8分"),
       reading("Rules", "https://docs.cursor.com/en/context/rules", "Cursor Docs", "プロジェクト固有の継続的な指示を定義する方法。", "10分"),
       reading("Codebase indexing", "https://docs.cursor.com/en/context/codebase-indexing", "Cursor Docs", "Indexingで検索可能になる範囲と更新。", "8分"),
@@ -271,7 +274,7 @@ const lessonCore: LessonCore[] = [
     color: "lavender",
     objectives: ["Agent loopとContextの関係を説明する", "変更前に計画を作らせる", "別Agentで反証レビューする"],
     schedule: [
-      { time: "0:00–0:35", title: "公式動画", detail: "Claude CodeとCodexの公式動画を選んで視聴" },
+      { time: "0:00–0:35", title: "任意動画／Tool確認", detail: "画面操作が未知のToolだけ公式動画を見る。両方を操作できる人は比較演習の準備へ進む" },
       { time: "0:35–1:15", title: "公式資料", detail: "Overview、Best practices、Codex CLI、Skillsを読む" },
       { time: "1:15–2:30", title: "比較演習", detail: "同一Issueを調査・計画・レビューへ分業" },
       { time: "2:30–3:00", title: "評価", detail: "8観点の比較表を提出" },
@@ -282,9 +285,9 @@ const lessonCore: LessonCore[] = [
     ],
     readings: [
       reading("Claude Code overview", "https://code.claude.com/docs/en/overview", "Anthropic", "Claude Codeの基本能力と開発フロー。", "8分"),
-      reading("Claude Code best practices", "https://code.claude.com/docs/en/best-practices", "Anthropic", "Context取得、計画、検証、セッション管理。", "15分"),
+      reading("Claude Code best practices（英語）", "https://code.claude.com/docs/en/best-practices", "Anthropic", "Context取得、計画、検証、Session管理。日本語公式版がないため英語です。", "15分", true),
       reading("Claude Code settings", "https://code.claude.com/docs/en/settings", "Anthropic", "権限とプロジェクト設定。", "8分"),
-      reading("Codex CLI", "https://developers.openai.com/codex/cli", "OpenAI Developers", "Codex CLIの起動、承認、ローカル作業の基本。", "10分"),
+      reading("Codex CLI（英語）", "https://developers.openai.com/codex/cli", "OpenAI Developers", "Codex CLIの起動、承認、Local作業の基本。日本語公式版がないため英語です。", "10分", true),
       reading("Build skills for Codex", "https://developers.openai.com/codex/build-skills", "OpenAI Developers", "再利用可能なSkillの構造と呼び出し方。", "10分"),
       reading("OpenAI Codex repository", "https://github.com/openai/codex", "GitHub", "CLIのREADMEとリリースを確認します。", "8分"),
     ],
@@ -318,7 +321,7 @@ const lessonCore: LessonCore[] = [
     color: "orange",
     objectives: ["MethodとStatusを説明する", "NetworkからFetch/XHRを見つける", "DOMとCSS Selectorを対応させる"],
     schedule: [
-      { time: "0:00–0:25", title: "公式動画", detail: "DevToolsの6つの基本機能を確認" },
+      { time: "0:00–0:25", title: "任意動画／DevToolsを開く", detail: "DevToolsが初めてなら動画を見る。使ったことがあればNetwork panelを開いて演習へ進む" },
       { time: "0:25–1:15", title: "公式資料", detail: "HTTP → JSON → DOM → Selectorの順で読む" },
       { time: "1:15–2:30", title: "ブラウザ演習", detail: "Elements、Console、Network、Applicationを観察" },
       { time: "2:30–3:00", title: "提出", detail: "Request分析とクイズ" },
@@ -327,13 +330,13 @@ const lessonCore: LessonCore[] = [
       video("Fun & Powerful: Intro to Chrome DevTools", "https://developer.chrome.com/blog/devtools-tips-32", "Chrome for Developers", "Inspect、Elements、Console、Sources、Network、Device Modeを一度に確認できる公式動画付き記事です。", "約20分"),
     ],
     readings: [
-      reading("How the Web works", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works", "MDN", "ブラウザ、DNS、HTTP、サーバーの全体像。", "10分"),
-      reading("Overview of HTTP", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview", "MDN", "Request/ResponseとHeaderの基本。", "10分"),
-      reading("HTTP request methods", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods", "MDN", "GET、POST、PUT、PATCH、DELETEの意味。", "8分"),
-      reading("HTTP response status codes", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status", "MDN", "2xx、3xx、4xx、5xxの読み方。", "8分"),
-      reading("Using the Fetch API", "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch", "MDN", "ブラウザJavaScriptからHTTP通信する流れ。", "10分"),
-      reading("Introduction to the DOM", "https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction", "MDN", "HTMLが操作可能なObjectへ変換される仕組み。", "10分"),
-      reading("CSS selectors", "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors", "MDN", "要素を安定して特定するためのSelector。", "10分"),
+      reading("ウェブの仕組み", "https://developer.mozilla.org/ja/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works", "MDN", "Browser、DNS、HTTP、Serverの全体像。初学者は最初に読みます。", "10分", true, "日本語"),
+      reading("HTTPの概要", "https://developer.mozilla.org/ja/docs/Web/HTTP/Guides/Overview", "MDN", "Request／ResponseとHeaderの基本。", "10分", true, "日本語"),
+      reading("HTTPリクエストメソッド", "https://developer.mozilla.org/ja/docs/Web/HTTP/Reference/Methods", "MDN", "GET、POST、PUT、PATCH、DELETEの意味を迷った場合に参照します。", "必要時8分", false, "日本語"),
+      reading("HTTPレスポンスステータスコード", "https://developer.mozilla.org/ja/docs/Web/HTTP/Reference/Status", "MDN", "2xx、3xx、4xx、5xxをNetwork panelで確認するときに参照します。", "必要時8分", false, "日本語"),
+      reading("Fetch APIの使用", "https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch", "MDN", "Browser JavaScriptからHTTP通信する流れ。Day 7でも使います。", "補助10分", false, "日本語"),
+      reading("DOMの紹介", "https://developer.mozilla.org/ja/docs/Web/API/Document_Object_Model/Introduction", "MDN", "HTMLが操作可能なObjectへ変換される仕組み。", "補助10分", false, "日本語"),
+      reading("CSSセレクター", "https://developer.mozilla.org/ja/docs/Web/CSS/CSS_selectors", "MDN", "操作対象を安定して特定するときだけ参照します。", "必要時10分", false, "日本語"),
     ],
     steps: [
       { title: "画面操作を1つ固定", detail: "ログイン、検索、保存など、観察対象の操作と期待結果を先に書きます。" },
@@ -365,7 +368,7 @@ const lessonCore: LessonCore[] = [
     color: "blue",
     objectives: ["HTMLの意味構造を読む", "async/awaitとFetchを追う", "PropsとStateを区別する"],
     schedule: [
-      { time: "0:00–0:35", title: "動画", detail: "JavaScriptの基礎とDOM操作を復習" },
+      { time: "0:00–0:35", title: "任意動画／基礎確認", detail: "JavaScriptの変数・配列・Functionが不安な人だけ必要な章を見る。読める人は既存TSXへ進む" },
       { time: "0:35–1:20", title: "公式資料", detail: "HTML → JS → TS → Reactの指定範囲を読む" },
       { time: "1:20–2:30", title: "TSX読解", detail: "ComponentからAPIとDOMまで線でつなぐ" },
       { time: "2:30–3:00", title: "小変更", detail: "表示文言またはValidationだけを安全に変更" },
@@ -374,13 +377,11 @@ const lessonCore: LessonCore[] = [
       video("Learn JavaScript - Full Course for Beginners", "https://www.youtube.com/watch?v=PkZNo7MFNFg", "freeCodeCamp.org", "変数、配列、Object、Function、Conditionを必要な章だけ視聴します。", "35分", "https://www.youtube-nocookie.com/embed/PkZNo7MFNFg"),
     ],
     readings: [
-      reading("Structuring content with HTML", "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content", "MDN", "見出し、Form、Button、Table、data-*属性を読む基礎。", "12分"),
-      reading("JavaScript Guide", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide", "MDN", "変数、Function、Array、Object、Control flow。", "15分"),
-      reading("Fetch API", "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch", "MDN", "Promise、async/await、Response、Error処理。", "10分"),
-      reading("TypeScript Handbook", "https://www.typescriptlang.org/docs/handbook/intro.html", "TypeScript", "Basics、Everyday Types、Narrowing、Functions、Object Types、Modules。", "18分"),
-      reading("Describing the UI", "https://react.dev/learn/describing-the-ui", "React", "Component、JSX、Props、Conditional rendering、List。", "15分"),
-      reading("Adding Interactivity", "https://react.dev/learn/adding-interactivity", "React", "Event handlerとStateの関係。", "12分"),
-      reading("Synchronizing with Effects", "https://react.dev/learn/synchronizing-with-effects", "React", "Effectが外部Systemとの同期に必要な場合を読む。", "10分"),
+      reading("HTMLによるコンテンツの構造化", "https://developer.mozilla.org/ja/docs/Learn_web_development/Core/Structuring_content", "MDN", "見出し、Form、Buttonなど、実際に出てくる要素だけ確認します。", "必要時12分", false, "日本語"),
+      reading("JavaScriptガイド", "https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide", "MDN", "変数、Function、Array、Object、Control flow。既存TSXで分からない構文の章だけ読みます。", "必要時15分", false, "日本語"),
+      reading("Fetch APIの使用", "https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch", "MDN", "Promise、async/await、Response、Error処理。", "10分", true, "日本語"),
+      reading("TypeScript Handbook（英語・補助）", "https://www.typescriptlang.org/docs/handbook/intro.html", "TypeScript", "型を追えない場合だけ該当章を参照します。日本語公式版がないため英語です。", "必要時18分"),
+      reading("Reactをはじめる", "https://developer.mozilla.org/ja/docs/Learn_web_development/Core/Frameworks_libraries/React_getting_started", "MDN", "Component、JSX、Props、Stateの日本語入門。既存TSXを読む前に必修範囲を確認します。", "15分", true, "日本語"),
     ],
     steps: [
       { title: "Component境界を探す", detail: "export、Function、return JSXから1つのComponentの入力と出力を特定します。" },
@@ -412,7 +413,7 @@ const lessonCore: LessonCore[] = [
     color: "green",
     objectives: ["Namespaceとuseを読む", "Dependency injectionを見つける", "Exceptionの発生と処理を追う"],
     schedule: [
-      { time: "0:00–1:15", title: "公式動画コース", detail: "Laravel公式PHP Fundamentalsを通しで視聴" },
+      { time: "0:00–1:15", title: "任意動画／PHP基礎演習", detail: "PHP未経験者は必要な章だけ視聴。変数・配列・Functionを読める人はManualとClass読解へ進む" },
       { time: "1:15–1:45", title: "Manual", detail: "OOP、Namespace、Exceptionを確認" },
       { time: "1:45–2:35", title: "読解演習", detail: "Laravel Classを日本語へ翻訳" },
       { time: "2:35–3:00", title: "確認", detail: "小さなUnit Testとクイズ" },
@@ -421,10 +422,10 @@ const lessonCore: LessonCore[] = [
       video("PHP Fundamentals", "https://laravel.com/learn/php-fundamentals", "Laravel Learn", "Variables、Arrays、Functions、Loops、Classes、Modern PHP、Composerを10本・71分で学ぶ公式動画コースです。", "71分"),
     ],
     readings: [
-      reading("PHP language reference", "https://www.php.net/manual/en/langref.php", "PHP Manual", "Basic syntax、Types、Variables、Operators、Control structures、Functions、Arrays。", "15分"),
-      reading("Classes and Objects", "https://www.php.net/manual/en/language.oop5.php", "PHP Manual", "Class、Property、Method、Visibility、Inheritance。", "12分"),
-      reading("Namespaces", "https://www.php.net/manual/en/language.namespaces.php", "PHP Manual", "Namespace宣言とuseによるImport。", "8分"),
-      reading("Exceptions", "https://www.php.net/manual/en/language.exceptions.php", "PHP Manual", "throw、try/catch/finally、Exceptionの伝播。", "8分"),
+      reading("PHP言語リファレンス", "https://www.php.net/manual/ja/langref.php", "PHP Manual", "構文、型、変数、制御構造、Function、配列。分からない構文だけ参照します。", "必要時15分", false, "日本語"),
+      reading("クラスとオブジェクト", "https://www.php.net/manual/ja/language.oop5.php", "PHP Manual", "Class、Property、Method、Visibility、Inheritance。", "12分", true, "日本語"),
+      reading("名前空間", "https://www.php.net/manual/ja/language.namespaces.php", "PHP Manual", "Namespace宣言とuseによるImport。", "8分", true, "日本語"),
+      reading("例外", "https://www.php.net/manual/ja/language.exceptions.php", "PHP Manual", "throw、try/catch/finally、Exceptionの伝播。", "補助8分", false, "日本語"),
       reading("PHP The Right Way", "https://phptherightway.com/", "PHP The Right Way", "Code style、Dependency management、Testing、Securityの補助資料。", "15分", false),
     ],
     steps: [
@@ -457,7 +458,7 @@ const lessonCore: LessonCore[] = [
     color: "lime",
     objectives: ["RouteからControllerを探す", "MiddlewareとValidationの役割を説明する", "Service ContainerのBindingを追う"],
     schedule: [
-      { time: "0:00–0:35", title: "公式動画", detail: "Route、MVC、Controllerの章を視聴" },
+      { time: "0:00–0:35", title: "任意動画／既存Code確認", detail: "Laravel未経験者はRoute・MVC・Controllerの指定章を見る。経験者はtraining-labのRouteへ進む" },
       { time: "0:35–1:20", title: "公式Docs", detail: "StructureからService Providersまで順番に読む" },
       { time: "1:20–2:35", title: "Code trace", detail: "対象画面の全処理経路を埋める" },
       { time: "2:35–3:00", title: "説明試験", detail: "図を見ずに経路を説明" },
@@ -467,7 +468,7 @@ const lessonCore: LessonCore[] = [
     ],
     readings: [
       reading("Directory Structure", "https://laravel.com/docs/13.x/structure", "Laravel Docs", "app、routes、config、database、resources、testsの配置。", "8分"),
-      reading("Request Lifecycle", "https://laravel.com/docs/13.x/lifecycle", "Laravel Docs", "public/index.phpからResponseまでの起動経路。", "12分"),
+      reading("Request Lifecycle（英語）", "https://laravel.com/docs/13.x/lifecycle", "Laravel Docs", "public/index.phpからResponseまでの起動経路。日本語公式版がないため英語です。", "12分", true),
       reading("Routing", "https://laravel.com/docs/13.x/routing", "Laravel Docs", "Route、Parameter、Named route、Route model binding。", "12分"),
       reading("Middleware", "https://laravel.com/docs/13.x/middleware", "Laravel Docs", "Request前後の認証・変換・制御。", "10分"),
       reading("Controllers", "https://laravel.com/docs/13.x/controllers", "Laravel Docs", "Request処理をまとめるController。", "10分"),
@@ -505,7 +506,7 @@ const lessonCore: LessonCore[] = [
     color: "sky",
     objectives: ["SELECTとJOINを読む", "MigrationとSchemaを対応させる", "N+1を検出し修正案を作る"],
     schedule: [
-      { time: "0:00–0:35", title: "動画", detail: "Laravel公式のDatabaseとModel章を視聴" },
+      { time: "0:00–0:35", title: "任意動画／Schema確認", detail: "Eloquent未経験者は指定章を見る。経験者はMigrationとModelの対応確認へ進む" },
       { time: "0:35–1:20", title: "SQLBolt", detail: "SELECT、JOIN、Aggregate、INSERT/UPDATE/DELETE" },
       { time: "1:20–2:30", title: "Laravel演習", detail: "Eloquent、Relation、Migration、N+1" },
       { time: "2:30–3:00", title: "検証", detail: "Query logとTest結果を提出" },
@@ -514,7 +515,7 @@ const lessonCore: LessonCore[] = [
       video("Laravel Learn: Database / Model chapters", "https://laravel.com/learn/getting-started-with-laravel", "Laravel Learn", "Working with the database、Our first model、Creating and storingの章を視聴します。", "約38分"),
     ],
     readings: [
-      reading("SQLBolt", "https://sqlbolt.com/", "SQLBolt", "SELECT、Constraints、Sorting、JOIN、NULL、Aggregate、INSERT、UPDATE、DELETEを対話形式で実行。", "45分"),
+      reading("SQLBolt（英語・対話演習）", "https://sqlbolt.com/", "SQLBolt", "SELECT、JOIN、NULL、Aggregateまでの指定ExerciseをBrowser上で実行します。日本語公式版はありません。", "30分", true),
       reading("Database", "https://laravel.com/docs/13.x/database", "Laravel Docs", "Connection、Transaction、Query event。", "10分"),
       reading("Query Builder", "https://laravel.com/docs/13.x/queries", "Laravel Docs", "SELECT、JOIN、Aggregate、Mutation。", "12分"),
       reading("Migrations", "https://laravel.com/docs/13.x/migrations", "Laravel Docs", "Schema変更、up/down、rollback。", "12分"),
@@ -552,7 +553,7 @@ const lessonCore: LessonCore[] = [
     color: "pink",
     objectives: ["Timeoutとraise_for_statusを使う", "Selector失敗を検出する", "重複を除去し失敗をLogへ残す"],
     schedule: [
-      { time: "0:00–0:30", title: "動画", detail: "Python Web scrapingの実装例を視聴" },
+      { time: "0:00–0:30", title: "任意動画／安全確認", detail: "PythonまたはScraping未経験者だけ実装例を見る。経験者はrobots.txt・回数上限・Fixtureを確認する" },
       { time: "0:30–1:10", title: "公式資料", detail: "Python → Requests → Beautiful Soupの順で読む" },
       { time: "1:10–2:35", title: "Scraper実装", detail: "取得、解析、正規化、CSV、Log" },
       { time: "2:35–3:00", title: "失敗試験", detail: "Timeout、404、Selector変更を再現" },
@@ -561,7 +562,7 @@ const lessonCore: LessonCore[] = [
       video("Web scraping videos", "https://www.youtube.com/@realpython/search?query=web%20scraping", "Real Python", "RequestsとBeautiful Soupを使う動画を1本選び、取得・解析・保存の責務分離を確認します。", "約25分"),
     ],
     readings: [
-      reading("Python Tutorial", "https://docs.python.org/3/tutorial/", "Python Docs", "Data structures、Control flow、Functions、Modules、Exceptions、File I/O。", "20分"),
+      reading("Pythonチュートリアル", "https://docs.python.org/ja/3/tutorial/", "Python Docs", "Data structure、制御フロー、Function、Module、例外、File I/O。演習で使う章だけ読みます。", "20分", true, "日本語"),
       reading("Requests Quickstart", "https://requests.readthedocs.io/en/latest/user/quickstart/", "Requests", "Request、Response、JSON、Header、Timeout、Error。", "15分"),
       reading("Beautiful Soup documentation", "https://www.crummy.com/software/BeautifulSoup/bs4/doc/", "Beautiful Soup", "Quick Start、Tree navigation、Search、CSS selectors、Encoding。", "20分"),
       reading("Robots.txt specification", "https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt", "Google Search Central", "robots.txtの読み方とCrawlerの境界。", "10分"),
@@ -597,22 +598,20 @@ const lessonCore: LessonCore[] = [
     color: "yellow",
     objectives: ["role/label/test idを優先する", "Storage stateをSecretとして扱う", "UI操作とAPI直接取得を比較する"],
     schedule: [
-      { time: "0:00–0:45", title: "公式動画", detail: "Microsoft LearnのPlaywright入門Seriesを視聴" },
+      { time: "0:00–0:45", title: "任意動画／Locator確認", detail: "Playwright未経験者は日本語Seriesの必要な章を見る。経験者はLocator演習へ進む" },
       { time: "0:45–1:25", title: "公式資料", detail: "Locator、Auto-wait、Auth、Network、Debug" },
       { time: "1:25–2:35", title: "自動化演習", detail: "Login、一覧、Pagination、Download" },
       { time: "2:35–3:00", title: "比較", detail: "UI操作とAPI取得の選択理由を提出" },
     ],
     videos: [
-      video("Getting started with end-to-end testing with Playwright", "https://learn.microsoft.com/en-us/shows/getting-started-with-end-to-end-testing-with-playwright/", "Microsoft Learn", "Installation、Running、Writing、Debugging、CIまでを6本で扱う公式動画Seriesです。", "約45分"),
+      video("Playwrightを使用したE2E Test入門（日本語字幕）", "https://learn.microsoft.com/ja-jp/shows/getting-started-with-end-to-end-testing-with-playwright/", "Microsoft Learn", "Playwrightが初めての人向けの公式動画Seriesです。Installation、実行、作成、Debugから必要な章だけ視聴します。", "必要な章だけ・約45分", undefined, false, "日本語"),
     ],
     readings: [
-      reading("Installation", "https://playwright.dev/docs/intro", "Playwright", "Playwright Testの導入と最初のTest。", "8分"),
-      reading("Locators", "https://playwright.dev/docs/locators", "Playwright", "role、label、text、test idと再試行。", "12分"),
-      reading("Auto-waiting", "https://playwright.dev/docs/actionability", "Playwright", "操作可能性とAssertionの自動待機。", "10分"),
-      reading("Authentication", "https://playwright.dev/docs/auth", "Playwright", "Storage stateの再利用とSecret管理。", "12分"),
-      reading("Network", "https://playwright.dev/docs/network", "Playwright", "XHR/Fetchの観察、待機、Mock。", "10分"),
-      reading("Test generator", "https://playwright.dev/docs/codegen", "Playwright", "操作からCodeを生成し、堅牢なLocatorへ直す手順。", "8分"),
-      reading("Best practices", "https://playwright.dev/docs/best-practices", "Playwright", "User-visible behavior、Isolation、Web-first assertions。", "12分"),
+      reading("Microsoft Learn: PlaywrightでBuildする", "https://learn.microsoft.com/ja-jp/training/modules/build-with-playwright/", "Microsoft Learn", "最初のTest、Locator、Assertion、実行を日本語で学ぶ必修教材です。", "25分", true, "日本語"),
+      reading("Locators（英語・補助）", "https://playwright.dev/docs/locators", "Playwright", "role、label、text、test idの詳細を確認するときだけ参照します。日本語公式版はありません。", "必要時12分"),
+      reading("Auto-waiting（英語・補助）", "https://playwright.dev/docs/actionability", "Playwright", "待機の理由が分からない場合だけ参照します。", "必要時10分"),
+      reading("Authentication（英語・補助）", "https://playwright.dev/docs/auth", "Playwright", "Storage stateを使う演習時だけ参照し、Secret管理を確認します。", "必要時12分"),
+      reading("Network（英語・補助）", "https://playwright.dev/docs/network", "Playwright", "XHR/Fetchの観察やMockが必要な場合だけ参照します。", "必要時10分"),
     ],
     steps: [
       { title: "Codegenで操作を記録", detail: "ログインから一覧到達までを記録し、生成Codeをそのまま完成品にしません。", code: "npx playwright codegen https://example.test/login" },
@@ -644,18 +643,18 @@ const lessonCore: LessonCore[] = [
     color: "lavender",
     objectives: ["Unit/Feature/E2Eを使い分ける", "失敗を再現するTestを先に作る", "LogへContextを残しSecretを除く"],
     schedule: [
-      { time: "0:00–0:30", title: "動画", detail: "Playwright DebuggingとLaravel Testingの動画" },
+      { time: "0:00–0:30", title: "任意動画／失敗Test確認", detail: "Debug操作が不安な人だけ動画を見る。経験者は用意された失敗Testの再現へ進む" },
       { time: "0:30–1:10", title: "公式資料", detail: "HTTP Tests、Database Testing、Logging" },
       { time: "1:10–2:35", title: "Bug修正", detail: "再現 → Test → Root cause → 最小修正" },
       { time: "2:35–3:00", title: "回帰確認", detail: "全TestとDiffを提出" },
     ],
     videos: [
-      video("Playwright: Debugging Tests", "https://learn.microsoft.com/en-us/shows/getting-started-with-end-to-end-testing-with-playwright/", "Microsoft Learn", "公式SeriesのDebugging episodeでTrace、Inspector、失敗箇所の読み方を確認します。", "15分"),
+      video("Playwright TestのDebug（任意・日本語字幕）", "https://learn.microsoft.com/ja-jp/shows/getting-started-with-end-to-end-testing-with-playwright/", "Microsoft Learn", "Debug操作が不安な場合だけ公式SeriesのDebugging episodeを確認します。", "必要時15分", undefined, false, "日本語"),
       video("Laravel testing videos", "https://www.youtube.com/@Laracasts/search?query=Laravel%20testing", "Laracasts", "Laravel Testの実行とHTTP Assertionを扱う動画を1本選びます。", "15分"),
     ],
     readings: [
       reading("Laravel Testing", "https://laravel.com/docs/13.x/testing", "Laravel Docs", "Test環境、並列実行、Coverage。", "10分"),
-      reading("HTTP Tests", "https://laravel.com/docs/13.x/http-tests", "Laravel Docs", "Request、Response Assertion、Session、Validation。", "15分"),
+      reading("HTTP Tests（英語）", "https://laravel.com/docs/13.x/http-tests", "Laravel Docs", "Request、Response Assertion、Session、Validation。日本語公式版がないため英語です。", "15分", true),
       reading("Database Testing", "https://laravel.com/docs/13.x/database-testing", "Laravel Docs", "Fixture、Factory、Database Assertion。", "12分"),
       reading("Mocking", "https://laravel.com/docs/13.x/mocking", "Laravel Docs", "Mock、Spy、Facade、Time。", "10分"),
       reading("Logging", "https://laravel.com/docs/13.x/logging", "Laravel Docs", "Channel、Level、Context、Structured log。", "10分"),
@@ -691,7 +690,7 @@ const lessonCore: LessonCore[] = [
     color: "orange",
     objectives: ["SkillのTriggerと出力契約を書く", "Hookの実行時点と失敗動作を決める", "Subagentへ最小権限を与える"],
     schedule: [
-      { time: "0:00–0:25", title: "公式動画", detail: "Skills・Hooks・Subagentsの公式デモを視聴" },
+      { time: "0:00–0:25", title: "任意動画／Starter確認", detail: "SkillとHookを見たことがない人だけデモを見る。経験者はstarter-kitsを開く" },
       { time: "0:25–1:05", title: "公式資料", detail: "Skills → Hooks → Subagents → Settings" },
       { time: "1:05–2:35", title: "実装", detail: "Laravel調査Skill、安全Refactor Skill、Hook" },
       { time: "2:35–3:00", title: "実行試験", detail: "Trigger、誤Trigger、危険操作Blockを検証" },
@@ -700,7 +699,7 @@ const lessonCore: LessonCore[] = [
       video("Claude Code Skills / Hooks videos", "https://www.youtube.com/@AnthropicAI/search?query=Claude%20Code%20skills%20hooks", "Anthropic", "公式チャンネルからSkillsまたはHooksのデモを選び、設定と実行結果を確認します。", "20分"),
     ],
     readings: [
-      reading("Agent Skills", "https://code.claude.com/docs/en/skills", "Anthropic", "Skill配置、SKILL.md、Project/User scope、Trigger。", "15分"),
+      reading("Agent Skills（英語）", "https://code.claude.com/docs/en/skills", "Anthropic", "Skill配置、SKILL.md、Project/User scope、Trigger。日本語公式版がないため英語です。", "15分", true),
       reading("Hooks", "https://code.claude.com/docs/en/hooks", "Anthropic", "Lifecycle eventでCommand、HTTP、Promptを実行する仕組み。", "15分"),
       reading("Subagents", "https://code.claude.com/docs/en/sub-agents", "Anthropic", "専門Prompt、Tool制限、権限、Skills、Hooks。", "15分"),
       reading("Settings", "https://code.claude.com/docs/en/settings", "Anthropic", "Skills、Agents、Hooks、MCPの設定場所。", "10分"),
@@ -736,7 +735,7 @@ const lessonCore: LessonCore[] = [
     color: "blue",
     objectives: ["SkillとPluginの用途を区別する", "MCPのTool/Resource/Promptを区別する", "外部接続の信頼境界を説明する"],
     schedule: [
-      { time: "0:00–0:25", title: "公式動画", detail: "CodexとMCPの公式動画を選択" },
+      { time: "0:00–0:25", title: "任意動画／構成確認", detail: "MCPのClient・Server・Toolが未知なら1本だけ見る。理解済みならManifest確認へ進む" },
       { time: "0:25–1:10", title: "公式資料", detail: "Claude Plugins、MCP、Codex Skills、Codex Plugins" },
       { time: "1:10–2:35", title: "実装", detail: "Claude Plugin starterとCodex Skill/Plugin" },
       { time: "2:35–3:00", title: "権限監査", detail: "読み取り・変更・破壊操作を分類" },
@@ -748,7 +747,7 @@ const lessonCore: LessonCore[] = [
     readings: [
       reading("Claude Code plugins", "https://code.claude.com/docs/en/plugins", "Anthropic", "Skills、Agents、Hooks、MCP serversを配布単位へまとめる方法。", "15分"),
       reading("Plugins reference", "https://code.claude.com/docs/en/plugins-reference", "Anthropic", "Manifest、Directory、Marketplace、Component。", "15分"),
-      reading("Model Context Protocol", "https://modelcontextprotocol.io/docs/getting-started/intro", "MCP", "Client、Server、Tools、Resources、Prompts、Transport。", "15分"),
+      reading("Model Context Protocol入門（英語）", "https://modelcontextprotocol.io/docs/getting-started/intro", "MCP", "Client、Server、Tools、Resources、Prompts、Transport。日本語公式版がないため英語です。", "15分", true),
       reading("Build Skills for Codex", "https://developers.openai.com/codex/build-skills", "OpenAI Developers", "SKILL.md、Trigger、Progressive disclosure、References、Scripts。", "15分"),
       reading("Build plugins", "https://learn.chatgpt.com/docs/build-plugins", "OpenAI", ".codex-plugin/plugin.json、skills、hooks、MCP、marketplace。", "15分"),
       reading("Codex CLI", "https://developers.openai.com/codex/cli", "OpenAI Developers", "CLI、承認、Sandbox、Project作業の基本。", "10分"),
@@ -783,7 +782,7 @@ const lessonCore: LessonCore[] = [
     color: "green",
     objectives: ["調査範囲と変更禁止を守る", "確認済み事実と不明点を分離する", "高Risk箇所へ根拠を付ける"],
     schedule: [
-      { time: "0:00–0:20", title: "動画復習", detail: "Laravel Courseの全体構造を再確認" },
+      { time: "0:00–0:20", title: "任意動画／調査開始", detail: "Laravel構造を思い出せない場合だけ復習。Day 09のrequest-flowがあれば調査設計へ進む" },
       { time: "0:20–0:40", title: "調査設計", detail: "質問、対象、時間配分、変更禁止" },
       { time: "0:40–2:20", title: "並行調査", detail: "Stack、Flow、DB、External、Queue、Test、Scraper" },
       { time: "2:20–3:00", title: "反証", detail: "Codexで調査結果を独立レビュー" },
@@ -829,7 +828,7 @@ const lessonCore: LessonCore[] = [
     color: "lime",
     objectives: ["症状とRoot causeを分ける", "変更しない仕様を明記する", "Rollback可能な実装順へ分解する"],
     schedule: [
-      { time: "0:00–0:25", title: "動画", detail: "RefactoringとTest safety netの解説を視聴" },
+      { time: "0:00–0:25", title: "任意動画／Issue確認", detail: "Refactoringが初めてなら解説を見る。Day 13のTest-firstを説明できればIssue分析へ進む" },
       { time: "0:25–0:50", title: "Issue分析", detail: "現状・期待・制約・非Goal" },
       { time: "0:50–2:20", title: "計画作成", detail: "影響、DB、外部通信、Test、Rollback" },
       { time: "2:20–3:00", title: "Design review", detail: "講師と別Agentの反証を反映" },
@@ -842,7 +841,7 @@ const lessonCore: LessonCore[] = [
       reading("Laravel Service Container", "https://laravel.com/docs/13.x/container", "Laravel Docs", "責務分割時のDependency設計。", "10分"),
       reading("Database Transactions", "https://laravel.com/docs/13.x/database#database-transactions", "Laravel Docs", "複数更新の原子性とRetry。", "8分"),
       reading("HTTP Tests", "https://laravel.com/docs/13.x/http-tests", "Laravel Docs", "変更しない振る舞いを固定するFeature Test。", "10分"),
-      reading("GitHub: Linking a pull request to an issue", "https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue", "GitHub Docs", "Issue、計画、PRを一つの変更目的へ結び付ける。", "6分"),
+      reading("Pull RequestをIssueにリンクする", "https://docs.github.com/ja/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue", "GitHub Docs", "Issue、計画、Pull Requestを一つの変更目的へ結び付けます。", "6分", true, "日本語"),
     ],
     steps: [
       { title: "現状と問題を分ける", detail: "観測事実、症状、Root cause、仮説を別欄へ書きます。" },
@@ -874,7 +873,7 @@ const lessonCore: LessonCore[] = [
     color: "sky",
     objectives: ["実装前のTest基準を保存する", "AI生成Diffを全行Reviewする", "外部通信とDB変更の失敗経路をTestする"],
     schedule: [
-      { time: "0:00–0:20", title: "動画復習", detail: "Laravel Test/DB章を確認" },
+      { time: "0:00–0:20", title: "任意動画／Baseline", detail: "Test Commandが分からない場合だけ復習。分かる場合はBaseline保存へ進む" },
       { time: "0:20–0:40", title: "Baseline", detail: "Branch、既存Test、再現結果を保存" },
       { time: "0:40–2:20", title: "実装", detail: "小Commit、Test、Diff reviewを反復" },
       { time: "2:20–3:00", title: "Regression", detail: "全Test、Rollback、Static analysis" },
@@ -883,11 +882,11 @@ const lessonCore: LessonCore[] = [
       video("Laravel Learn: database and CRUD chapters", "https://laravel.com/learn/getting-started-with-laravel", "Laravel Learn", "Database、Model、Validation、CRUD章を再確認し、変更とTest対象を対応させます。", "20分"),
     ],
     readings: [
-      reading("Laravel Testing", "https://laravel.com/docs/13.x/testing", "Laravel Docs", "Test実行とEnvironment。", "8分"),
+      reading("Laravel Testing（英語）", "https://laravel.com/docs/13.x/testing", "Laravel Docs", "Test実行とEnvironment。日本語公式版がないため英語です。", "8分", true),
       reading("Database Testing", "https://laravel.com/docs/13.x/database-testing", "Laravel Docs", "Database状態とFactory。", "10分"),
       reading("HTTP Client", "https://laravel.com/docs/13.x/http-client", "Laravel Docs", "Timeout、Retry、Error、Fake。", "12分"),
       reading("Migrations", "https://laravel.com/docs/13.x/migrations", "Laravel Docs", "up/downとSchema変更。", "10分"),
-      reading("GitHub: About status checks", "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks", "GitHub Docs", "CI結果をMerge gateとして読む。", "8分"),
+      reading("Status Checkについて", "https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks", "GitHub Docs", "CI結果をMerge gateとして読む方法。", "8分", true, "日本語"),
     ],
     steps: [
       { title: "Baselineを保存", detail: "既存Test、再現手順、Query数、Responseを変更前結果として保存します。" },
@@ -919,7 +918,7 @@ const lessonCore: LessonCore[] = [
     color: "pink",
     objectives: ["Review観点を体系化する", "指摘の採用/不採用を説明する", "修正後に再Testする"],
     schedule: [
-      { time: "0:00–0:20", title: "動画", detail: "GitHub公式のPR Review動画を選択" },
+      { time: "0:00–0:20", title: "任意動画／Self Review", detail: "Files changedの操作が不安な場合だけ動画を見る。操作できる人は全行Reviewへ進む" },
       { time: "0:20–0:45", title: "Self review", detail: "Files changedを全行確認" },
       { time: "0:45–2:10", title: "3者Review", detail: "Codex、Claude、人間で指摘を分類" },
       { time: "2:10–3:00", title: "対応", detail: "修正、再Test、コメント回答、Merge判定" },
@@ -928,10 +927,10 @@ const lessonCore: LessonCore[] = [
       video("GitHub pull request review videos", "https://www.youtube.com/@GitHub/search?query=pull%20request%20review", "GitHub", "GitHub公式チャンネルからPull Request reviewの操作動画を1本視聴します。", "約15分"),
     ],
     readings: [
-      reading("Reviewing proposed changes", "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/reviewing-proposed-changes-in-a-pull-request", "GitHub Docs", "Comment、Approve、Request changes。", "10分"),
-      reading("About pull request reviews", "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews", "GitHub Docs", "Review stateとBranch protection。", "8分"),
-      reading("Addressing merge conflicts", "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts", "GitHub Docs", "Conflictの原因と解消。", "10分"),
-      reading("About protected branches", "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches", "GitHub Docs", "Required reviewとStatus check。", "10分"),
+      reading("Pull Requestで提案された変更をReviewする", "https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/reviewing-proposed-changes-in-a-pull-request", "GitHub Docs", "Comment、Approve、Request changesの実際の操作。", "10分", true, "日本語"),
+      reading("Pull Request Reviewについて", "https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews", "GitHub Docs", "Review stateとBranch protection。", "補助8分", false, "日本語"),
+      reading("Merge Conflictに対処する", "https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts", "GitHub Docs", "Conflictが実際に起きた場合だけ参照します。", "必要時10分", false, "日本語"),
+      reading("保護されたBranchについて", "https://docs.github.com/ja/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches", "GitHub Docs", "Required reviewとStatus checkの背景。", "補助10分", false, "日本語"),
       reading("Secure coding practices", "https://laravel.com/docs/13.x/security", "Laravel Docs", "認証、入力、SecretなどProject版DocsのSecurity項目を確認。", "10分", false),
     ],
     steps: [
@@ -957,37 +956,40 @@ const lessonCore: LessonCore[] = [
     category: "CAPSTONE",
     title: "最終実技試験",
     shortTitle: "Final Capstone",
-    description: "未知のIssueを3時間で調査し、再現、Root cause、計画、実装、Test、PR、AI利用記録、Rollbackまで提出します。",
+    description: "会社情報Importの『2ページ目を取得できず、ページをまたぐ同一websiteを重複保存する』不具合を、再現からPull Requestまで一人で修正する最終課題です。",
     duration: "3時間",
-    outcome: "AIを使いながらも、自分で安全性と正しさを説明できる実務PRを完成する",
+    outcome: "Paginationと重複登録の不具合を最小修正し、第三者が再現・検証・Rollbackできる実務Pull Requestを完成する",
     branch: "exam/final-capstone",
     color: "yellow",
-    objectives: ["未知のIssueを再現する", "最小修正とRegression Testを作る", "AI利用と残Riskを説明する"],
+    objectives: ["固定Fixtureで2つの症状を再現する", "Root causeを実ファイルと失敗Testで証明する", "最小修正とRegression Testを小Commitで作る", "AI利用・残Risk・Rollbackを第三者へ説明する"],
     schedule: [
-      { time: "0:00–0:15", title: "試験説明", detail: "課題、禁止事項、提出物、採点を確認" },
-      { time: "0:15–0:50", title: "調査", detail: "再現、Root cause、計画" },
-      { time: "0:50–2:10", title: "実装", detail: "小Commit、Test、Diff review" },
-      { time: "2:10–2:40", title: "Review", detail: "AI Review、修正、全Test" },
-      { time: "2:40–3:00", title: "提出", detail: "PR、Risk、Rollback、AI利用記録" },
+      { time: "0:00–0:15", title: "課題を読みBranchを固定", detail: "Scenario、禁止事項、成果物、採点可能な10項目を読み、exam/final-capstoneとCleanな開始状態を記録する" },
+      { time: "0:15–0:45", title: "Regression Testを再現", detail: "skipを外し、『2ページ目欠落』『ページ間website重複』による期待値との差を保存する" },
+      { time: "0:45–1:05", title: "原因と計画を承認", detail: "Pagination、停止条件、一意Key、保存処理を追跡し、根拠Path・非Goal・Test・Rollbackをplan.mdへ書く。実装前に一度停止する" },
+      { time: "1:05–2:05", title: "Testから最小実装", detail: "再現TestをREDにし、Paginationと重複排除を別Commitで直す。各Commit後に対象TestとDiffを確認する" },
+      { time: "2:05–2:35", title: "全体検証とReview", detail: "対象Regression Test・Laravel全Test・Lint・Secret scan・AI Reviewを実行し、指摘の採否を記録する" },
+      { time: "2:35–3:00", title: "Pull Requestを提出", detail: "再現、原因、変更、検証結果、AI利用、残Risk、Rollbackを埋め、成果物と完了条件を最終照合する" },
     ],
-    videos: [
-      video("GitHub code review videos", "https://www.youtube.com/@GitHub/search?query=code%20review", "GitHub", "試験前にReviewとPR提出の操作だけを再確認します。試験中の新規学習ではなくチェック用です。", "10分"),
-    ],
+    videos: [],
     readings: [
-      reading("GitHub flow", "https://docs.github.com/en/get-started/using-github/github-flow", "GitHub Docs", "試験中のBranch、Commit、PR手順。", "5分"),
-      reading("Laravel Testing", "https://laravel.com/docs/13.x/testing", "Laravel Docs", "Project versionへ切り替えてTest commandを確認。", "5分"),
-      reading("Playwright Best Practices", "https://playwright.dev/docs/best-practices", "Playwright", "Scraper/UI Testが対象の場合の最終確認。", "5分"),
-      reading("Requests Quickstart", "https://requests.readthedocs.io/en/latest/user/quickstart/", "Requests", "HTTP Scraperが対象の場合のTimeout/Error確認。", "5分"),
+      reading("GitHub Flow", "https://docs.github.com/ja/get-started/using-github/github-flow", "GitHub Docs", "Branch・Commit・Pull Requestの操作を忘れた場合だけ参照します。最終課題の必修学習ではありません。", "必要時5分", false, "日本語"),
+      reading("Laravel Testing（英語・補助）", "https://laravel.com/docs/13.x/testing", "Laravel Docs", "Test環境の挙動を確認する必要がある場合だけ、ProjectのLaravel版と合わせて参照します。", "必要時5分"),
     ],
     steps: [
-      { title: "Issueを再現", detail: "例: 会社情報Scraperで2Page目以降が取れず、一部企業が重複登録される。入力と結果を固定します。" },
-      { title: "Root causeと計画", detail: "Pagination停止条件、重複Key、Laravel再実行Buttonの経路を調べ、最小計画を作ります。" },
-      { title: "実装とTest", detail: "Branch、小Commit、Regression Test、Timeout/Retry、重複除去、DB整合性を確認します。" },
-      { title: "PRを提出", detail: "Issue理解、再現、Root cause、計画、Code、Test、AI利用、Risk、Rollback、Review対応を空欄なく提出します。" },
+      { title: "Scenarioを自分の言葉で書く", detail: "課題は『training-lab/app/Services/CompanyImportService.php がDemoCompanySourceの1ページ目だけを取得し、Company::createで同じwebsiteを重複保存する』です。training-lab内のDemo Dataだけを使い、本番サイト・本番DB・実在顧客Dataは使いません。learning-log/day-20/issue-understanding.mdに現状、期待結果、影響、非Goalを書きます。" },
+      { title: "開始状態を保存する", detail: "Repository rootでBranchと差分を確認し、既存TestをBaselineとして保存します。mainなら作業を止め、指定Branchを開始します。", code: "npm run course -- start 20\ngit branch --show-current\ngit status -sb\nnpm run lab:test" },
+      { title: "Skipを外して症状を再現する", detail: "training-lab/tests/Feature/CompanyImportRegressionTest.php のmarkTestSkippedだけを削除し、対象Testを実行します。期待値はcompanies=3、Globexあり、crawl_runsのpages_visited=2・companies_seen=4・companies_saved=3です。修正前に失敗する出力をlearning-log/day-20/reproduction.mdへ保存します。", code: "php training-lab/artisan test --filter=CompanyImportRegressionTest" },
+      { title: "Root causeを証拠で特定する", detail: "training-lab/app/Services/CompanyImportService.php と DemoCompanySource.php を読み、fetchPage(1)固定、2ページ目のGlobex、websiteが同じAcme 2件、Company::create、固定集計値を根拠として記録します。『たぶん』だけの説明はRoot causeにしません。" },
+      { title: "実装前の計画を承認する", detail: "learning-log/day-20/plan.mdへ変更対象、変更しない範囲、Commit分割、Test、失敗時のRollbackを書きます。ここで一度実装を止め、自分またはReviewerが計画を読み直してからIMPLEMENTへ進みます。" },
+      { title: "Regression Testを先にREDにする", detail: "用意済みTestのskip解除を最初のTest変更とし、companies=3、Globexあり、pages_visited=2、seen=4、saved=3のうちどれが失敗するか確認します。Testの期待値を実装に合わせて弱めたり、再度skipしたりしてはいけません。" },
+      { title: "最小修正を2つのCommitに分ける", detail: "Commit 1は空配列になるまでPage番号を進めるPaginationと集計、Commit 2はwebsiteを一意Keyにした重複排除に分けます。無関係なUI刷新、Package更新、全面Refactor、Test削除・skipは禁止です。各Commit前にgit diff --stagedを全行読みます。" },
+      { title: "検証と安全監査を行う", detail: "対象Regression Test、Laravel全Test、Lintを実行します。Test結果がcompanies=3、pages_visited=2、seen=4、saved=3を証明し、.env・Token・Cookie・個人情報がDiffにないことを確認します。", code: "php training-lab/artisan test --filter=CompanyImportRegressionTest\nnpm run lab:test\nnpm run lab:lint\ngit diff --check\ngit status -sb" },
+      { title: "AI利用記録とSelf Reviewを残す", detail: "learning-log/day-20/ai-usage.mdへ、依頼内容、採用した案、不採用の案と理由、人間が確認したPath・Testを書きます。さらにFiles changedを全行読み、仕様・不要変更・DB・Timeout・Retry・Secret・Rollbackを点検します。" },
+      { title: "採点可能なPull Requestを提出する", detail: "PRへIssue理解、再現手順、Root causeと根拠、変更概要、Commit、Test Commandと結果、AI利用、残Risk、Rollbackを記載します。Reviewerが新しい環境で手順をコピーして再現できる文章にします。" },
     ],
-    prompt: "この最終課題について、最初は調査だけ行ってください。Issue理解、再現手順、Root cause候補、変更計画、影響範囲、Test、Risk、Rollback、不明点を作り、実装開始前に停止してください。",
-    deliverables: ["Issue理解", "再現手順", "Root cause", "変更計画", "BranchとCode", "Testと実行結果", "Pull Request", "AI利用記録", "RiskとRollback", "Review対応"],
-    checks: ["SecretをCommitしていない", "Testを実行した", "Diffを全行確認した", "mainへ直接Pushしていない", "DB破壊操作を無確認で行っていない", "Scrapingの規約・負荷・robots.txtを確認した", "AI出力を自分の言葉で説明できる"],
+    prompt: "最終課題をCOACHモードで開始します。AGENTS.md、START-HERE.md、course/tasks/day-20.mdを読んでください。まだ実装しないでください。CompanyImportRegressionTestのskipを外して『2ページ目を取得できない』『ページをまたぐ同一websiteが重複保存される』を再現する方法、Root cause候補と確認Path、変更しない範囲、Regression Test、Commit分割、Risk、Rollback、不明点をlearning-log/day-20/plan.md用Checklistとして提案し、実装開始前に停止してください。",
+    deliverables: ["learning-log/day-20/issue-understanding.md（現状・期待・影響・非Goal）", "learning-log/day-20/reproduction.md（2症状のCommand・期待値・実際値）", "learning-log/day-20/plan.md（根拠Path・変更範囲・Test・Rollback）", "PaginationのRegression Testと最小修正Commit", "重複排除のRegression Testと最小修正Commit", "全Test・Lint・git diff --checkの結果", "learning-log/day-20/ai-usage.md（依頼・採用/不採用・人間の検証）", "Pull Request（再現・原因・変更・検証・Risk・Rollback）"],
+    checks: ["1. exam/final-capstoneで作業しmainへ直接Pushしていない", "2. markTestSkippedを削除し、修正前の失敗出力を保存した", "3. Root causeにCompanyImportService.php・DemoCompanySource.php・失敗Testの根拠がある", "4. Regression Testがcompanies=3とGlobexの保存を証明してPASSする", "5. Regression Testがpages_visited=2・companies_seen=4・companies_saved=3を証明してPASSする", "6. websiteが同じAcmeを1社として保存し、Testを削除・skip・弱体化していない", "7. Laravel全Test・Lint・git diff --checkがPASSする", "8. Secret・.env値・Cookie・個人情報をCommitしていない", "9. Files changedを全行読み、AI案の採用/不採用理由を記録した", "10. PRに第三者が実行できるRollback手順と残Riskがある"],
     quizzes: [
       q("最終試験で点数に関係なく不合格になる行為はどれですか？", ["SecretをCommitする", "小さなCommitを作る", "不明点を書く"], 0, "Secret Commit、Test未実行、Diff未確認、main直接Pushなどは安全性の最低条件に反します。"),
       q("AI利用記録に必要なものは何ですか？", ["依頼・採用/不採用・検証方法", "AIの名前だけ", "会話の文字数だけ"], 0, "何を任せ、何を判断し、どう正しさを確認したかを再現可能にします。"),
@@ -998,6 +1000,7 @@ const lessonCore: LessonCore[] = [
 export const lessons: Lesson[] = lessonCore.map((lesson) => ({
   ...lesson,
   ...getLessonSupport(lesson.day),
+  quizzes: getLessonQuizzes(lesson.day, lesson.quizzes),
 }));
 
 export const weekSummaries = [

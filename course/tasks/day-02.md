@@ -23,7 +23,7 @@ Gitは失敗を消す道具ではなく、変更を小さく記録して安全�
 - [ ] 現在のBranch名を確認できる
 - [ ] git status -sbが読める
 
-## Three words for today
+## 先に調べる用語
 
 - **差分（Diff）:** 変更前と変更後の違い
 - **Stage:** 次のCommitへ入れる変更を選ぶ場所
@@ -43,10 +43,20 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-02.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–0:35 動画:** Gitの履歴・Branch・Remoteの全体像を確認
+- **0:00–0:35 任意動画／先行演習:** Gitが初めてなら動画の必要な章を見る。git statusを説明できる人は日本語資料と演習へ進む
 - **0:35–1:15 公式資料:** Pro Gitを指定順で読む
 - **1:15–2:30 ハンズオン:** 変更、差分確認、Commit、復元、Branch、Push
 - **2:30–3:00 説明試験:** Gitの5領域を自分の言葉で説明
+
+## Learning resources
+
+### 必修
+
+- **Pro Git 第2章「Gitの基本」**（日本語・必修15分）— 日本語版の2.2『変更内容のRepositoryへの記録』を必修範囲として読みます。2.1、2.3〜2.5は操作で迷った箇所だけ参照します。 [開く](https://git-scm.com/book/ja/v2)
+
+### 任意・困ったときだけ
+
+- **Git and GitHub for Beginners**（英語・35分）— 初期化、Commit、Branch、Remote、GitHubまでを一つのリポジトリで追う入門動画です。最初の35分を視聴します。 [必要なときだけ開く](https://www.youtube.com/watch?v=RGOj5yH7evk)
 
 ## Objectives
 

@@ -23,7 +23,7 @@ AI生成Diffを全行説明し、Test結果とRollbackを伴う安全な実装Br
 - [ ] 変更前Test結果を保存
 - [ ] Rollback Commandを確認
 
-## Three words for today
+## 先に調べる用語
 
 - **Baseline:** 変更前の比較基準
 - **Static analysis:** 実行せずCode上の問題を調べる検査
@@ -43,10 +43,24 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-18.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–0:20 動画復習:** Laravel Test/DB章を確認
+- **0:00–0:20 任意動画／Baseline:** Test Commandが分からない場合だけ復習。分かる場合はBaseline保存へ進む
 - **0:20–0:40 Baseline:** Branch、既存Test、再現結果を保存
 - **0:40–2:20 実装:** 小Commit、Test、Diff reviewを反復
 - **2:20–3:00 Regression:** 全Test、Rollback、Static analysis
+
+## Learning resources
+
+### 必修
+
+- **Laravel Testing（英語）**（英語・8分）— Test実行とEnvironment。日本語公式版がないため英語です。 [開く](https://laravel.com/docs/13.x/testing)
+- **Status Checkについて**（日本語・8分）— CI結果をMerge gateとして読む方法。 [開く](https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks)
+
+### 任意・困ったときだけ
+
+- **Laravel Learn: database and CRUD chapters**（英語・20分）— Database、Model、Validation、CRUD章を再確認し、変更とTest対象を対応させます。 [必要なときだけ開く](https://laravel.com/learn/getting-started-with-laravel)
+- **Database Testing**（英語・10分）— Database状態とFactory。 [必要なときだけ開く](https://laravel.com/docs/13.x/database-testing)
+- **HTTP Client**（英語・12分）— Timeout、Retry、Error、Fake。 [必要なときだけ開く](https://laravel.com/docs/13.x/http-client)
+- **Migrations**（英語・10分）— up/downとSchema変更。 [必要なときだけ開く](https://laravel.com/docs/13.x/migrations)
 
 ## Objectives
 

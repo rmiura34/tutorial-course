@@ -23,7 +23,7 @@ PluginとMCPはAIが触れられる外部機能を増やします。便利さと
 - [ ] 外部接続なしのMockから始める
 - [ ] 許可する操作と禁止操作を列挙
 
-## Three words for today
+## 先に調べる用語
 
 - **Plugin:** SkillやToolなどを配布できるPackage
 - **MCP:** AIと外部Tool・Dataを接続する共通方式
@@ -43,10 +43,26 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-15.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–0:25 公式動画:** CodexとMCPの公式動画を選択
+- **0:00–0:25 任意動画／構成確認:** MCPのClient・Server・Toolが未知なら1本だけ見る。理解済みならManifest確認へ進む
 - **0:25–1:10 公式資料:** Claude Plugins、MCP、Codex Skills、Codex Plugins
 - **1:10–2:35 実装:** Claude Plugin starterとCodex Skill/Plugin
 - **2:35–3:00 権限監査:** 読み取り・変更・破壊操作を分類
+
+## Learning resources
+
+### 必修
+
+- **Model Context Protocol入門（英語）**（英語・15分）— Client、Server、Tools、Resources、Prompts、Transport。日本語公式版がないため英語です。 [開く](https://modelcontextprotocol.io/docs/getting-started/intro)
+
+### 任意・困ったときだけ
+
+- **Model Context Protocol videos**（英語・15分）— MCPのClient、Server、Toolと外部Data接続を扱う公式動画を1本視聴します。 [必要なときだけ開く](https://www.youtube.com/@AnthropicAI/search?query=Model%20Context%20Protocol)
+- **Codex videos**（英語・10分）— CodexのSkillやAgent workflowに近い公式デモを1本視聴します。 [必要なときだけ開く](https://www.youtube.com/@OpenAI/search?query=Codex%20skills)
+- **Claude Code plugins**（英語・15分）— Skills、Agents、Hooks、MCP serversを配布単位へまとめる方法。 [必要なときだけ開く](https://code.claude.com/docs/en/plugins)
+- **Plugins reference**（英語・15分）— Manifest、Directory、Marketplace、Component。 [必要なときだけ開く](https://code.claude.com/docs/en/plugins-reference)
+- **Build Skills for Codex**（英語・15分）— SKILL.md、Trigger、Progressive disclosure、References、Scripts。 [必要なときだけ開く](https://developers.openai.com/codex/build-skills)
+- **Build plugins**（英語・15分）— .codex-plugin/plugin.json、skills、hooks、MCP、marketplace。 [必要なときだけ開く](https://learn.chatgpt.com/docs/build-plugins)
+- **Codex CLI**（英語・10分）— CLI、承認、Sandbox、Project作業の基本。 [必要なときだけ開く](https://developers.openai.com/codex/cli)
 
 ## Objectives
 

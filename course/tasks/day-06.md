@@ -23,7 +23,7 @@ HTMLは画面の意味と骨組み、CSSは見た目を担当します。役割�
 - [ ] Browser PreviewまたはPortを開ける
 - [ ] HTMLファイルとCSSファイルを見分けられる
 
-## Three words for today
+## 先に調べる用語
 
 - **HTML:** Webページの内容と構造を表す言語
 - **CSS:** 色・余白・配置を指定する言語
@@ -43,10 +43,26 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-06.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–0:25 公式動画:** DevToolsの6つの基本機能を確認
+- **0:00–0:25 任意動画／DevToolsを開く:** DevToolsが初めてなら動画を見る。使ったことがあればNetwork panelを開いて演習へ進む
 - **0:25–1:15 公式資料:** HTTP → JSON → DOM → Selectorの順で読む
 - **1:15–2:30 ブラウザ演習:** Elements、Console、Network、Applicationを観察
 - **2:30–3:00 提出:** Request分析とクイズ
+
+## Learning resources
+
+### 必修
+
+- **ウェブの仕組み**（日本語・10分）— Browser、DNS、HTTP、Serverの全体像。初学者は最初に読みます。 [開く](https://developer.mozilla.org/ja/docs/Learn_web_development/Getting_started/Web_standards/How_the_web_works)
+- **HTTPの概要**（日本語・10分）— Request／ResponseとHeaderの基本。 [開く](https://developer.mozilla.org/ja/docs/Web/HTTP/Guides/Overview)
+
+### 任意・困ったときだけ
+
+- **Fun & Powerful: Intro to Chrome DevTools**（英語・約20分）— Inspect、Elements、Console、Sources、Network、Device Modeを一度に確認できる公式動画付き記事です。 [必要なときだけ開く](https://developer.chrome.com/blog/devtools-tips-32)
+- **HTTPリクエストメソッド**（日本語・必要時8分）— GET、POST、PUT、PATCH、DELETEの意味を迷った場合に参照します。 [必要なときだけ開く](https://developer.mozilla.org/ja/docs/Web/HTTP/Reference/Methods)
+- **HTTPレスポンスステータスコード**（日本語・必要時8分）— 2xx、3xx、4xx、5xxをNetwork panelで確認するときに参照します。 [必要なときだけ開く](https://developer.mozilla.org/ja/docs/Web/HTTP/Reference/Status)
+- **Fetch APIの使用**（日本語・補助10分）— Browser JavaScriptからHTTP通信する流れ。Day 7でも使います。 [必要なときだけ開く](https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch)
+- **DOMの紹介**（日本語・補助10分）— HTMLが操作可能なObjectへ変換される仕組み。 [必要なときだけ開く](https://developer.mozilla.org/ja/docs/Web/API/Document_Object_Model/Introduction)
+- **CSSセレクター**（日本語・必要時10分）— 操作対象を安定して特定するときだけ参照します。 [必要なときだけ開く](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_selectors)
 
 ## Objectives
 

@@ -10,18 +10,13 @@ const taskDirectory = resolve(root, "course", "tasks");
 await mkdir(taskDirectory, { recursive: true });
 
 for (const lesson of lessons) {
-  if (lesson.videos.length === 0) {
-    throw new Error(`Day ${lesson.day} has no video resource`);
-  }
-  if (lesson.readings.length === 0) {
-    throw new Error(`Day ${lesson.day} has no reading resource`);
-  }
   for (const resource of [...lesson.videos, ...lesson.readings]) {
     if (
       !resource.title.trim() ||
       !resource.source.trim() ||
       !resource.description.trim() ||
       !resource.time.trim() ||
+      !resource.language ||
       !resource.url.startsWith("https://")
     ) {
       throw new Error(`Day ${lesson.day} has an incomplete resource: ${resource.title}`);
@@ -77,6 +72,10 @@ const tasks = lessons.map((lesson) => {
     submissionGuide: lesson.submissionGuide,
     objectives: lesson.objectives,
     schedule: lesson.schedule,
+    learningResources: [
+      ...lesson.videos.map((resource) => ({ type: "video", ...resource })),
+      ...lesson.readings.map((resource) => ({ type: "reading", ...resource })),
+    ],
     instructions: lesson.steps,
     deliverables: lesson.deliverables,
     checks: lesson.checks,
@@ -111,6 +110,14 @@ for (const task of tasks) {
       return `${index + 1}. **${item.title}** — ${item.detail}${code}`;
     })
     .join("\n\n");
+  const requiredResources = task.learningResources
+    .filter((item) => item.required)
+    .map((item) => `- **${item.title}**（${item.language}・${item.time}）— ${item.description} [開く](${item.url})`)
+    .join("\n");
+  const optionalResources = task.learningResources
+    .filter((item) => !item.required)
+    .map((item) => `- **${item.title}**（${item.language}・${item.time}）— ${item.description} [必要なときだけ開く](${item.url})`)
+    .join("\n");
   const deliverables = task.deliverables.map((item) => `- [ ] ${item}`).join("\n");
   const checks = task.checks.map((item) => `- [ ] ${item}`).join("\n");
 
@@ -137,7 +144,7 @@ ${task.whyItMatters}
 
 ${prerequisites}
 
-## Three words for today
+## 先に調べる用語
 
 ${terms}
 
@@ -156,6 +163,16 @@ ${task.kickoffPrompt}
 ## 180-minute schedule
 
 ${schedule}
+
+## Learning resources
+
+### 必修
+
+${requiredResources || "このDayに事前の必修資料はありません。Taskから開始してください。"}
+
+### 任意・困ったときだけ
+
+${optionalResources || "このDayに任意資料はありません。"}
 
 ## Objectives
 

@@ -23,7 +23,7 @@ Database変更は画面より戻しにくいため、読む・試す・戻す手
 - [ ] LabのSQLite fileを確認できる
 - [ ] Test用Databaseと学習用Databaseを区別する
 
-## Three words for today
+## 先に調べる用語
 
 - **Database:** 構造化したDataを保存する仕組み
 - **Migration:** Table構造の変更をCodeで記録する仕組み
@@ -43,10 +43,26 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-10.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–0:35 動画:** Laravel公式のDatabaseとModel章を視聴
+- **0:00–0:35 任意動画／Schema確認:** Eloquent未経験者は指定章を見る。経験者はMigrationとModelの対応確認へ進む
 - **0:35–1:20 SQLBolt:** SELECT、JOIN、Aggregate、INSERT/UPDATE/DELETE
 - **1:20–2:30 Laravel演習:** Eloquent、Relation、Migration、N+1
 - **2:30–3:00 検証:** Query logとTest結果を提出
+
+## Learning resources
+
+### 必修
+
+- **SQLBolt（英語・対話演習）**（英語・30分）— SELECT、JOIN、NULL、Aggregateまでの指定ExerciseをBrowser上で実行します。日本語公式版はありません。 [開く](https://sqlbolt.com/)
+
+### 任意・困ったときだけ
+
+- **Laravel Learn: Database / Model chapters**（英語・約38分）— Working with the database、Our first model、Creating and storingの章を視聴します。 [必要なときだけ開く](https://laravel.com/learn/getting-started-with-laravel)
+- **Database**（英語・10分）— Connection、Transaction、Query event。 [必要なときだけ開く](https://laravel.com/docs/13.x/database)
+- **Query Builder**（英語・12分）— SELECT、JOIN、Aggregate、Mutation。 [必要なときだけ開く](https://laravel.com/docs/13.x/queries)
+- **Migrations**（英語・12分）— Schema変更、up/down、rollback。 [必要なときだけ開く](https://laravel.com/docs/13.x/migrations)
+- **Eloquent**（英語・12分）— Model、Query、Mass assignment、Serialization。 [必要なときだけ開く](https://laravel.com/docs/13.x/eloquent)
+- **Eloquent Relationships**（英語・15分）— RelationとEager loading。 [必要なときだけ開く](https://laravel.com/docs/13.x/eloquent-relationships)
+- **Collections**（英語・10分）— DB結果をApplication内で変換するCollection。 [必要なときだけ開く](https://laravel.com/docs/13.x/collections)
 
 ## Objectives
 

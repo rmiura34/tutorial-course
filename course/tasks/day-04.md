@@ -23,7 +23,7 @@ Cursorへ渡すContextを絞ると、関係ないファイルの変更や秘密�
 - [ ] RepositoryをCursorで開ける
 - [ ] Day 01の地図を手元に置く
 
-## Three words for today
+## 先に調べる用語
 
 - **Context:** AIが回答に使える情報
 - **Indexing:** Codeを検索できるよう整理する処理
@@ -43,10 +43,25 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-04.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–0:30 公式デモ:** Cursor LearnでAgent・Rules・Contextを確認
+- **0:00–0:30 任意デモ／操作確認:** Cursorが初めてならAgent・Rules・Contextのデモを見る。操作経験者は調査対象の確認へ進む
 - **0:30–1:10 公式資料:** QuickstartからPrivacyまで順番に読む
 - **1:10–2:30 調査演習:** Laravel versionとユーザー一覧の処理経路を追う
 - **2:30–3:00 小変更:** 文言だけ変更しDiffを人間が承認
+
+## Learning resources
+
+### 必修
+
+- **Cursor Quickstart（英語）**（英語・8分）— 最初のProjectとAgent操作。日本語公式版がないため英語です。 [開く](https://docs.cursor.com/en/get-started/quickstart)
+
+### 任意・困ったときだけ
+
+- **Cursor Learn**（英語・30分）— Cursor公式の短いデモから、Agent、Tab、コードベースContextの操作を確認します。 [必要なときだけ開く](https://cursor.com/learn)
+- **Agent overview**（英語・8分）— Agentが検索、編集、Terminal実行を行う範囲。 [必要なときだけ開く](https://docs.cursor.com/en/agent/overview)
+- **Rules**（英語・10分）— プロジェクト固有の継続的な指示を定義する方法。 [必要なときだけ開く](https://docs.cursor.com/en/context/rules)
+- **Codebase indexing**（英語・8分）— Indexingで検索可能になる範囲と更新。 [必要なときだけ開く](https://docs.cursor.com/en/context/codebase-indexing)
+- **Ignore files**（英語・8分）— 秘密情報や巨大ファイルをContextから除外する方法。 [必要なときだけ開く](https://docs.cursor.com/en/context/ignore-files)
+- **Privacy and security**（英語・8分）— 送信されるContextと組織で確認すべき設定。 [必要なときだけ開く](https://www.cursor.com/security)
 
 ## Objectives
 

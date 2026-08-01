@@ -4,7 +4,7 @@
 
 | Surface | 受講者の用途 | 運営者の責任 |
 |---|---|---|
-| 教材サイト | 動画、公式資料、Quiz、Task確認 | 公開Linkを案内する |
+| 教材サイト | 必須教材、任意教材、10問Quiz、実行手順、Task確認 | 公開Linkを案内する |
 | GitHub Repository | Code、Branch、Commit、PR | TemplateまたはFork方式を決める |
 | Codespaces | 開発環境 | Dev Containerが完了することを定期確認する |
 | Laravel Lab | 実装・Debug・Test | Migration、Seeder、既知Scenarioを保守する |

@@ -23,7 +23,7 @@ Refactoringの失敗は、Codeより「変えてはいけない振る舞い」�
 - [ ] 症状を再現できる
 - [ ] このDayでは承認前に実装しない
 
-## Three words for today
+## 先に調べる用語
 
 - **Refactoring:** 外から見える動作を保ち内部構造を改善すること
 - **非Goal:** 今回あえて行わないこと
@@ -43,10 +43,24 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-17.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–0:25 動画:** RefactoringとTest safety netの解説を視聴
+- **0:00–0:25 任意動画／Issue確認:** Refactoringが初めてなら解説を見る。Day 13のTest-firstを説明できればIssue分析へ進む
 - **0:25–0:50 Issue分析:** 現状・期待・制約・非Goal
 - **0:50–2:20 計画作成:** 影響、DB、外部通信、Test、Rollback
 - **2:20–3:00 Design review:** 講師と別Agentの反証を反映
+
+## Learning resources
+
+### 必修
+
+- **Pull RequestをIssueにリンクする**（日本語・6分）— Issue、計画、Pull Requestを一つの変更目的へ結び付けます。 [開く](https://docs.github.com/ja/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue)
+
+### 任意・困ったときだけ
+
+- **Refactoring videos**（英語・約20分）— Laravel/PHPのRefactoringとTestを扱う動画を1本選び、変更単位とSafety netを確認します。 [必要なときだけ開く](https://www.youtube.com/@Laracasts/search?query=refactoring)
+- **Refactoring**（英語・10分）— 既存動作を保ちながら内部構造を改善する定義とCode smell。 [必要なときだけ開く](https://martinfowler.com/books/refactoring.html)
+- **Laravel Service Container**（英語・10分）— 責務分割時のDependency設計。 [必要なときだけ開く](https://laravel.com/docs/13.x/container)
+- **Database Transactions**（英語・8分）— 複数更新の原子性とRetry。 [必要なときだけ開く](https://laravel.com/docs/13.x/database#database-transactions)
+- **HTTP Tests**（英語・10分）— 変更しない振る舞いを固定するFeature Test。 [必要なときだけ開く](https://laravel.com/docs/13.x/http-tests)
 
 ## Objectives
 

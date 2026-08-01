@@ -23,7 +23,7 @@ Pull Requestは単なる提出ボタンではなく、「なぜ変えたか・�
 - [ ] 自分のRepositoryへPushできる
 - [ ] Day 02でCommitとBranchを区別できた
 
-## Three words for today
+## 先に調べる用語
 
 - **Issue:** 問題や作業目的を記録する場所
 - **Pull Request:** Branchの変更を取り込んでもらう提案
@@ -43,10 +43,23 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-03.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–0:25 動画復習:** GitHub上のBranchとPR部分を確認
+- **0:00–0:25 任意動画／前Day復習:** BranchとPRの画面操作が不安な人だけ視聴。理解済みならIssue作成へ進む
 - **0:25–1:05 公式資料:** Branch → Flow → PR → Reviewの順で読む
 - **1:05–2:35 実務フロー:** Issue、Branch、2 Commit、PR、Review、修正
 - **2:35–3:00 振り返り:** Merge可能性と残リスクを説明
+
+## Learning resources
+
+### 必修
+
+- **GitHub Flow**（日本語・8分）— Branch、Commit、Pull Request、Review、Mergeの標準フロー。 [開く](https://docs.github.com/ja/get-started/using-github/github-flow)
+
+### 任意・困ったときだけ
+
+- **GitHub Flow部分を視聴**（英語・25分）— BranchをPushし、GitHub上でPull Requestへ変える部分を視聴します。 [必要なときだけ開く](https://www.youtube.com/watch?v=RGOj5yH7evk&t=3528s)
+- **Pull Requestについて**（日本語・8分）— Pull Requestが変更の提案・議論・Review単位である理由。 [必要なときだけ開く](https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
+- **Pull Requestを作成する**（日本語・必要時8分）— baseとcompareの操作で迷った場合だけ参照します。 [必要なときだけ開く](https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
+- **GitHub Skills: Review Pull Requests（英語・補助）**（英語・任意30分）— Review操作を追加練習したい場合の公式ハンズオンです。 [必要なときだけ開く](https://github.com/skills/review-pull-requests)
 
 ## Objectives
 

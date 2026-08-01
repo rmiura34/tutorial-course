@@ -23,7 +23,7 @@ Paginationと重複除去は実務Scraperで頻出します。停止条件を誤
 - [ ] 一意にできるKey候補を確認
 - [ ] 最大ページ数を安全な小さい値に設定
 
-## Three words for today
+## 先に調べる用語
 
 - **Pagination:** 結果を複数ページに分ける仕組み
 - **重複排除:** 同じ対象を一度だけ残す処理
@@ -43,10 +43,24 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-12.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–0:45 公式動画:** Microsoft LearnのPlaywright入門Seriesを視聴
+- **0:00–0:45 任意動画／Locator確認:** Playwright未経験者は日本語Seriesの必要な章を見る。経験者はLocator演習へ進む
 - **0:45–1:25 公式資料:** Locator、Auto-wait、Auth、Network、Debug
 - **1:25–2:35 自動化演習:** Login、一覧、Pagination、Download
 - **2:35–3:00 比較:** UI操作とAPI取得の選択理由を提出
+
+## Learning resources
+
+### 必修
+
+- **Microsoft Learn: PlaywrightでBuildする**（日本語・25分）— 最初のTest、Locator、Assertion、実行を日本語で学ぶ必修教材です。 [開く](https://learn.microsoft.com/ja-jp/training/modules/build-with-playwright/)
+
+### 任意・困ったときだけ
+
+- **Playwrightを使用したE2E Test入門（日本語字幕）**（日本語・必要な章だけ・約45分）— Playwrightが初めての人向けの公式動画Seriesです。Installation、実行、作成、Debugから必要な章だけ視聴します。 [必要なときだけ開く](https://learn.microsoft.com/ja-jp/shows/getting-started-with-end-to-end-testing-with-playwright/)
+- **Locators（英語・補助）**（英語・必要時12分）— role、label、text、test idの詳細を確認するときだけ参照します。日本語公式版はありません。 [必要なときだけ開く](https://playwright.dev/docs/locators)
+- **Auto-waiting（英語・補助）**（英語・必要時10分）— 待機の理由が分からない場合だけ参照します。 [必要なときだけ開く](https://playwright.dev/docs/actionability)
+- **Authentication（英語・補助）**（英語・必要時12分）— Storage stateを使う演習時だけ参照し、Secret管理を確認します。 [必要なときだけ開く](https://playwright.dev/docs/auth)
+- **Network（英語・補助）**（英語・必要時10分）— XHR/Fetchの観察やMockが必要な場合だけ参照します。 [必要なときだけ開く](https://playwright.dev/docs/network)
 
 ## Objectives
 

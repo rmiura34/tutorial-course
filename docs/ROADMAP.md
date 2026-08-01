@@ -3,10 +3,10 @@
 ## 実装済み
 
 - 20日・60時間のCourse Site
-- 全Dayの動画または公式動画Course Link
-- 公式資料の読む順番、目的、目安時間
+- 必要なDayだけに出す任意動画
+- 日本語優先の公式資料、読む順番、目的、目安時間、必須／任意表示
 - 180分の時間割
-- Hands-on、Prompt、複数Quiz、提出物、完了条件
+- 作業場所・Command・理由・成功状態付きHands-on、Prompt、各日10問Quiz、提出物、完了条件
 - Browser内の進捗保存
 - Codespaces / Dev Container
 - Issue / Pull Request Template

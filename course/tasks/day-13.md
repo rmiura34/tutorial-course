@@ -23,7 +23,7 @@ Testは完成後の採点ではなく、変更してよい範囲を示す安全�
 - [ ] 期待する入力と出力を文章化
 - [ ] Test Commandを確認
 
-## Three words for today
+## 先に調べる用語
 
 - **Unit Test:** 小さな関数やClassを単独で確かめるTest
 - **Feature Test:** 複数部品を通した振る舞いを確かめるTest
@@ -43,10 +43,26 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-13.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–0:30 動画:** Playwright DebuggingとLaravel Testingの動画
+- **0:00–0:30 任意動画／失敗Test確認:** Debug操作が不安な人だけ動画を見る。経験者は用意された失敗Testの再現へ進む
 - **0:30–1:10 公式資料:** HTTP Tests、Database Testing、Logging
 - **1:10–2:35 Bug修正:** 再現 → Test → Root cause → 最小修正
 - **2:35–3:00 回帰確認:** 全TestとDiffを提出
+
+## Learning resources
+
+### 必修
+
+- **HTTP Tests（英語）**（英語・15分）— Request、Response Assertion、Session、Validation。日本語公式版がないため英語です。 [開く](https://laravel.com/docs/13.x/http-tests)
+
+### 任意・困ったときだけ
+
+- **Playwright TestのDebug（任意・日本語字幕）**（日本語・必要時15分）— Debug操作が不安な場合だけ公式SeriesのDebugging episodeを確認します。 [必要なときだけ開く](https://learn.microsoft.com/ja-jp/shows/getting-started-with-end-to-end-testing-with-playwright/)
+- **Laravel testing videos**（英語・15分）— Laravel Testの実行とHTTP Assertionを扱う動画を1本選びます。 [必要なときだけ開く](https://www.youtube.com/@Laracasts/search?query=Laravel%20testing)
+- **Laravel Testing**（英語・10分）— Test環境、並列実行、Coverage。 [必要なときだけ開く](https://laravel.com/docs/13.x/testing)
+- **Database Testing**（英語・12分）— Fixture、Factory、Database Assertion。 [必要なときだけ開く](https://laravel.com/docs/13.x/database-testing)
+- **Mocking**（英語・10分）— Mock、Spy、Facade、Time。 [必要なときだけ開く](https://laravel.com/docs/13.x/mocking)
+- **Logging**（英語・10分）— Channel、Level、Context、Structured log。 [必要なときだけ開く](https://laravel.com/docs/13.x/logging)
+- **Error Handling**（英語・10分）— Exception報告、Rendering、Context。 [必要なときだけ開く](https://laravel.com/docs/13.x/errors)
 
 ## Objectives
 

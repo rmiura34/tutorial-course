@@ -23,7 +23,7 @@ PHPの配列・条件分岐・関数はLaravelのControllerやServiceを読む�
 - [ ] 変数と文字列の違いを説明できる
 - [ ] TerminalでTestを実行できる
 
-## Three words for today
+## 先に調べる用語
 
 - **変数:** 値へ名前を付けたもの
 - **関数:** 入力を受け処理し結果を返すまとまり
@@ -43,10 +43,24 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-08.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–1:15 公式動画コース:** Laravel公式PHP Fundamentalsを通しで視聴
+- **0:00–1:15 任意動画／PHP基礎演習:** PHP未経験者は必要な章だけ視聴。変数・配列・Functionを読める人はManualとClass読解へ進む
 - **1:15–1:45 Manual:** OOP、Namespace、Exceptionを確認
 - **1:45–2:35 読解演習:** Laravel Classを日本語へ翻訳
 - **2:35–3:00 確認:** 小さなUnit Testとクイズ
+
+## Learning resources
+
+### 必修
+
+- **クラスとオブジェクト**（日本語・12分）— Class、Property、Method、Visibility、Inheritance。 [開く](https://www.php.net/manual/ja/language.oop5.php)
+- **名前空間**（日本語・8分）— Namespace宣言とuseによるImport。 [開く](https://www.php.net/manual/ja/language.namespaces.php)
+
+### 任意・困ったときだけ
+
+- **PHP Fundamentals**（英語・71分）— Variables、Arrays、Functions、Loops、Classes、Modern PHP、Composerを10本・71分で学ぶ公式動画コースです。 [必要なときだけ開く](https://laravel.com/learn/php-fundamentals)
+- **PHP言語リファレンス**（日本語・必要時15分）— 構文、型、変数、制御構造、Function、配列。分からない構文だけ参照します。 [必要なときだけ開く](https://www.php.net/manual/ja/langref.php)
+- **例外**（日本語・補助8分）— throw、try/catch/finally、Exceptionの伝播。 [必要なときだけ開く](https://www.php.net/manual/ja/language.exceptions.php)
+- **PHP The Right Way**（英語・15分）— Code style、Dependency management、Testing、Securityの補助資料。 [必要なときだけ開く](https://phptherightway.com/)
 
 ## Objectives
 

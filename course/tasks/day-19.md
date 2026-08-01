@@ -23,7 +23,7 @@ Reviewの目的はAIや人の意見へ従うことではなく、仕様と証拠
 - [ ] PR説明欄を埋めた
 - [ ] Files changedを自分で全行確認
 
-## Three words for today
+## 先に調べる用語
 
 - **Review:** 変更を第三者視点で検査すること
 - **Status check:** CIなど自動検査の結果
@@ -43,10 +43,24 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-19.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–0:20 動画:** GitHub公式のPR Review動画を選択
+- **0:00–0:20 任意動画／Self Review:** Files changedの操作が不安な場合だけ動画を見る。操作できる人は全行Reviewへ進む
 - **0:20–0:45 Self review:** Files changedを全行確認
 - **0:45–2:10 3者Review:** Codex、Claude、人間で指摘を分類
 - **2:10–3:00 対応:** 修正、再Test、コメント回答、Merge判定
+
+## Learning resources
+
+### 必修
+
+- **Pull Requestで提案された変更をReviewする**（日本語・10分）— Comment、Approve、Request changesの実際の操作。 [開く](https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/reviewing-proposed-changes-in-a-pull-request)
+
+### 任意・困ったときだけ
+
+- **GitHub pull request review videos**（英語・約15分）— GitHub公式チャンネルからPull Request reviewの操作動画を1本視聴します。 [必要なときだけ開く](https://www.youtube.com/@GitHub/search?query=pull%20request%20review)
+- **Pull Request Reviewについて**（日本語・補助8分）— Review stateとBranch protection。 [必要なときだけ開く](https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews)
+- **Merge Conflictに対処する**（日本語・必要時10分）— Conflictが実際に起きた場合だけ参照します。 [必要なときだけ開く](https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts)
+- **保護されたBranchについて**（日本語・補助10分）— Required reviewとStatus checkの背景。 [必要なときだけ開く](https://docs.github.com/ja/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)
+- **Secure coding practices**（英語・10分）— 認証、入力、SecretなどProject版DocsのSecurity項目を確認。 [必要なときだけ開く](https://laravel.com/docs/13.x/security)
 
 ## Objectives
 

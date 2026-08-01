@@ -23,7 +23,7 @@ SkillとHookはAIの作業手順を再利用可能にし、危険な操作を機
 - [ ] 安全にTestできる専用Branch
 - [ ] 禁止したいCommandを具体化
 
-## Three words for today
+## 先に調べる用語
 
 - **Skill:** 特定作業の手順・知識・Tool利用をまとめた再利用部品
 - **Hook:** 決まったEventの前後で自動実行する処理
@@ -43,10 +43,24 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-14.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–0:25 公式動画:** Skills・Hooks・Subagentsの公式デモを視聴
+- **0:00–0:25 任意動画／Starter確認:** SkillとHookを見たことがない人だけデモを見る。経験者はstarter-kitsを開く
 - **0:25–1:05 公式資料:** Skills → Hooks → Subagents → Settings
 - **1:05–2:35 実装:** Laravel調査Skill、安全Refactor Skill、Hook
 - **2:35–3:00 実行試験:** Trigger、誤Trigger、危険操作Blockを検証
+
+## Learning resources
+
+### 必修
+
+- **Agent Skills（英語）**（英語・15分）— Skill配置、SKILL.md、Project/User scope、Trigger。日本語公式版がないため英語です。 [開く](https://code.claude.com/docs/en/skills)
+
+### 任意・困ったときだけ
+
+- **Claude Code Skills / Hooks videos**（英語・20分）— 公式チャンネルからSkillsまたはHooksのデモを選び、設定と実行結果を確認します。 [必要なときだけ開く](https://www.youtube.com/@AnthropicAI/search?query=Claude%20Code%20skills%20hooks)
+- **Hooks**（英語・15分）— Lifecycle eventでCommand、HTTP、Promptを実行する仕組み。 [必要なときだけ開く](https://code.claude.com/docs/en/hooks)
+- **Subagents**（英語・15分）— 専門Prompt、Tool制限、権限、Skills、Hooks。 [必要なときだけ開く](https://code.claude.com/docs/en/sub-agents)
+- **Settings**（英語・10分）— Skills、Agents、Hooks、MCPの設定場所。 [必要なときだけ開く](https://code.claude.com/docs/en/settings)
+- **Steering Claude Code**（英語・15分）— CLAUDE.md、Skills、Hooks、Rules、Subagentsの使い分け。 [必要なときだけ開く](https://claude.com/blog/steering-claude-code-skills-hooks-rules-subagents-and-more)
 
 ## Objectives
 

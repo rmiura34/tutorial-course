@@ -23,7 +23,7 @@ HTTPのRequestとResponseが分かると、画面の不具合をBrowser・Server
 - [ ] BrowserのDeveloper Toolsを開ける
 - [ ] URLをAddress barへ入力できる
 
-## Three words for today
+## 先に調べる用語
 
 - **HTTP:** BrowserとServerが情報を交換する約束
 - **Request:** BrowserからServerへの依頼
@@ -43,10 +43,24 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-07.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–0:35 動画:** JavaScriptの基礎とDOM操作を復習
+- **0:00–0:35 任意動画／基礎確認:** JavaScriptの変数・配列・Functionが不安な人だけ必要な章を見る。読める人は既存TSXへ進む
 - **0:35–1:20 公式資料:** HTML → JS → TS → Reactの指定範囲を読む
 - **1:20–2:30 TSX読解:** ComponentからAPIとDOMまで線でつなぐ
 - **2:30–3:00 小変更:** 表示文言またはValidationだけを安全に変更
+
+## Learning resources
+
+### 必修
+
+- **Fetch APIの使用**（日本語・10分）— Promise、async/await、Response、Error処理。 [開く](https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch)
+- **Reactをはじめる**（日本語・15分）— Component、JSX、Props、Stateの日本語入門。既存TSXを読む前に必修範囲を確認します。 [開く](https://developer.mozilla.org/ja/docs/Learn_web_development/Core/Frameworks_libraries/React_getting_started)
+
+### 任意・困ったときだけ
+
+- **Learn JavaScript - Full Course for Beginners**（英語・35分）— 変数、配列、Object、Function、Conditionを必要な章だけ視聴します。 [必要なときだけ開く](https://www.youtube.com/watch?v=PkZNo7MFNFg)
+- **HTMLによるコンテンツの構造化**（日本語・必要時12分）— 見出し、Form、Buttonなど、実際に出てくる要素だけ確認します。 [必要なときだけ開く](https://developer.mozilla.org/ja/docs/Learn_web_development/Core/Structuring_content)
+- **JavaScriptガイド**（日本語・必要時15分）— 変数、Function、Array、Object、Control flow。既存TSXで分からない構文の章だけ読みます。 [必要なときだけ開く](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide)
+- **TypeScript Handbook（英語・補助）**（英語・必要時18分）— 型を追えない場合だけ該当章を参照します。日本語公式版がないため英語です。 [必要なときだけ開く](https://www.typescriptlang.org/docs/handbook/intro.html)
 
 ## Objectives
 

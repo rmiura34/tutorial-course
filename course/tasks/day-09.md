@@ -23,7 +23,7 @@ LaravelではURLからResponseまでに複数の層があります。処理経�
 - [ ] PHPの関数と配列を読める
 - [ ] repository-map.mdを開いている
 
-## Three words for today
+## 先に調べる用語
 
 - **Route:** URLと処理の入口を結ぶ定義
 - **Controller:** Requestを受け処理を組み立てる場所
@@ -43,10 +43,27 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-09.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–0:35 公式動画:** Route、MVC、Controllerの章を視聴
+- **0:00–0:35 任意動画／既存Code確認:** Laravel未経験者はRoute・MVC・Controllerの指定章を見る。経験者はtraining-labのRouteへ進む
 - **0:35–1:20 公式Docs:** StructureからService Providersまで順番に読む
 - **1:20–2:35 Code trace:** 対象画面の全処理経路を埋める
 - **2:35–3:00 説明試験:** 図を見ずに経路を説明
+
+## Learning resources
+
+### 必修
+
+- **Request Lifecycle（英語）**（英語・12分）— public/index.phpからResponseまでの起動経路。日本語公式版がないため英語です。 [開く](https://laravel.com/docs/13.x/lifecycle)
+
+### 任意・困ったときだけ
+
+- **Getting Started with Laravel**（英語・約35分）— Your first route、MVC、Database、Model、Validation、Authenticationを含む13本・2時間の公式コースから指定章を視聴します。 [必要なときだけ開く](https://laravel.com/learn/getting-started-with-laravel)
+- **Directory Structure**（英語・8分）— app、routes、config、database、resources、testsの配置。 [必要なときだけ開く](https://laravel.com/docs/13.x/structure)
+- **Routing**（英語・12分）— Route、Parameter、Named route、Route model binding。 [必要なときだけ開く](https://laravel.com/docs/13.x/routing)
+- **Middleware**（英語・10分）— Request前後の認証・変換・制御。 [必要なときだけ開く](https://laravel.com/docs/13.x/middleware)
+- **Controllers**（英語・10分）— Request処理をまとめるController。 [必要なときだけ開く](https://laravel.com/docs/13.x/controllers)
+- **Validation**（英語・10分）— 入力検証とFormRequest。 [必要なときだけ開く](https://laravel.com/docs/13.x/validation)
+- **Service Container**（英語・10分）— Dependency解決とBinding。 [必要なときだけ開く](https://laravel.com/docs/13.x/container)
+- **Service Providers**（英語・8分）— Application起動時の登録とboot。 [必要なときだけ開く](https://laravel.com/docs/13.x/providers)
 
 ## Objectives
 

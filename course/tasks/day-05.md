@@ -23,7 +23,7 @@ AIツールは同じではありません。調査・計画・実装・Reviewの
 - [ ] 利用するAIごとの送信データ規約を確認
 - [ ] 秘密情報をContextへ入れない
 
-## Three words for today
+## 先に調べる用語
 
 - **Agent:** 目標に向けて検索・編集・実行を組み合わせるAI
 - **Prompt:** AIへ渡す目的・条件・出力形式
@@ -43,10 +43,26 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-05.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–0:35 公式動画:** Claude CodeとCodexの公式動画を選んで視聴
+- **0:00–0:35 任意動画／Tool確認:** 画面操作が未知のToolだけ公式動画を見る。両方を操作できる人は比較演習の準備へ進む
 - **0:35–1:15 公式資料:** Overview、Best practices、Codex CLI、Skillsを読む
 - **1:15–2:30 比較演習:** 同一Issueを調査・計画・レビューへ分業
 - **2:30–3:00 評価:** 8観点の比較表を提出
+
+## Learning resources
+
+### 必修
+
+- **Claude Code best practices（英語）**（英語・15分）— Context取得、計画、検証、Session管理。日本語公式版がないため英語です。 [開く](https://code.claude.com/docs/en/best-practices)
+- **Codex CLI（英語）**（英語・10分）— Codex CLIの起動、承認、Local作業の基本。日本語公式版がないため英語です。 [開く](https://developers.openai.com/codex/cli)
+
+### 任意・困ったときだけ
+
+- **Claude Code公式動画一覧**（英語・15分）— Anthropic公式チャンネルからClaude Codeの基本デモを1本選び、操作と権限確認を記録します。 [必要なときだけ開く](https://www.youtube.com/@AnthropicAI/search?query=Claude%20Code)
+- **Codex公式動画一覧**（英語・15分）— OpenAI公式チャンネルからCodexのCLIまたはアプリのデモを1本選び、Claude Codeとの差を記録します。 [必要なときだけ開く](https://www.youtube.com/@OpenAI/search?query=Codex)
+- **Claude Code overview**（英語・8分）— Claude Codeの基本能力と開発フロー。 [必要なときだけ開く](https://code.claude.com/docs/en/overview)
+- **Claude Code settings**（英語・8分）— 権限とプロジェクト設定。 [必要なときだけ開く](https://code.claude.com/docs/en/settings)
+- **Build skills for Codex**（英語・10分）— 再利用可能なSkillの構造と呼び出し方。 [必要なときだけ開く](https://developers.openai.com/codex/build-skills)
+- **OpenAI Codex repository**（英語・8分）— CLIのREADMEとリリースを確認します。 [必要なときだけ開く](https://github.com/openai/codex)
 
 ## Objectives
 

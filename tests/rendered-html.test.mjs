@@ -42,9 +42,12 @@ test("renders a complete lesson page with resources, practice, and quizzes", asy
 
   const html = await response.text();
   assert.match(html, /ターミナル・ファイル・開発環境/);
-  assert.match(html, /Introductory Videos for VS Code/);
-  assert.match(html, /公式資料をこの順番で読む/);
-  assert.match(html, /そのまま使える練習Prompt/);
+  assert.match(html, /今日やること/);
+  assert.match(html, /GitHubで作業する場所/);
+  assert.match(html, /Task内容をTerminalに表示/);
+  assert.match(html, /先に調べる用語/);
+  assert.match(html, /用語集で意味・読み方・使用例を調べる/);
+  assert.match(html, /AIへの依頼文/);
   assert.match(html, /理解確認クイズ/);
   assert.match(html, /自分のBranchで提出物を作る/);
   assert.match(html, /完了チェック/);
@@ -53,7 +56,11 @@ test("renders a complete lesson page with resources, practice, and quizzes", asy
   assert.match(html, /成功すると、こうなります/);
   assert.match(html, /よくあるつまずきと戻り方/);
   assert.match(html, /提出物の書き方/);
-  assert.match(html, /repository-map\.example\.md/);
+  assert.match(html, /作業する場所/);
+  assert.match(html, /なぜやるか/);
+  assert.match(html, /成功時の見え方/);
+  assert.match(html, /提出方法/);
+  assert.match(html, /learning-log\/day-01\/repository-map\.md/);
   assert.doesNotMatch(html, /git switch -c training\/day-01-environment/);
   assert.doesNotMatch(html, /Claude Code overview/);
   assert.doesNotMatch(html, /動画をここに埋め込みます/);
@@ -107,16 +114,21 @@ test("renders all 20 days with the complete learning flow", async () => {
     const response = await render(`/lessons/${slug}`);
     assert.equal(response.status, 200, `${slug} should render`);
     const html = await response.text();
-    assert.match(html, /VIDEO|youtube-nocookie\.com\/embed/);
-    assert.match(html, /公式資料をこの順番で読む/);
-    assert.match(html, /そのまま使える練習Prompt/);
+    assert.match(html, /今日やること/);
+    assert.match(html, /GitHubで作業する場所/);
+    assert.match(html, /作業する場所/);
+    assert.match(html, /Terminalに入力|Terminal入力なし/);
+    assert.match(html, /なぜやるか/);
+    assert.match(html, /成功時の見え方/);
+    assert.match(html, /AIへの依頼文/);
     assert.match(html, /理解確認クイズ/);
-    assert.match(html, /必須提出物/);
+    assert.match(html, /必須提出物|あなたが作る最終成果物/);
     assert.match(html, /完了チェック/);
     assert.match(html, /始める前に、ここだけ確認/);
     assert.match(html, /成功すると、こうなります/);
     assert.match(html, /よくあるつまずきと戻り方/);
     assert.match(html, /提出物の書き方/);
+    assert.match(html, /提出方法/);
     assert.match(html, new RegExp(`npm run course -- start ${slugs.indexOf(slug) + 1}`));
     assert.match(html, new RegExp(`npm run course -- check ${slugs.indexOf(slug) + 1}`));
   }

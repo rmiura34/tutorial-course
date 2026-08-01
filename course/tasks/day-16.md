@@ -23,7 +23,7 @@ duration_minutes: 180
 - [ ] 起動・Test Commandを確認
 - [ ] 本番Secretへアクセスしない
 
-## Three words for today
+## 先に調べる用語
 
 - **System map:** 主要部品とDataの流れを表す地図
 - **依存関係:** ある部品が別の部品を必要とする関係
@@ -43,10 +43,26 @@ Read AGENTS.md, START-HERE.md, and course/tasks/day-16.md. Use COACH mode. Do no
 
 ## 180-minute schedule
 
-- **0:00–0:20 動画復習:** Laravel Courseの全体構造を再確認
+- **0:00–0:20 任意動画／調査開始:** Laravel構造を思い出せない場合だけ復習。Day 09のrequest-flowがあれば調査設計へ進む
 - **0:20–0:40 調査設計:** 質問、対象、時間配分、変更禁止
 - **0:40–2:20 並行調査:** Stack、Flow、DB、External、Queue、Test、Scraper
 - **2:20–3:00 反証:** Codexで調査結果を独立レビュー
+
+## Learning resources
+
+### 必修
+
+このDayに事前の必修資料はありません。Taskから開始してください。
+
+### 任意・困ったときだけ
+
+- **Getting Started with Laravel: course overview**（英語・20分）— 未知のProjectでも見るべきRoute、MVC、DB、Authの位置関係を復習します。 [必要なときだけ開く](https://laravel.com/learn/getting-started-with-laravel)
+- **Laravel Directory Structure**（英語・8分）— 調査の入口。Project versionに合わせて版を切り替えます。 [必要なときだけ開く](https://laravel.com/docs/13.x/structure)
+- **Task Scheduling**（英語・8分）— 定期実行Jobと実行場所。 [必要なときだけ開く](https://laravel.com/docs/13.x/scheduling)
+- **Queues**（英語・10分）— 非同期Job、Retry、Failure。 [必要なときだけ開く](https://laravel.com/docs/13.x/queues)
+- **Configuration**（英語・8分）— Environment別設定と.envの扱い。 [必要なときだけ開く](https://laravel.com/docs/13.x/configuration)
+- **Testing**（英語・8分）— 既存Testの構成と実行方法。 [必要なときだけ開く](https://laravel.com/docs/13.x/testing)
+- **Logging**（英語・8分）— 観測可能な処理とLog channel。 [必要なときだけ開く](https://laravel.com/docs/13.x/logging)
 
 ## Objectives
 
