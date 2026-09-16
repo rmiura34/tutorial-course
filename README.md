@@ -24,12 +24,34 @@
 
 ## 開発
 
-必要環境はNode.js 22以上です。
+必要環境はNode.js 22.13.0以上です。
 
 ```bash
 npm ci
 npm run dev
 ```
+
+## ターミナルで教材を読む
+
+リポジトリのルート（`package.json` があるフォルダ）で実行します。
+Day 01として案内されている内容は、このリポジトリのLesson 01に対応します。
+
+```bash
+npm run course -- show 1
+npm run course -- list
+npm run course -- show 2
+```
+
+`show` は1〜8の番号に対応し、`01` のような表記も利用できます。
+学習目標、手順、完了チェック、クイズを表示します。コマンドは課題の変更や自動採点を行いません。
+クイズの回答・解説と進捗記録を利用する場合は `npm run dev` でWeb画面を開いてください。
+
+`Missing script: "course"` が出る場合は、実行場所を確認し、この修正を含む最新版を取得してください。
+`package.json` へのスクリプト追加だけでは実行できず、`course/index.js` も必要です。
+
+CLIだけの検証は `npm run test:course` で実行できます（ビルド不要）。
+
+## 検証
 
 検証:
 
